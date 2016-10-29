@@ -1,0 +1,134 @@
+<div class="row">
+	<div class="col-lg-4 col-sm-3"></div>
+	<div class="col-lg-4 col-sm-6">
+		<div class="alert alert-info" role="alert">
+			<strong ng-if="!ctrlr.visited">Great, let's move on!  </strong>We see your bill is <i>{{ctrlr.bill.totalAmount | currency}}</i> in <i>{{ctrlr.getArea()}}</i>.  Now tell us the name of the company that is sending you this bill.
+		</div>
+		
+		<div class="alert alert-danger" role="alert" ng-if="ctrlr.errs.length > 0">
+			<strong>Whoops:</strong> {{ctrlr.errs.join(',')}}
+		</div>
+		
+		<div class="form-group">
+			<label>Service provider:</label>
+			<input type="text" class="form-control" ng-model="ctrlr.lookupProviderName" placeholder="Type the name of your provider..." uib-typeahead="provider for provider in ctrlr.getProviders($viewValue)">
+		</div>
+		
+		<div style="text-align: center;" ng-if="!ctrlr.review">
+			<button class="btn btn-brand btn-brand-secondary" ng-click="ctrlr.prev()">Back</button>
+			<button class="btn btn-brand btn-brand-primary" ng-click="ctrlr.next()">Next</button>
+		</div>
+		<div style="text-align: center;" ng-if="ctrlr.review">
+			<button class="btn btn-brand btn-brand-primary" ng-click="ctrlr.finish()">Finished Reviewing</button>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-3"></div>
+</div>
+
+<!--
+<div class="row">
+	<div class="col-lg-4 col-sm-3"></div>
+	<div class="col-lg-4 col-sm-6">
+		<div class="alert alert-info" role="alert">
+			<strong ng-if="!ctrlr.visited">Great, let's move on!  </strong>We see your bill is <i>{{ctrlr.bill.totalAmount | currency}}</i> in <i>{{ctrlr.getArea()}}</i>.  Now tell us the name of the company that is sending you this bill.
+		</div>
+		
+		<div class="alert alert-danger" role="alert" ng-if="ctrlr.errs.length > 0">
+			<strong>Whoops:</strong> {{ctrlr.errs.join(',')}}
+		</div>
+		
+		<div ng-if="ctrlr.mode === 'select'">
+			<div class="form-group">
+				<label>Select a service provider:</label>
+				
+				<div style="padding-bottom: 5px;">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search..." ng-model="ctrlr.searchProviderName">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="ctrlr.filterProviders()">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							</button>
+						</span>
+					</div>
+				</div>
+				
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Name</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="provider in ctrlr.providers" ng-click="ctrlr.selectProvider(provider)" ng-class="{info : provider.id === ctrlr.selectedProvider.id}">
+									<td>{{provider.name}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="panel-footer" ng-if="ctrlr.pager.pages.length > 1">
+						<ul class="pagination">
+							<li ng-class="{disabled:ctrlr.pager.currentPage === 1}">
+								<a ng-click="ctrlr.setPage(1)">First</a>
+							</li>
+							<li ng-class="{disabled:ctrlr.pager.currentPage === 1}">
+								<a ng-click="ctrlr.setPage(ctrlr.pager.currentPage - 1)">Previous</a>
+							</li>
+							<li ng-repeat="page in ctrlr.pager.pages" ng-class="{active:ctrlr.pager.currentPage === page}">
+								<a ng-click="ctrlr.setPage(page)">{{page}}</a>
+							</li>
+							<li ng-class="{disabled:ctrlr.pager.currentPage === ctrlr.pager.totalPages}">
+								<a ng-click="ctrlr.setPage(ctrlr.pager.currentPage + 1)">Next</a>
+							</li>
+							<li ng-class="{disabled:ctrlr.pager.currentPage === ctrlr.pager.totalPages}">
+								<a ng-click="ctrlr.setPage(ctrlr.pager.totalPages)">Last</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				<div style="text-align: center;">
+					<a href="#" ng-click="ctrlr.showEnterMode()">Help, I don't see my provider.</a><br /><br />
+				</div>
+			</div>
+		</div>
+		
+		<div ng-if="ctrlr.mode === 'enter'">
+			<div class="form-group">
+				<label>Type the name of your service provider:</label>
+				<input type="text" name="typedProviderName" class="form-control" ng-model="ctrlr.typedProviderName">
+				
+				<div style="text-align: center; padding-top: 10px;">
+					<a href="#" ng-click="ctrlr.showSelectMode()">Let me check the list again.</a><br /><br />
+				</div>
+			</div>
+		</div>
+		
+		<div ng-if="ctrlr.mode === 'review'">
+			<div>
+				<div class="form-group form-inline">
+					<label>Provider:</label>
+					<div class="input-group">
+						<input type="text" class="form-control" value="{{ctrlr.getEnteredProviderName()}}" disabled="true">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="ctrlr.clearEnteredProvider()">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div style="text-align: center;" ng-if="!ctrlr.review">
+			<button class="btn btn-brand btn-brand-secondary" ng-click="ctrlr.prev()">Back</button>
+			<button class="btn btn-brand btn-brand-primary" ng-click="ctrlr.next()">Next</button>
+		</div>
+		<div style="text-align: center;" ng-if="ctrlr.review">
+			<button class="btn btn-brand btn-brand-primary" ng-click="ctrlr.finish()">Finished Reviewing</button>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-3"></div>
+</div>
+-->

@@ -1,0 +1,17 @@
+<ul class="pagination">
+	<li ng-class="{disabled:ctrlr.currentPageNumber === 1}">
+		<a ng-click="callSetPage(1)">First</a>
+	</li>
+	<li ng-class="{disabled:ctrlr.currentPageNumber === 1}">
+		<a ng-click="callSetPage(ctrlr.currentPageNumber - 1)">Previous</a>
+	</li>
+	<li ng-repeat="page in ctrlr.pageNumbers" ng-class="{active:ctrlr.currentPageNumber === page}">
+		<a ng-click="callSetPage(page)">{{page}}</a>
+	</li>
+	<li ng-class="{disabled:ctrlr.currentPageNumber === ctrlr.totalPages}">
+		<a ng-click="callSetPage(ctrlr.currentPageNumber + 1)">Next</a>
+	</li>
+	<li ng-class="{disabled:ctrlr.currentPageNumber === ctrlr.totalPages}">
+		<a ng-click="callSetPage(ctrlr.totalPages)">Last</a>
+	</li>
+</ul>

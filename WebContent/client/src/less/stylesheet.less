@@ -1,0 +1,284 @@
+
+@import "../../../assets/less/variables.less";
+@import "./glyphs.less";
+
+@app-color-success-border: #d6e9c6;
+@app-color-success-background: #dff0d8;
+@app-color-success-text: #3c7668;
+
+@app-color-warning-border: #faebcc;
+@app-color-warning-background: #fcf8e3;
+@app-color-warning-text: #8a6d6a;
+
+@app-color-danger-border: #ebccd1;
+@app-color-danger-background: #f2dede;
+@app-color-danger-text: #bb4d42;
+
+@app-border-default-width: 1px;
+@app-border-default-radius: 5px;
+
+@app-button-default-border-color: #dddddd;
+@app-button-default-background-color: #f5f5f5;
+@app-button-primary-background-color: #337ab7;
+
+@app-center-panel-max-width: 330px;
+
+/****************** Widgets *************************/
+
+.app-rounded-primary-btn {
+	background-color: @color-primary;
+	color: white;
+	display: inline-block;
+	border: 1px solid transparent;
+	border-radius: 75px;
+	padding: 6px 12px;
+	font-weight: bold;
+}
+
+.app-rounded-darkblue-btn {
+	background-color: #37454d;
+	color: white;
+	display: inline-block;
+	border: 1px solid transparent;
+	border-radius: 75px;
+	padding: 6px 12px;
+	font-weight: bold;
+}
+
+.app-icon-text-btn {
+	padding: 10px;
+	background-color: #f9f9f9;
+	border-style: solid;
+	border-color: #efefef;
+	border-width: @app-border-default-width;
+	border-radius: @app-border-default-radius;
+	text-align: center;
+	
+	&:hover {
+		cursor: pointer;
+		border-color: @color-primary;
+		color: @color-primary;
+	}
+}
+
+.app-icon-text-btn .app-icon-text-btn-icon {
+	font-size: 2.0em;
+	padding-bottom: 10px;
+}
+
+.app-icon-text-btn .app-icon-text-btn-title {
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.app-icon-text-btn .app-icon-text-btn-descr {
+	font-size: .85em;
+}
+
+/****************** Widgets - Titlebar *************************/
+
+.app-titlebar {
+	margin-bottom: 20px;
+	border-width: 0px;
+}
+
+.app-titlebar .app-titlebar-back-ico {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	padding-left: 10px;
+	cursor: pointer;
+}
+
+.app-titlebar .app-titlebar-title {
+	display: inline-block;
+	float: none;
+	padding: 10px 15px;
+	font-weight: bold;
+	font-size: 2em;
+	color: @color-primary;
+}
+
+.app-titlebar .app-titlebar-center {
+	text-align: center;
+}
+
+/****************** Widgets - Progress *************************/
+
+.app-progress-bar {
+	background-color: @color-primary;
+}
+
+/****************** Loading *************************/
+
+.ngplus-overlay-background {
+    top: 0px;
+    left: 0px;
+    padding-left: 100px;
+    position: absolute;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+    background-color: #808080;
+    opacity: 0.2;
+}
+
+.ngplus-overlay-background .image {
+	position: absolute;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				left: 50%;
+}
+
+/****************** Forgot Password *************************/
+
+.app-forgot-pwd-success {
+	text-align: center;
+	min-width: @app-center-panel-max-width;
+}
+
+.app-forgot-pwd-success ul {
+	display: inline-table;
+	text-align: left;
+}
+
+/****************** Signup verify *************************/
+
+.app-signup-verify {
+	text-align: center;
+	min-width: @app-center-panel-max-width;
+}
+
+.app-signup-verify ul {
+	display: inline-table;
+	text-align: left;
+}
+
+/****************** Login *************************/
+/* https://gist.github.com/bMinaise/7329874 */
+.app-login-form
+{
+    max-width: @app-center-panel-max-width;
+    padding: 15px;
+    margin: 0 auto;
+}
+.app-login-form .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.app-login-form .form-control:focus
+{
+    z-index: 2;
+}
+
+/****************** Bill *************************/
+
+.app-bill-totalAmount-under {
+	color: green;
+}
+
+.app-bill-totalAmount-over {
+	color: @color-primary;
+}
+
+/****************** Bill - Create *************************/
+
+@app-bill-create-tgl-btn-border-color: #e3e2e3;
+@app-bill-create-tgl-btn-hover-color: #f5f5f5;
+@app-bill-create-tgl-btn-active-glyph-color: #5cb85c;
+
+.app-bill-create-tgl-btn-phone
+{
+	width: 100px;
+	height: 110px;
+	cursor: pointer;
+	border-style: dashed;
+	border-width: 1px;
+	border-color: @app-bill-create-tgl-btn-border-color;
+	border-radius: 5px;
+	
+	&.active {
+		background-color: @app-bill-create-tgl-btn-hover-color;
+		border-color: @app-bill-create-tgl-btn-active-glyph-color;
+		color: @app-bill-create-tgl-btn-active-glyph-color;
+	}
+	
+	&:hover {
+		background-color: @app-bill-create-tgl-btn-hover-color;
+	}
+}
+
+.app-bill-create-tgl-btn-phone
+{
+	.glyphicon-placeholder {
+		font-size: 3.5em;
+		
+		&.active {
+			color: @app-bill-create-tgl-btn-active-glyph-color;
+			&:hover {
+				color: fadeout(@app-bill-create-tgl-btn-active-glyph-color, 15%);
+			}
+		}
+	}
+	
+	.glyphicon-ok {
+		font-size: 1.5em;
+		
+		&.active {
+			color: @app-bill-create-tgl-btn-active-glyph-color;
+			&:hover {
+				color: fadeout(@app-bill-create-tgl-btn-active-glyph-color, 15%);
+			}
+		}
+	}
+}
+
+/****************** Bill - List item *************************/
+
+.app-bill-list-item-tile {
+	min-width: 300px;
+	box-shadow: 1px 1px 4px #888888;
+}
+
+.app-bill-list-item-tile .app-bill-list-item-tile-price {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 125px;
+	resize: vertical;
+	overflow: auto;
+	text-align: center;
+}
+
+.app-bill-list-item-tile .app-bill-list-item-tile-price p {
+	margin: 0;
+}
+
+.app-bill-list-item-tile .app-bill-list-item-tile-price .app-bill-list-item-tile-price-amount {
+	font-size: 3em;
+	font-weight: bold;
+}
+
+.app-bill-list-item-tile .app-bill-list-item-tile-details {
+	padding: 5px;
+}
+
+.app-bill-list-item-tile .app-bill-list-item-tile-details .app-bill-list-item-tile-details-h1 {
+	font-size: 1.25em;
+	font-weight: bold;
+}
+
+.app-bill-list-item-tile .app-bill-list-item-tile-details .app-bill-list-item-tile-details-h2 {
+	font-weight: bold;
+}
+
+.app-bill-list-item-tile .app-bill-list-item-tile-details .app-bill-list-item-tile-details-h3 {
+	color: #888888;
+}

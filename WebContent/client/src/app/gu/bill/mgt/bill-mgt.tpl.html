@@ -1,0 +1,47 @@
+<app-titlebar-0 titlebar-text="ctrlr.titlebarText" titlebar-back="ctrlr.titlebarBack()"></app-titlebar-0>
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8">
+			<div style="margin-bottom: 10px;">
+				<button type="button" class="btn btn-brand btn-brand-primary btn-md" ng-click="ctrlr.newBill()">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New Bill
+				</button>
+			</div>
+			<span ng-if="ctrlr.bills.length == 0">No Bills</span>
+			<ul class="list-unstyled" ng-if="ctrlr.bills.length > 0">
+				<li ng-repeat="bill in ctrlr.bills" style="padding-bottom: 10px;">
+					<gu-bill-mgt-list-item-tile index="$index" bill="bill" delete-bill="ctrlr.deleteBill(bill)"></gu-bill-mgt-list-item-tile>
+				</li>
+			</ul>
+		</div>
+		<div class="col-lg-2"></div>
+	</div>
+</div>
+
+<!--<section class="mainbar">
+	<section class="matter">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-2"></div>
+				<div class="col-lg-8">
+					<div style="margin: 10px;">
+						<div style="margin-bottom: 10px;">
+							<button type="button" class="btn btn-brand btn-brand-secondary btn-md" ng-click="ctrlr.newBill()">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Bill
+							</button>
+						</div>
+						
+						<ul class="list-unstyled">
+							<li ng-repeat="bill in ctrlr.bills" style="padding-bottom: 10px;">
+								<gu-bill-mgt-list-item-tile index="$index" bill="bill" view-more-bills="ctrlr.viewMoreBills()" delete-bill="ctrlr.deleteBill(bill)"></gu-bill-mgt-list-item-tile>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2"></div>
+			</div>
+		</div>
+	</section>
+</section>-->

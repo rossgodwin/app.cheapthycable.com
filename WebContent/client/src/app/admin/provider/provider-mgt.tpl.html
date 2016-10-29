@@ -1,0 +1,31 @@
+<app-titlebar-0 titlebar-text="ctrlr.titlebarText" titlebar-back="ctrlr.titlebarBack()"></app-titlebar-0>
+
+<div class="container">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Name</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="provider in ctrlr.providers"
+							ng-click="ctrlr.selectProvider(provider)"
+							ng-class="{info : provider.id === ctrlr.selectedProvider.id}">
+							<td>{{provider.name}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer"
+				ng-if="ctrlr.providersPageNumbers.length > 1">
+				<app-pagination current-page-number="ctrlr.providersCurrentPage"
+					page-numbers="ctrlr.providersPageNumbers"
+					total-pages="ctrlr.providersTotalPages"
+					set-page="ctrlr.setprovidersPage"></app-pagination>
+			</div>
+		</div>
+	</div>
+</div>

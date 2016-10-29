@@ -1,0 +1,69 @@
+
+@import "./variables.less";
+
+.btn-brand {
+	border-radius: 0px;
+}
+
+.btn-brand:focus,
+.btn-brand:active:focus,
+.btn-brand.active:focus,
+.btn-brand.focus,
+.btn-brand:active.focus,
+.btn-brand.active.focus {
+	outline: none;
+}
+
+/************************ Primary *************************/
+.btn-brand-primary {
+	color: @color-white;
+	font-weight: bold;
+	background-color: @color-primary;
+	border-color: darken(@color-primary, 5%);
+}
+
+.btn-brand-primary:hover,
+.btn-brand-primary.hover,
+.btn-brand-primary:focus,
+.btn-brand-primary.focus,
+.open > .dropdown-toggle.btn-brand-primary {
+	color: @color-white;
+	background-color: darken(@color-primary, 5%);
+	border-color: darken(@color-primary, 5%);
+}
+
+.btn-brand-primary:active,
+.btn-brand-primary:active:focus,
+.btn-brand-primary.active,
+.open > .dropdown-toggle.btn-brand-primary {
+	color: @color-white;
+	background-color: darken(@color-primary, 10%);
+	border-color: darken(@color-primary, 10%);
+}
+
+/************************ Secondary *************************/
+.btn-brand-secondary {
+	color: @color-primary;
+	font-weight: bold;
+	background-color: @color-white;
+	border-color: @color-primary;
+}
+
+.btn-brand-secondary:hover,
+.btn-brand-secondary.hover,
+.btn-brand-secondary:focus,
+.btn-brand-secondary.focus,
+.open > .dropdown-toggle.btn-brand-secondary {
+	color: darken(@color-primary, 5%);
+	background-color: darken(@color-white, 5%);
+	border-color: darken(@color-primary, 5%);
+}
+
+.btn-brand-secondary:active,
+.btn-brand-secondary:active:focus,
+.btn-brand-secondary.active,
+.open > .dropdown-toggle.btn-brand-secondary {
+	color: darken(@color-primary, 10%);
+	background-color: darken(@color-white, 10%);
+	border-color: darken(@color-primary, 10%);
+}

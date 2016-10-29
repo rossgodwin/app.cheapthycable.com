@@ -1,0 +1,85 @@
+<div class="row">
+	<div class="col-lg-4 col-sm-3"></div>
+	<div class="col-lg-4 col-sm-6">
+		<div class="alert alert-info" role="alert">
+			<strong ng-if="!ctrlr.review">Great!  </strong>Tell us just a little bit more detail about the services you have with <i>{{ctrlr.bill.getProviderName()}}</i>.
+		</div>
+		
+		<div ng-if="ctrlr.bill.internetService">
+			<div class="form-group form-inline">
+				<label>Do you rent a modem:</label>
+				<div class="input-group">
+					<toggle-switch ng-model="ctrlr.internetOptions.modem" on-label="Yes" off-label="No"></toggle-switch>
+				</div>
+			</div>
+			
+			<!--<div class="form-group form-inline">
+				<label>What is your download speed?</label>
+				<div class="input-group">
+					<div class="btn-group" uib-dropdown>
+						<button type="button" class="btn btn-default" uib-dropdown-toggle>{{ctrlr.internetOptions.downloadSpeedMbps}} <span class="caret"></span></button>
+						<ul class="dropdown-menu" uib-dropdown-menu>
+							<li><a ng-click="ctrlr.internetOptions.downloadSpeedMbps = downloadSpeedMbpsOption" ng-repeat="downloadSpeedMbpsOption in ctrlr.downloadSpeedMbpsOptions">{{downloadSpeedMbpsOption}}</a></li>
+						</ul>
+						<div class="input-group-addon">Mbps</div>
+					</div>
+				</div>
+			</div>-->
+			
+			<div class="form-group form-inline">
+				<label>What range does your internet download speed fall?</label>
+				<div class="input-group">
+					<div class="btn-group" uib-dropdown>
+						<button type="button" class="btn btn-default" uib-dropdown-toggle>{{ctrlr.renderDownloadSpeedRng(ctrlr.internetOptions.downloadSpeedMbpsRngLower, ctrlr.internetOptions.downloadSpeedMbpsRngUpper)}} <span class="caret"></span></button>
+						<ul class="dropdown-menu" uib-dropdown-menu>
+							<li><a ng-click="ctrlr.updDownloadSpeedRng(downloadSpeedMbpsRngOption)" ng-repeat="downloadSpeedMbpsRngOption in ctrlr.downloadSpeedMbpsRngOptions">{{ctrlr.renderDownloadSpeedRng(downloadSpeedMbpsRngOption.lower, downloadSpeedMbpsRngOption.upper)}}</a></li>
+						</ul>
+						<div class="input-group-addon">Mbps</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div ng-if="ctrlr.bill.cableService">
+			<div class="form-group form-inline">
+				<label>How many cable boxes do you have?</label>
+				<div class="input-group">
+					<div class="btn-group" uib-dropdown>
+						<button type="button" class="btn btn-default" uib-dropdown-toggle>{{ctrlr.cableOptions.boxCount}} <span class="caret"></span></button>
+						<ul class="dropdown-menu" uib-dropdown-menu>
+							<li><a ng-click="ctrlr.cableOptions.boxCount = boxCountOption" ng-repeat="boxCountOption in ctrlr.boxCountOptions">{{boxCountOption}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group form-inline">
+				<label>How many DVRs do you have?</label>
+				<div class="input-group">
+					<div class="btn-group" uib-dropdown>
+						<button type="button" class="btn btn-default" uib-dropdown-toggle>{{ctrlr.cableOptions.dvrCount}} <span class="caret"></span></button>
+						<ul class="dropdown-menu" uib-dropdown-menu>
+							<li><a ng-click="ctrlr.cableOptions.dvrCount = dvrCountOption" ng-repeat="dvrCountOption in ctrlr.dvrCountOptions">{{dvrCountOption}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group form-inline">
+				<label>Do you have special/movie channels?</label>
+				<div class="input-group">
+					<toggle-switch ng-model="ctrlr.cableOptions.specialChannels" on-label="Yes" off-label="No"></toggle-switch>
+				</div>
+			</div>
+		</div>
+		
+		<div style="text-align: center;" ng-if="!ctrlr.review">
+			<button class="btn btn-brand btn-brand-secondary" ng-click="ctrlr.prev()">Back</button>
+			<button class="btn btn-brand btn-brand-primary" ng-click="ctrlr.next()">Next</button>
+		</div>
+		<div style="text-align: center;" ng-if="ctrlr.review">
+			<button class="btn btn-brand btn-brand-primary" ng-click="ctrlr.finish()">Finished Reviewing</button>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-3"></div>
+</div>

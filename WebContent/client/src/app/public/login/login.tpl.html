@@ -1,0 +1,36 @@
+<div>
+	<form name="form" class="app-login-form" novalidate ng-submit="form.$valid && ctrlr.login()">
+		<h2 class="text-center">Sign In</h2>
+		
+		<ul class="list-group" ng-hide="ctrlr.serverErrs.length === 0">
+			<li class="list-group-item list-group-item-danger" ng-repeat="err in ctrlr.serverErrs">{{err}}</li>
+		</ul>
+		
+		<div class="form-group" ng-class="ctrlr.getCssClasses(form, form.email)">
+			<label>Email</label>
+			<input type="email" name="email" class="form-control" ng-model="ctrlr.user.email" ng-model-options="{updateOn: 'blur'}" required autofocus>
+			<div ng-messages="form.email.$error" ng-if="form.email.$dirty || form.$submitted">
+				<div ng-message="required" class="help-block">This field is required.</div>
+			</div>
+		</div>
+		
+		<div class="form-group" ng-class="ctrlr.getCssClasses(form, form.password)">
+			<label>Password</label>
+			<input type="password" name="password" class="form-control" ng-model="ctrlr.user.password" ng-model-options="{updateOn: 'blur'}" required>
+			<div ng-messages="form.password.$error" ng-if="form.password.$dirty || form.$submitted">
+				<div ng-message="required" class="help-block">This field is required.</div>
+			</div>
+			<div class="text-right">
+				<a ng-click="ctrlr.goToForgot()" style="cursor: pointer;">Forgot your password?</a>
+			</div>
+		</div>
+		
+		<button type="submit" class="btn btn-brand btn-brand-primary btn-lg btn-block">Sign in</button>
+		
+		<hr>
+		
+		<div class="text-center">
+			<a ng-click="ctrlr.goToCreateAccount()" style="cursor: pointer;">Create an account</a>
+		</div>
+	</form>
+</div>

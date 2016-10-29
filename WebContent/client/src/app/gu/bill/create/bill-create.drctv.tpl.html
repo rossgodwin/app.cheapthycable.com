@@ -1,0 +1,13 @@
+<div class="row">
+	<div class="col-lg-4 col-sm-3"></div>
+	<div class="col-lg-4 col-sm-6">
+		<label>Progress:</label>
+		<br>
+		<div class="progress">
+			<div class="progress-bar app-progress-bar" role="progressbar" aria-valuenow="drctvCtrlr.navHlpr.getProgressValue()" aria-valuemin="0" aria-valuemax="drctvCtrlr.navHlpr.getProgressMax()" style="width: {{(drctvCtrlr.navHlpr.getProgressValue() / drctvCtrlr.navHlpr.getProgressMax()) * 100}}%"></div>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-3"></div>
+</div>
+
+<div ui-view></div>

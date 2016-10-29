@@ -1,0 +1,49 @@
+<div>
+	<form name="form" class="app-login-form" novalidate ng-submit="form.$valid && ctrlr.submit(form)">
+		<h2 class="text-center">Create Account</h2>
+		
+		<ul class="list-group" ng-hide="ctrlr.serverErrs.length === 0">
+			<li class="list-group-item list-group-item-danger" ng-repeat="err in ctrlr.serverErrs">{{err}}</li>
+		</ul>
+		
+		<div class="form-group" ng-class="ctrlr.getCssClasses(form, form.email)">
+			<label>Email</label>
+			<input type="email" name="email" class="form-control" ng-model="ctrlr.signup.email" ng-model-options="{updateOn: 'blur'}" required signup-unique-email-chk autofocus>
+			<div ng-messages="form.email.$error" ng-if="form.email.$dirty || form.$submitted">
+				<div ng-message="required" class="help-block">This field is required.</div>
+				<div ng-message="email" class="help-block">You must enter a valid email.</div>
+				<div ng-message="signupUniqueEmailChk" class="help-block">Email is already being used.</div>
+			</div>
+		</div>
+		
+		<div class="form-group" ng-class="ctrlr.getCssClasses(form, form.password)">
+			<label>Password</label>
+			<input type="password" name="password" class="form-control" placeholder="at least {{ctrlr.pwdMinLength}} characters" ng-model="ctrlr.signup.password" ng-model-options="{updateOn: 'blur'}" required pwd-valid-chk>
+			<div ng-messages="form.password.$error" ng-if="form.password.$dirty || form.$submitted">
+				<div ng-message="required" class="help-block">This field is required.</div>
+				<div ng-message="pwdValidChk" class="help-block">
+					<ul ng-hide="errs === 0">
+						<li ng-repeat="err in errs">{{err}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group" ng-class="ctrlr.getCssClasses(form, form.passwordConfirm)">
+			<label>Password again</label>
+			<input type="password" name="passwordConfirm" class="form-control" ng-model="ctrlr.signup.passwordConfirm" ng-model-options="{updateOn: 'blur'}" required values-equal-rqrd="ctrlr.signup.password">
+			<div ng-messages="form.passwordConfirm.$error" ng-if="form.passwordConfirm.$dirty || form.$submitted">
+				<div ng-message="required" class="help-block">This field is required.</div>
+				<div ng-message="valuesEqualRqrd" class="help-block">Passwords do not match.</div>
+			</div>
+		</div>
+		
+		<button class="btn btn-brand btn-brand-primary btn-lg btn-block" type="submit">Create your account</button>
+		
+		<hr>
+		
+		<div class="text-center">
+			Already have an account? <a ng-click="ctrlr.goToLogin()" style="cursor: pointer;">Sign in</a>
+		</div>
+	</form>
+</div>

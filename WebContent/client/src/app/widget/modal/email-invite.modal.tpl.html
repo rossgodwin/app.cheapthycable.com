@@ -1,0 +1,59 @@
+<div class="modal-header">
+	<h3 class="modal-title">Invite People</h3>
+</div>
+<div class="modal-body">
+	<span>Invite people via email.</span>
+	<br />
+	<br />
+	<div class="alert alert-danger" role="alert" ng-if="ctrlr.errs.length > 0">
+		<table>
+			<tr>
+				<td style="vertical-align: top; padding-right: 5px;"><strong>Whoops:</strong></td>
+				<td><div ng-repeat="err in ctrlr.errs">{{err}}</div></td>
+			</tr>
+		</table>
+	</div>
+	
+	<form name="form">
+		<table>
+			<tr>
+				<td>
+					<label>Your name (or nickname):</label>
+				</td>
+				<td>
+					<input type="text" class="form-control">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>Enter email address:</label>
+				</td>
+				<td>
+					<div class="input-group">
+						<input type="email" name="email" class="form-control" ng-model="ctrlr.newEmail" required>
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="ctrlr.addEmail(form.email)">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							</button>
+						</span>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<span ng-repeat="email in ctrlr.emails" >
+				<span class="app-rounded-darkblue-btn" style="margin-bottom: 10px; margin-right: 10px;">
+					{{email}}&nbsp;&nbsp;
+					<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeEmail(email)"></span>
+				</span>
+			</span>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-brand btn-brand-primary" type="button" ng-click="ctrlr.send()">Ok, Send Invitation</button>
+	<button class="btn btn-brand btn-brand-secondary" type="button" ng-click="ctrlr.cancel()">Cancel</button>
+</div>

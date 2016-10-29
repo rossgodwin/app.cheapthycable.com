@@ -1,0 +1,50 @@
+<div class="row">
+	<div class="col-lg-4 col-sm-3"></div>
+	<div class="col-lg-4 col-sm-6">
+		<div class="alert alert-info" role="alert">
+			<strong ng-if="!ctrlr.visited">Gotcha!  </strong>We hope that <i>{{ctrlr.bill.getProviderName()}}</i> is treating you well.  Now, please select what services you are paying for.
+		</div>
+		
+		<div class="alert alert-danger" role="alert" ng-if="ctrlr.errs.length > 0">
+			<strong>Whoops:</strong> {{ctrlr.errs.join(',')}}
+		</div>
+		
+		<div class="text-center">
+			<label>What services do you have with {{ctrlr.bill.getProviderName()}}?</label>
+			<table style="width: 100%">
+				<tr>
+					<td>
+						<div class="app-bill-create-tgl-btn-phone" ng-class="{active : ctrlr.internetService}" ng-click="ctrlr.internetService = !ctrlr.internetService">
+							<span class="glyphicon glyphicon-placeholder icon-ie" ng-class="{active : ctrlr.internetService}" style="margin-top: 5px;"></span><br/>
+							<span><b>Internet</b></span><br/>
+							<span class="glyphicon glyphicon-ok" ng-if="ctrlr.internetService" ng-class="{active : ctrlr.internetService}" style="margin-bottom: 5px;"></span>
+						</div>
+					</td>
+					<td>
+						<div class="app-bill-create-tgl-btn-phone" ng-class="{active : ctrlr.cableService}" ng-click="ctrlr.cableService = !ctrlr.cableService">
+							<span class="glyphicon glyphicon-placeholder icon-tv" ng-class="{active : ctrlr.cableService}" style="margin-top: 5px;"></span><br/>
+							<span><b>Cable</b></span><br/>
+							<span class="glyphicon glyphicon-ok" ng-if="ctrlr.cableService" ng-class="{active : ctrlr.cableService}" style="margin-bottom: 5px;"></span>
+						</div>
+					</td>
+					<td>
+						<div class="app-bill-create-tgl-btn-phone" ng-class="{active : ctrlr.phoneService}" ng-click="ctrlr.phoneService = !ctrlr.phoneService">
+							<span class="glyphicon glyphicon-placeholder icon-phone" ng-class="{active : ctrlr.phoneService}" style="margin-top: 5px;"></span><br/>
+							<span><b>Phone</b></span><br/>
+							<span class="glyphicon glyphicon-ok" ng-if="ctrlr.phoneService" ng-class="{active : ctrlr.phoneService}" style="margin-bottom: 5px;"></span>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div style="text-align: center; padding-top: 10px;" ng-if="!ctrlr.review">
+			<button class="btn btn-brand btn-brand-secondary" ng-click="ctrlr.prev()">Back</button>
+			<button class="btn btn-brand btn-brand-primary" ng-click="ctrlr.next()">Next</button>
+		</div>
+		<div style="text-align: center; padding-top: 10px;" ng-if="ctrlr.review">
+			<button class="btn btn-brand btn-brand-primary" ng-click="ctrlr.finish()">Finished Reviewing</button>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-3"></div>
+</div>

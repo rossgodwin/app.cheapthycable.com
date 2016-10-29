@@ -1,0 +1,52 @@
+<!--
+	https://css-tricks.com/centering-css-complete-guide/ 
+ -->
+<div class="app-bill-list-item-tile">
+	<div class="row" style="padding: 5px;">
+		<div class="col-sm-4">
+			<div class="app-bill-list-item-tile-price">
+				<p>
+					<span ng-class="ctrlr.getTotalAmountClasses()" class="app-bill-list-item-tile-price-amount">
+						{{ctrlr.bill.totalAmount | currency}}
+					</span>
+					<br>
+					<div ng-class="ctrlr.getTotalAmountClasses()">{{ctrlr.amountRelativeToAvg() | currency}} <span class="glyphicon glyphicon-arrow-up" aria-hidden="true" ng-if="ctrlr.isTotalAmountUnderAvg()"></span><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" ng-if="ctrlr.isTotalAmountOverAvg()"></span> average</div>
+					<span style="padding-top: 5px;">
+						<span class="color-primary bold gi-1_5x" style="padding-right: 5px;" ng-if="ctrlr.isTotalAmountUnderAvg()">Brag!</span>
+						<span class="color-primary bold gi-1_5x" style="padding-right: 5px;" ng-if="ctrlr.isTotalAmountAvg() || ctrlr.isTotalAmountOverAvg()">Complain!</span>
+						<a style="text-decoration: none;" ng-href="{{ctrlr.tweet()}}"><span class="icon-twitter cursor-pointer color-primary gi-2x" style="padding-right: 5px;"></span></a>
+						<span class="icon-facebook cursor-pointer color-primary gi-2x" ng-click="ctrlr.fbShare()"></span>
+					</span>
+				</p>
+			</div>
+		</div>
+		<div class="col-sm-8">
+			<div class="app-bill-list-item-tile-details">
+				<div class="app-bill-list-item-tile-details-h1">
+					<span ng-if="ctrlr.bill.provider">{{ctrlr.bill.provider.name}}</span>
+					<span ng-if="!ctrlr.bill.provider">{{ctrlr.bill.providerOther}}</span>
+				</div>
+				<div class="app-bill-list-item-tile-details-h2">
+					{{ctrlr.bill.geoZipCode.city}}, {{ctrlr.bill.geoZipCode.stateCode}} {{ctrlr.bill.geoZipCode.zipCode}}
+				</div>
+				<div class="app-bill-list-item-tile-details-h2">
+					{{ctrlr.bill.validDateInMillis | date:'MM-dd-yyyy'}}
+				</div>
+				<div class="app-bill-list-item-tile-details-h3">
+					Services:&nbsp;&nbsp;{{ctrlr.getServicesStr()}}
+				</div>
+				<div class="app-bill-list-item-tile-details-h3">
+					Options:&nbsp;&nbsp;{{ctrlr.getAllOptionsStr()}}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<div style="padding: 5px; text-align: center;">
+				<button type="button" class="btn btn-brand btn-brand-secondary" ng-click="ctrlr.deleteBill(ctrlr.bill)">
+					<span class="glyphicon glyphicon glyphicon-minus-sign"></span>&nbsp;Delete
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

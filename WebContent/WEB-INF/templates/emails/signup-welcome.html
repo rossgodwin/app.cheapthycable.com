@@ -1,0 +1,49 @@
+<!-- 
+	Variables:
+	productName
+	logoImgSrc
+	productUrl
+	twitterHomePageUrl
+	fbHomePageUrl
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style type="text/css">
+			table {
+			    border-collapse: collapse;
+			    width: 100%;
+			}
+			
+			table, th, td {
+			    border: 1px solid #d6d6d8;
+			    padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td style="background-color: #f0f0f0;"><img th:alt="@{${productName}}" th:src="@{${logoImgSrc}}">
+			</tr>
+			<tr><td>
+				<p>Welcome to [[${productName}]]!</p>
+				<p>This is a place to gain information to allow you to negotiate a better rate from your cable/satellite company. You will be able to see what people in your area are paying.</p>
+				<p>At any time you can log back in and check out what others are paying.</p>
+				<p>
+					Thank you,
+					<br/>
+					<a th:href="@{${productUrl}}">[[${productName}]]</a>
+				</p>
+			</td></tr>
+			<tr>
+				<td style="background-color: #f0f0f0; text-align: center;">
+					Follow us:&nbsp;
+					<span style="margin-right: 5px;"><a th:href="@{${twitterHomePageUrl}}" target="_blank">Twitter</a></span>
+					<a th:href="@{${fbHomePageUrl}}" target="_blank">Facebook</a>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

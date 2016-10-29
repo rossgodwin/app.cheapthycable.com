@@ -1,0 +1,99 @@
+define([
+	'app/gu/bill/create/BillCreateModule',
+	'app/gu/dashboard/bill/BillCreateCtrlr'
+], function(
+	BillCreateModule,
+	BillCreateCtrlr) {
+	var moduleName = 'app.gu.dashboard.bill.create';
+	var baseState = 'app.gu.bill';
+	
+	var module = angular.module(moduleName, ['app.gu.bill.create']);
+	
+	module.value('dashboardBillCreateBaseState', baseState);
+	
+	module.controller('DashboardBillCreateCtrlr', BillCreateCtrlr);
+	
+	var authorizeResolve = {
+		authorize : ['AuthService', function(AuthService) {
+			return AuthService.authorize(['USER']);
+		}]
+	};
+	
+	module.config(['$stateProvider', function($stateProvider) {
+		$stateProvider
+		.state(baseState + '.create', {
+			url : '/create',
+			templateUrl : 'client/src/app/gu/dashboard/bill/bill-create.tpl.html',
+			controller : 'DashboardBillCreateCtrlr',
+			controllerAs : 'ctrlr'
+		})
+		.state(baseState + '.create.node0', {
+			params : {
+				review : false
+			},
+			templateUrl : 'client/src/app/gu/bill/create/view/bill-create-node0.tpl.html',
+			controller : 'BillCreateNode0Ctrlr',
+			controllerAs : 'ctrlr',
+			resolve : authorizeResolve
+		})
+		.state(baseState + '.create.node1', {
+			params : {
+				review : false
+			},
+			templateUrl : 'client/src/app/gu/bill/create/view/bill-create-node1.tpl.html',
+			controller : 'BillCreateNode1Ctrlr',
+			controllerAs : 'ctrlr',
+			resolve : authorizeResolve
+		})
+		.state(baseState + '.create.node2', {
+			params : {
+				review : false
+			},
+			templateUrl : 'client/src/app/gu/bill/create/view/bill-create-node2.tpl.html',
+			controller : 'BillCreateNode2Ctrlr',
+			controllerAs : 'ctrlr',
+			resolve : authorizeResolve
+		})
+		.state(baseState + '.create.node3', {
+			params : {
+				review : false
+			},
+			templateUrl : 'client/src/app/gu/bill/create/view/bill-create-node3.tpl.html',
+			controller : 'BillCreateNode3Ctrlr',
+			controllerAs : 'ctrlr',
+			resolve : authorizeResolve
+		})
+		.state(baseState + '.create.node4', {
+			params : {
+				review : false
+			},
+			templateUrl : 'client/src/app/gu/bill/create/view/bill-create-node4.tpl.html',
+			controller : 'BillCreateNode4Ctrlr',
+			controllerAs : 'ctrlr',
+			resolve : authorizeResolve
+		})
+		.state(baseState + '.create.node5', {
+			templateUrl : 'client/src/app/gu/bill/create/view/bill-create-node5.tpl.html',
+			controller : 'BillCreateNode5Ctrlr',
+			controllerAs : 'ctrlr',
+			resolve : authorizeResolve
+		})
+		.state(baseState + '.create.node6', {
+			params : {
+				myBill : {}
+			},
+			templateUrl : 'client/src/app/gu/bill/create/view/bill-create-node6.tpl.html',
+			controller : 'BillCreateNode6Ctrlr',
+			controllerAs : 'ctrlr',
+			resolve : authorizeResolve
+		})
+		.state(baseState + '.create.node7', {
+			templateUrl : 'client/src/app/gu/bill/create/view/bill-create-node7.tpl.html',
+			controller : 'BillCreateNode7Ctrlr',
+			controllerAs : 'ctrlr',
+			resolve : authorizeResolve
+		})
+	}]);
+	
+	return module;
+});

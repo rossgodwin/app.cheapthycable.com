@@ -1,0 +1,68 @@
+<div class="row">
+	<div class="col-lg-4 col-sm-3"></div>
+	<div class="col-lg-4 col-sm-6">
+		<div class="alert alert-info" role="alert">
+			<strong ng-if="!ctrlr.review">Finally!  </strong>Just review your information below and your done!
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading"><strong>Summary</strong></div>
+			<div style="padding: 5px;">
+				<table class="table table-bordered">
+					<tr>
+						<td><b>Zip Code:</b></td>
+						<td><a href="#" ng-click="ctrlr.goToNode0()">{{ctrlr.bill.zipCode}}</a></td>
+					</tr>
+					<tr>
+						<td><b>Total Amount:</b></td>
+						<td><a href="#" ng-click="ctrlr.goToNode0()">{{ctrlr.bill.totalAmount | currency}}</a></td>
+					</tr>
+					<tr>
+						<td><b>Provider:</b></td>
+						<td><a href="#" ng-click="ctrlr.goToNode1()">{{ctrlr.bill.getProviderName()}}</a></td>
+					</tr>
+					<tr>
+						<td style="vertical-align: top;"><b>Services:</b></td>
+						<td>
+							<a href="#" ng-click="ctrlr.goToNode2()"><span ng-repeat="service in ctrlr.bill.getServices()">{{service}}<br ng-if="$index >= 0"></span></a>
+						</td>
+					</tr>
+					<tr ng-if="ctrlr.bill.cableService">
+						<td><b>Cable Options:</b></td>
+						<td>
+							<a href="#" ng-click="ctrlr.goToNode3()">
+								<div>{{ctrlr.bill.cableOptions.boxCount}} Cable Box{{ctrlr.bill.cableOptions.boxCount > 1 ? 's' : ''}}</div>
+								<div>{{ctrlr.bill.cableOptions.dvrCount}} DVR{{ctrlr.bill.cableOptions.dvrCount > 1 ? 's' : ''}}</div>
+								<div ng-if="ctrlr.bill.cableOptions.specialChannels">Special TV Channels</div>
+							</a>
+						</td>
+					</tr>
+					<tr ng-if="ctrlr.bill.internetService">
+						<td><b>Internet Options:</b></td>
+						<td>
+							<a href="#" ng-click="ctrlr.goToNode3()">
+								<!--<div>{{ctrlr.bill.internetOptions.downloadSpeedMbps}} Mbps</div>-->
+								<div>{{ctrlr.renderInternetOptionsDownloadSpeedMbps()}}</div>
+								<div ng-if="ctrlr.bill.internetOptions.modem">Modem</div>
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td style="vertical-align: top;"><b>Comments:</b></td>
+						<td>
+							<a href="#" ng-click="ctrlr.goToNode4()">
+								<span ng-if="ctrlr.bill.comments">Review</span>
+								<span ng-if="!ctrlr.bill.comments">Skipped</span>
+							</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<div style="text-align: center;">
+			<button class="btn btn-brand btn-brand-primary" ng-click="ctrlr.save()">Looks Good! Now Save</button>
+		</div>
+	</div>
+	<div class="col-lg-4 col-sm-3"></div>
+</div>
