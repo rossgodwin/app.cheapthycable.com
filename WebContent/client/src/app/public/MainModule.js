@@ -1,44 +1,30 @@
 define([
 	'common/ValuesEqualRqrdDrctv',
-	'app/public/signup/SignupUniqueEmailChkDrctv',
 	'app/widget/PwdValidChkDrctv',
-	'app/public/signup/SignupModel',
 	'app/public/MainCtrlr',
 	'app/public/login/LoginCtrlr',
-	'app/public/signup/SignupCtrlr',
-	'app/public/signup/SignupVerifyCtrlr',
-	'app/public/signup/SignupVerifiedCtrlr',
 	'app/public/forgot/PwdForgotCtrlr',
 	'app/public/forgot/PwdForgotSuccessCtrlr',
 	'app/public/reset/PwdResetCtrlr',
-	'app/public/reset/PwdResetSuccessCtrlr'
+	'app/public/reset/PwdResetSuccessCtrlr',
+	'app/public/signup/SignupModule'
 ], function(
 	ValuesEqualRqrdDrctv,
-	SignupUniqueEmailChkDrctv,
 	PwdValidChkDrctv,
-	SignupModel,
 	MainCtrlr,
 	LoginCtrlr,
-	SignupCtrlr,
-	SignupVerifyCtrlr,
-	SignupVerifiedCtrlr,
 	PwdForgotCtrlr,
 	PwdForgotSuccessCtrlr,
 	PwdResetCtrlr,
-	PwdResetSuccessCtrlr) {
-	var module = angular.module('app.login', ['ngMessages']);
+	PwdResetSuccessCtrlr,
+	SignupModule) {
+	var module = angular.module('app.login', ['ngMessages', 'app.signup']);
 	
 	module.directive('valuesEqualRqrd', ValuesEqualRqrdDrctv);
-	module.directive('signupUniqueEmailChk', SignupUniqueEmailChkDrctv);
 	module.directive('pwdValidChk', PwdValidChkDrctv);
-	
-	module.factory('SignupModel', SignupModel);
 	
 	module.controller('PublicMainCtrlr', MainCtrlr);
 	module.controller('LoginCtrlr', LoginCtrlr);
-	module.controller('SignupCtrlr', SignupCtrlr);
-	module.controller('SignupVerifyCtrlr', SignupVerifyCtrlr);
-	module.controller('SignupVerifiedCtrlr', SignupVerifiedCtrlr);
 	module.controller('PwdForgotCtrlr', PwdForgotCtrlr);
 	module.controller('PwdForgotSuccessCtrlr', PwdForgotSuccessCtrlr);
 	module.controller('PwdResetCtrlr', PwdResetCtrlr);
@@ -56,26 +42,6 @@ define([
 			url : '/login',
 			templateUrl : 'client/src/app/public/login/login.tpl.html',
 			controller : 'LoginCtrlr',
-			controllerAs : 'ctrlr'
-		})
-		.state('app.signup', {
-			url : '/signup',
-			templateUrl : 'client/src/app/public/signup/signup.tpl.html',
-			controller : 'SignupCtrlr',
-			controllerAs : 'ctrlr'
-		})
-		.state('app.signup-verify', {
-			params : {
-				email : ''
-			},
-			templateUrl : 'client/src/app/public/signup/signup-verify.tpl.html',
-			controller : 'SignupVerifyCtrlr',
-			controllerAs : 'ctrlr'
-		})
-		.state('app.signup-verified', {
-			url : '/signup-verified',
-			templateUrl : 'client/src/app/public/signup/signup-verified.tpl.html',
-			controller : 'SignupVerifiedCtrlr',
 			controllerAs : 'ctrlr'
 		})
 		.state('app.forgot', {
