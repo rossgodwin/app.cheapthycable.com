@@ -6,7 +6,7 @@ define([
 	AppCtrlr,
 	IntroModule,
 	DashboardModule) {
-	var module = angular.module('app.user', ['ui.bootstrap', 'app.gu.intro', 'app.gu.dashboard']);
+	var module = angular.module('app.gu', ['ui.bootstrap', 'app.gu.intro', 'app.gu.dashboard']);
 
 	module.controller('GuAppCtrlr', AppCtrlr);
 	

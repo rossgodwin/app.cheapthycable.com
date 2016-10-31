@@ -14,7 +14,7 @@ define([
 	SocialModule) {
 	var moduleName = 'app';
 
-	var module = angular.module(moduleName, ['app.templates', 'app.core', 'app.social', 'app.user', 'app.admin']);
+	var module = angular.module(moduleName, ['app.templates', 'app.core', 'app.social', 'app.gu', 'app.admin']);
 	
 	module.factory('SecurityInterceptor', SecurityInterceptor);
 	
