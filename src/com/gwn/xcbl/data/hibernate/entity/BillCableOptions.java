@@ -27,13 +27,13 @@ public class BillCableOptions implements ILongId {
 	@JoinColumn(name = BillCableOptionsTableMetadata.COL_BILL_ID, referencedColumnName = BillTableMetadata.COL_ID, nullable = false)
 	private Bill bill;
 	
-	@Column(name = "dvr_count")
+	@Column(name = BillCableOptionsTableMetadata.COL_DVR_COUNT)
 	private Integer dvrCount;
 	
-	@Column(name = "box_count")
+	@Column(name = BillCableOptionsTableMetadata.COL_BOX_COUNT)
 	private Integer boxCount;
 	
-	@Column(name = "special_channels", nullable = false)
+	@Column(name = BillCableOptionsTableMetadata.COL_SPECIAL_CHANNELS, nullable = false)
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean specialChannels;
 

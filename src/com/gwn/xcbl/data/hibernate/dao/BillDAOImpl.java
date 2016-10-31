@@ -1,6 +1,7 @@
 package com.gwn.xcbl.data.hibernate.dao;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.hibernate.SQLQuery;
 
 import com.gwn.xcbl.data.dao.BillDAO;
 import com.gwn.xcbl.data.dao.util.QueryOrderByBuilder;
+import com.gwn.xcbl.data.entity.BillCableOptionsTableMetadata;
 import com.gwn.xcbl.data.entity.BillTableMetadata;
 import com.gwn.xcbl.data.entity.ProviderTableMetadata;
 import com.gwn.xcbl.data.hibernate.entity.Bill;
@@ -19,6 +21,7 @@ import com.gwn.xcbl.data.model.HaversineFormulaConsts;
 import com.gwn.xcbl.data.model.HaversineFormulaCritr;
 import com.gwn.xcbl.data.model.QueryComposite;
 import com.gwn.xcbl.data.shared.ILongId;
+import com.gwn.xcbl.data.shared.SetOperator;
 import com.gwn.xcbl.data.shared.SortOrder;
 import com.gwn.xcbl.data.shared.bill.BillSearchCritrDTO;
 import com.gwn.xcbl.data.shared.bill.BillSort;
@@ -67,6 +70,18 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, ILongId> implements B
 		return qc;
 	}
 	
+	public Bill findLatestBill(long accountId, boolean readOnly) {
+		StringBuilder qsb = new StringBuilder();
+		qsb.append("from " + Bill.class.getSimpleName() + " b0 where b0.account.id = :accountId");
+		// TODO use {@link AccountDAOImpl#appendIdEqualsCritr}
+		qsb.append(" and b0.id = (select max(b1.id) from " + Bill.class.getSimpleName() + " b1 where b1.account.id = :accountId)");
+		
+		Query q = getSession().createQuery(qsb.toString());
+		q.setParameter("accountId", accountId);
+		Bill r = (Bill) q.uniqueResult();
+		return r;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Bill> findBillsByCritr(BillSearchCritrDTO critr, Integer offset, Integer limit) {
@@ -106,6 +121,11 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, ILongId> implements B
 		appendSqlTotalAmountEqualsCritr("b", qsb, params, critr.getExactTotalAmount());
 		appendSqlProviderCritr("b", qsb, params, critr.getProviderId());
 		appendSqlProviderNameMatchCritr("b", qsb, params, critr.getMatchProviderName());
+//		appendSqlInternetServiceCritr("b", qsb, params, critr.getInternetService());
+//		appendSqlCableServiceCritr("b", qsb, params, critr.getCableService());
+//		appendSqlPhoneServiceCritr("b", qsb, params, critr.getPhoneService());
+		appendSqlServicesCritr("b", qsb, params, critr);
+		appendSqlCableOptionCritr("b", qsb, params, critr);
 		
 		if (orderBy) {
 			appendSqlOrderBy("b", qsb, critr.getSorts());
@@ -129,6 +149,21 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, ILongId> implements B
 //		return c;
 //	}
 	
+	public static void appendSqlZipCodeRadiusCritr(String tableAlias, StringBuilder qsb, HaversineFormulaCritr critr) {
+		qsb.append(" and exists (");
+		{
+			qsb.append("select 1");
+			qsb.append(" from (");
+			{
+				qsb.append(GeoZipCodeDAOImpl.buildHaversineTable(critr));
+			}
+			qsb.append(") as d");
+			qsb.append(" where d.distance <= d.radius");
+			qsb.append(" and ").append(tableAlias).append(".").append(BillTableMetadata.COL_GEO_ZIP_CODE_ID).append(" = d.zip_code_id");
+		}
+		qsb.append(")");
+	}
+	
 	private static void appendSqlOrderBy(String tableAlias, StringBuilder qsb, List<BillSort> sorts) {
 		QueryOrderByBuilder bldr = new QueryOrderByBuilder();
 		bldr.addKeyword();
@@ -140,42 +175,6 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, ILongId> implements B
 			}
 		}
 		qsb.append(" ").append(bldr.asString());
-	}
-	
-	public Bill findLatestBill(long accountId, boolean readOnly) {
-		StringBuilder qsb = new StringBuilder();
-		qsb.append("from " + Bill.class.getSimpleName() + " b0 where b0.account.id = :accountId");
-		// TODO use {@link AccountDAOImpl#appendIdEqualsCritr}
-		qsb.append(" and b0.id = (select max(b1.id) from " + Bill.class.getSimpleName() + " b1 where b1.account.id = :accountId)");
-		
-		Query q = getSession().createQuery(qsb.toString());
-		q.setParameter("accountId", accountId);
-		Bill r = (Bill) q.uniqueResult();
-		return r;
-	}
-	
-	public static void appendSqlInternetServiceCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, Boolean service) {
-		if (service != null) {
-			String param = DAOUtils.generateRandomUniqueParam(params);
-			qsb.append(" and ").append(tableAlias).append(".").append(BillTableMetadata.COL_INTERNET_SERVICE).append(" = :").append(param);
-			params.put(param, service);
-		}
-	}
-	
-	public static void appendSqlCableServiceCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, Boolean service) {
-		if (service != null) {
-			String param = DAOUtils.generateRandomUniqueParam(params);
-			qsb.append(" and ").append(tableAlias).append(".").append(BillTableMetadata.COL_CABLE_SERVICE).append(" = :").append(param);
-			params.put(param, service);
-		}
-	}
-	
-	public static void appendSqlPhoneServiceCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, Boolean service) {
-		if (service != null) {
-			String param = DAOUtils.generateRandomUniqueParam(params);
-			qsb.append(" and ").append(tableAlias).append(".").append(BillTableMetadata.COL_PHONE_SERVICE).append(" = :").append(param);
-			params.put(param, service);
-		}
 	}
 	
 	public static void appendSqlTotalAmountEqualsCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, BigDecimal amount) {
@@ -215,18 +214,114 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, ILongId> implements B
 		}
 	}
 	
-	public static void appendSqlZipCodeRadiusCritr(String tableAlias, StringBuilder qsb, HaversineFormulaCritr critr) {
-		qsb.append(" and exists (");
-		{
-			qsb.append("select 1");
-			qsb.append(" from (");
-			{
-				qsb.append(GeoZipCodeDAOImpl.buildHaversineTable(critr));
+	private static void appendSqlServicesCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, BillSearchCritrDTO critr) {
+		if (critr.getServicesSetOperator().equals(SetOperator.CONTAINS)) {
+			List<String> conds = new ArrayList<String>();
+			if (critr.getInternetService() != null && critr.getInternetService()) {
+				addSqlInternetServiceCritr(tableAlias, conds, params, critr.getInternetService());
 			}
-			qsb.append(") as d");
-			qsb.append(" where d.distance <= d.radius");
-			qsb.append(" and ").append(tableAlias).append(".").append(BillTableMetadata.COL_GEO_ZIP_CODE_ID).append(" = d.zip_code_id");
+			if (critr.getCableService() != null && critr.getCableService()) {
+				addSqlCableServiceCritr(tableAlias, conds, params, critr.getCableService());
+			}
+			if (critr.getPhoneService() != null && critr.getPhoneService()) {
+				addSqlPhoneServiceCritr(tableAlias, conds, params, critr.getPhoneService());
+			}
+			if (conds.size() > 0) {
+				qsb.append(" and (");
+				qsb.append(StringUtils.join(conds, " or "));
+				qsb.append(")");
+			}
+		} else if (critr.getServicesSetOperator().equals(SetOperator.MATCHES)) {
+			appendSqlInternetServiceCritr(tableAlias, qsb, params, critr.getInternetService());
+			appendSqlCableServiceCritr(tableAlias, qsb, params, critr.getCableService());
+			appendSqlPhoneServiceCritr(tableAlias, qsb, params, critr.getPhoneService());
 		}
-		qsb.append(")");
+	}
+	
+	public static void appendSqlInternetServiceCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, Boolean value) {
+		appendSqlInternetServiceCritr(tableAlias, qsb, params, "and", value);
+	}
+	
+	private static void appendSqlInternetServiceCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, String operator, Boolean value) {
+		if (value != null) {
+			String param = DAOUtils.generateRandomUniqueParam(params);
+			if (StringUtils.isNoneEmpty(operator)) {
+				qsb.append(" ").append(operator).append(" ");
+			}
+			qsb.append(tableAlias).append(".").append(BillTableMetadata.COL_INTERNET_SERVICE).append(" = :").append(param);
+			params.put(param, value);
+		}
+	}
+	
+	private static void addSqlInternetServiceCritr(String tableAlias, List<String> conds, Map<String, Object> params, Boolean value) {
+		StringBuilder qsb = new StringBuilder();
+		appendSqlInternetServiceCritr(tableAlias, qsb, params, null, value);
+		String cond = qsb.toString();
+		if (StringUtils.isNotEmpty(cond)) {
+			conds.add(cond);
+		}
+	}
+	
+	public static void appendSqlCableServiceCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, Boolean value) {
+		appendSqlCableServiceCritr(tableAlias, qsb, params, "and", value);
+	}
+	
+	private static void appendSqlCableServiceCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, String operator, Boolean value) {
+		if (value != null) {
+			String param = DAOUtils.generateRandomUniqueParam(params);
+			if (StringUtils.isNoneEmpty(operator)) {
+				qsb.append(" ").append(operator).append(" ");
+			}
+			qsb.append(tableAlias).append(".").append(BillTableMetadata.COL_CABLE_SERVICE).append(" = :").append(param);
+			params.put(param, value);
+		}
+	}
+	
+	private static void addSqlCableServiceCritr(String tableAlias, List<String> conds, Map<String, Object> params, Boolean value) {
+		StringBuilder qsb = new StringBuilder();
+		appendSqlCableServiceCritr(tableAlias, qsb, params, null, value);
+		String cond = qsb.toString();
+		if (StringUtils.isNotEmpty(cond)) {
+			conds.add(cond);
+		}
+	}
+	
+	public static void appendSqlPhoneServiceCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, Boolean value) {
+		appendSqlPhoneServiceCritr(tableAlias, qsb, params, "and", value);
+	}
+	
+	private static void appendSqlPhoneServiceCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, String operator, Boolean value) {
+		if (value != null) {
+			String param = DAOUtils.generateRandomUniqueParam(params);
+			if (StringUtils.isNoneEmpty(operator)) {
+				qsb.append(" ").append(operator).append(" ");
+			}
+			qsb.append(tableAlias).append(".").append(BillTableMetadata.COL_PHONE_SERVICE).append(" = :").append(param);
+			params.put(param, value);
+		}
+	}
+	
+	private static void addSqlPhoneServiceCritr(String tableAlias, List<String> conds, Map<String, Object> params, Boolean value) {
+		StringBuilder qsb = new StringBuilder();
+		appendSqlPhoneServiceCritr(tableAlias, qsb, params, null, value);
+		String cond = qsb.toString();
+		if (StringUtils.isNotEmpty(cond)) {
+			conds.add(cond);
+		}
+	}
+	
+	private static void appendSqlCableOptionCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, BillSearchCritrDTO critr) {
+		if ((critr.getCableService() != null && critr.getCableService()) && (critr.getCableOptionBoxCount() != null || critr.getCableOptionDvrCount() != null || critr.getCableOptionSpecialChannels() != null)) {
+			qsb.append(" and exists (");
+			{
+				qsb.append("select 1");
+				qsb.append(" from ").append(BillCableOptionsTableMetadata.TABLE_NAME).append(" c");
+				qsb.append(" where c.").append(BillCableOptionsTableMetadata.COL_BILL_ID).append(" = ").append(tableAlias).append(".").append(BillTableMetadata.COL_ID);
+				BillCableOptionsDAOImpl.appendSqlBoxCountCritr("c", qsb, params, critr.getCableOptionBoxCount());
+				BillCableOptionsDAOImpl.appendSqlDvrCountCritr("c", qsb, params, critr.getCableOptionDvrCount());
+				BillCableOptionsDAOImpl.appendSqlSpecialChannelsCritr("c", qsb, params, critr.getCableOptionSpecialChannels());
+			}
+			qsb.append(")");
+		}
 	}
 }

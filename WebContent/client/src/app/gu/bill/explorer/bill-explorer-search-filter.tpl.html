@@ -1,7 +1,7 @@
 <div ng-controller="BillExplorerSearchFilterCtrlr as ctrlr">
 	<span style="font-size: 1.25em; font-weight: bold;">Filters: </span>
 	<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
-		Distance: {{ctrlr.data.mileRadius}} miles
+		Distance: {{ctrlr.data.critrMileRadius}} miles
 	</span>
 	<span ng-show="ctrlr.data.critrExactTotalAmount != ''">
 		&nbsp;&nbsp;
@@ -22,6 +22,30 @@
 		<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
 			Provider: {{ctrlr.data.critrProviderName}}&nbsp;&nbsp;
 			<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeProviderName()"></span>
+		</span>
+	</span>
+	
+	<span ng-show="ctrlr.data.critrInternetService || ctrlr.data.critrCableService || ctrlr.data.critrPhoneService">
+		&nbsp;&nbsp;
+		<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
+			Services: {{ctrlr.getServices()}}&nbsp;&nbsp;
+			<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeServices()"></span>
+		</span>
+	</span>
+	
+	<span ng-show="ctrlr.showCableOptionsBoxCount()">
+		&nbsp;&nbsp;
+		<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
+			Cable Boxes: {{ctrlr.data.critrCableOptionsBoxCount}}&nbsp;&nbsp;
+			<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeCableOptionsBoxCount()"></span>
+		</span>
+	</span>
+	
+	<span ng-show="ctrlr.showCableOptionsDvrCount()">
+		&nbsp;&nbsp;
+		<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
+			DVRs: {{ctrlr.data.critrCableOptionsDvrCount}}&nbsp;&nbsp;
+			<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeCableOptionsDvrCount()"></span>
 		</span>
 	</span>
 </div>

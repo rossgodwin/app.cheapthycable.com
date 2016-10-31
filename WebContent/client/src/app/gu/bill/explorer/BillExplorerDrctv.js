@@ -18,7 +18,7 @@ define([], function() {
 		init();
 		
 		function init() {
-			$scope.$watch(function () { return data.mileRadius; }, function (mileRadius) {
+			$scope.$watch(function () { return data.critrMileRadius; }, function (critrMileRadius) {
 				updateTotals();
 			}, true);
 			
@@ -26,7 +26,7 @@ define([], function() {
 		}
 		
 		function updateTotals() {
-			BillHttpService.getBillExplorerResults(data.zipCode, data.mileRadius).then(function(response) {
+			BillHttpService.getBillExplorerResults(data.critrZipCode, data.critrMileRadius).then(function(response) {
 				var result = response.data.result;
 				
 				data.lowestTotalAmount = result.lowestTotalAmount;

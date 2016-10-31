@@ -1,6 +1,6 @@
 package com.gwn.xcbl.data.shared.bill.report;
 
-// TODO rename BillLocationStatsCritrDTO ???
+// TODO rename BillExplorerCritrDTO
 public class BillReportCritrDTO {
 
 	private double latitude;

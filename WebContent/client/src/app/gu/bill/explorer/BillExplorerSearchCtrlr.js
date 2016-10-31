@@ -7,7 +7,17 @@ define([], function() {
 		// public variables
 		vm.providerOptionNone = new Object();
 		vm.mileRadiusOptions = [10, 25, 50, 75, 100, 150, 200];
+		vm.servicesSetOperatorOptions = [{
+			label : 'Matches',
+			option : 'MATCHES'
+		}, {
+			label : 'Contains',
+			option : 'CONTAINS'
+		}];
 		vm.providerOptions = [];
+		vm.boxCountOptions = [data.cableOptionsBoxNAOption, '1', '2', '3', '4', '5'];
+		vm.dvrCountOptions = [data.cableOptionsDvrNAOption, '1', '2', '3', '4', '5'];
+		vm.moreExpanded = false;
 		vm.sortOptions = [{
 			label : 'Amount - High to Low',
 			iconClass : 'glyphicon-sort-by-attributes-alt',
@@ -24,6 +34,8 @@ define([], function() {
 		// public functions
 		vm.onMileRadiusSelect = onMileRadiusSelect;
 		vm.onAmountSelect = onAmountSelect;
+		vm.getCritrServicesSetOperatorLabel = getCritrServicesSetOperatorLabel;
+		vm.tglMoreExpanded = tglMoreExpanded;
 		vm.getProviders = getProviders;
 		vm.onProviderNameApply = onProviderNameApply;
 		vm.onProviderSelect = onProviderSelect;
@@ -51,11 +63,24 @@ define([], function() {
 		}
 		
 		function onMileRadiusSelect(mileRadius) {
-			data.mileRadius = mileRadius;
+			data.critrMileRadius = mileRadius;
 		}
 		
 		function onAmountSelect(amount) {
 			data.critrExactTotalAmount = amount;
+		}
+		
+		function getCritrServicesSetOperatorLabel() {
+			for (var i = 0; i < vm.servicesSetOperatorOptions.length; i++) {
+				if (data.critrServicesSetOperator == vm.servicesSetOperatorOptions[i].option) {
+					return vm.servicesSetOperatorOptions[i].label;
+				}
+			}
+			return '';
+		}
+		
+		function tglMoreExpanded() {
+			vm.moreExpanded = !vm.moreExpanded;
 		}
 		
 		function getProviders(value) {

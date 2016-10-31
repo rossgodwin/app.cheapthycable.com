@@ -37,7 +37,7 @@
 					Options:&nbsp;&nbsp;{{ctrlr.getAllOptionsStr()}}
 				</div>
 				<div style="padding-top: 5px;" ng-if="ctrlr.bill.comments">
-					<button class="btn btn-xs btn-brand-primary" ng-click="ctrlr.tglCommentsExpanded()">Comments <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ng-if="!ctrlr.commentsExpanded"></span><span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-if="ctrlr.commentsExpanded"></span></button>
+					<button class="btn btn-xs btn-brand-primary" ng-click="ctrlr.tglCommentsExpanded()">Comments&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-down" aria-hidden="true" ng-if="!ctrlr.commentsExpanded"></span><span class="glyphicon glyphicon-chevron-up" aria-hidden="true" ng-if="ctrlr.commentsExpanded"></span></button>
 					<div class="app-bill-list-item-tile-details-h3" style="margin: 5px; font-family: courier new;" ng-if="ctrlr.commentsExpanded">
 						"{{ctrlr.bill.comments}}"
 					</div>

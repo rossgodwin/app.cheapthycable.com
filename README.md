@@ -51,3 +51,11 @@ grunt build-app
 #### Clean for release
 
 grunt prod-clean
+
+## Helpful Angular Resources
+
+http://ngbp.github.io/ngbp/#/home
+https://github.com/johnpapa/HotTowel-Angular
+https://github.com/johnpapa/generator-hottowel
+https://github.com/ThomasBurleson/angularjs-Quizzler
+

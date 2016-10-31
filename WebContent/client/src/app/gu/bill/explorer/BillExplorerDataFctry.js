@@ -5,11 +5,20 @@ define([], function() {
 	var data = {};
 	var defaultData = {
 		reset : reset,
-		mileRadius : 50,
-		zipCode : '',
+		cableOptionsBoxNAOption : 'N/A',
+		cableOptionsDvrNAOption : 'N/A',
+		critrMileRadius : 50,
+		critrZipCode : '',
 		critrExactTotalAmount : '',
 		critrProvider : null,
 		critrProviderName : '',
+		critrServicesSetOperator : 'MATCHES',
+		critrInternetService : null,
+		critrCableService : null,
+		critrPhoneService : null,
+		critrCableOptionsBoxCount : null,
+		critrCableOptionsDvrCount : null,
+		critrCableOptionsSpecialChannels : null,
 		critrSort : {
 			option : 'TOTAL_AMOUNT',
 			order : 'DESC'
@@ -32,6 +41,30 @@ define([], function() {
 	
 	function setLatestBill(bill) {
 		data.latestBill = bill;
-		data.zipCode = bill.geoZipCode.zipCode;
+		data.critrZipCode = bill.geoZipCode.zipCode;
+		data.critrInternetService = bill.internetService;
+		data.critrCableService = bill.cableService;
+		data.critrPhoneService = bill.phoneService;
+		data.critrCableOptionsBoxCount = data.cableOptionsBoxNAOption;
+		data.critrCableOptionsDvrCount = data.cableOptionsDvrNAOption;
+		if (bill.cableOptions) {
+			if (bill.cableOptions.boxCount && bill.cableOptions.boxCount > 0) {
+				data.critrCableOptionsBoxCount = bill.cableOptions.boxCount;
+			}
+			if (bill.cableOptions.dvrCount && bill.cableOptions.dvrCount > 0) {
+				data.critrCableOptionsDvrCount = bill.cableOptions.dvrCount;
+			}
+//			if (!bill.cableOptions.boxCount || bill.cableOptions.boxCount == 0) {
+//				data.critrCableOptionsBoxCount = data.cableOptionsBoxNAOption;
+//			} else {
+//				data.critrCableOptionsBoxCount = bill.cableOptions.boxCount;
+//			}
+//			if (!bill.cableOptions.dvrCount || bill.cableOptions.dvrCount == 0) {
+//				data.critrCableOptionsDvrCount = data.cableOptionsDvrNAOption;
+//			} else {
+//				data.critrCableOptionsDvrCount = bill.cableOptions.dvrCount;
+//			}
+			data.critrCableOptionsSpecialChannels = bill.cableOptions.specialChannels;
+		}
 	}
 });

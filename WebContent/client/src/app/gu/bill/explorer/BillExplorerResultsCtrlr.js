@@ -8,7 +8,7 @@ define([
 	
 	function ctrlr($window, $scope, spinnerService, data, BillHttpService, fbHlprPrvdr, twitterHlprPrvdr) {
 		var vm = this;
-		
+		var watchCount = 0;
 		var paginationCtrlr = new PaginationCtrlr();
 		
 		// public variables
@@ -27,7 +27,11 @@ define([
 		init();
 		
 		function init() {
-			$scope.$watch(function () { return data.mileRadius; }, function (mileRadius) {
+			addWatchs();
+		}
+		
+		function addWatchs() {
+			$scope.$watch(function () { return data.critrMileRadius; }, function (critrMileRadius) {
 				setAllBillsPage(1);
 			}, true);
 			
@@ -40,6 +44,30 @@ define([
 			}, true);
 			
 			$scope.$watch(function () { return data.critrProviderName; }, function (critrProviderName) {
+				setAllBillsPage(1);
+			}, true);
+			
+			$scope.$watch(function () { return data.critrServicesSetOperator; }, function (critrServicesSetOperator) {
+				setAllBillsPage(1);
+			}, true);
+			
+			$scope.$watch(function () { return data.critrInternetService; }, function (critrInternetService) {
+				setAllBillsPage(1);
+			}, true);
+			
+			$scope.$watch(function () { return data.critrCableService; }, function (critrCableService) {
+				setAllBillsPage(1);
+			}, true);
+			
+			$scope.$watch(function () { return data.critrPhoneService; }, function (critrPhoneService) {
+				setAllBillsPage(1);
+			}, true);
+			
+			$scope.$watch(function () { return data.critrCableOptionsBoxCount; }, function (critrCableOptionsBoxCount) {
+				setAllBillsPage(1);
+			}, true);
+			
+			$scope.$watch(function () { return data.critrCableOptionsDvrCount; }, function (critrCableOptionsDvrCount) {
 				setAllBillsPage(1);
 			}, true);
 			
@@ -69,16 +97,39 @@ define([
 			
 			paginationCtrlr.update(vm.allBills.length, pageNumber, vm.pageSize);
 			
-			var criteria = {
-				zipCode : data.zipCode,
-				mileRadius : data.mileRadius,
+			var critr = {
+				zipCode : data.critrZipCode,
+				mileRadius : data.critrMileRadius,
 				exactTotalAmount : data.critrExactTotalAmount,
 				providerId : data.critrProvider ? data.critrProvider.id : null,
 				matchProviderName : data.critrProviderName,
+				servicesSetOperator : data.critrServicesSetOperator,
+				internetService : data.critrInternetService,
+				cableService : data.critrCableService,
+				phoneService : data.critrPhoneService,
 				sorts : [{option : data.critrSort.option, order : data.critrSort.order}]
 			};
 			
-			BillHttpService.getBillsListPage(criteria, paginationCtrlr.startPage, vm.pageSize).then(function(response) {
+//			if (data.critrInternetService) {
+//				critr.internetService = data.critrInternetService;
+//			}
+//			if (data.critrCableService) {
+//				critr.cableService = data.critrCableService;
+//			}
+//			if (data.critrPhoneService) {
+//				critr.phoneService = data.critrPhoneService;
+//			}
+			
+			if (data.critrCableService) {
+				if (data.critrCableOptionsBoxCount != data.cableOptionsBoxNAOption) {
+					critr.cableOptionBoxCount = data.critrCableOptionsBoxCount;
+				}
+				if (data.critrCableOptionsDvrCount != data.cableOptionsDvrNAOption) {
+					critr.cableOptionDvrCount = data.critrCableOptionsDvrCount;
+				}
+			}
+			
+			BillHttpService.getBillsListPage(critr, paginationCtrlr.startPage, vm.pageSize).then(function(response) {
 				var page = response.data.result;
 				vm.allBills = page.records;
 				paginationCtrlr.update(page.total, pageNumber, vm.pageSize);
