@@ -22,15 +22,20 @@
 						</ul>
 					</div>
 				</div>
-				<div class="checkbox">
-					<label><input type="checkbox" ng-model="ctrlr.data.critrInternetService">Internet</label>
-				</div>
-				<div class="checkbox">
-					<label><input type="checkbox" ng-model="ctrlr.data.critrCableService">Cable</label>
-				</div>
-				<div class="checkbox">
-					<label><input type="checkbox" ng-model="ctrlr.data.critrPhoneService">Phone</label>
-				</div>
+				<table class="app-bill-search-services">
+					<tr>
+						<td>Internet:</td>
+						<td><toggle-switch ng-model="ctrlr.data.critrInternetService" on-label="Yes" off-label="No"></toggle-switch></td>
+					</tr>
+					<tr>
+						<td>Cable:</td>
+						<td><toggle-switch ng-model="ctrlr.data.critrCableService" on-label="Yes" off-label="No"></toggle-switch></td>
+					</tr>
+					<tr>
+						<td>Phone:</td>
+						<td><toggle-switch ng-model="ctrlr.data.critrPhoneService" on-label="Yes" off-label="No"></toggle-switch></td>
+					</tr>
+				</table>
 			</div>
 			
 			<div class="form-group form-inline" ng-show="ctrlr.data.critrCableService">
@@ -54,6 +59,13 @@
 							<li><a ng-click="ctrlr.data.critrCableOptionsDvrCount = dvrCountOption" ng-repeat="dvrCountOption in ctrlr.dvrCountOptions">{{dvrCountOption}}</a></li>
 						</ul>
 					</div>
+				</div>
+			</div>
+			
+			<div class="form-group form-inline" ng-show="ctrlr.data.critrCableService">
+				<label>Special Channels:</label>
+				<div class="input-group">
+					<toggle-switch ng-model="ctrlr.data.critrCableOptionsSpecialChannels" on-label="Yes" off-label="No"></toggle-switch>
 				</div>
 			</div>
 			

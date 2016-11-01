@@ -17,6 +17,8 @@ define([], function() {
 		vm.removeCableOptionsBoxCount = removeCableOptionsBoxCount;
 		vm.showCableOptionsDvrCount = showCableOptionsDvrCount;
 		vm.removeCableOptionsDvrCount = removeCableOptionsDvrCount;
+		vm.showCableOptionsSpecialChannels = showCableOptionsSpecialChannels;
+		vm.removeCableOptionsSpecialChannels = removeCableOptionsSpecialChannels;
 		
 		function removeTotalAmount() {
 			data.critrExactTotalAmount = '';
@@ -67,6 +69,15 @@ define([], function() {
 		
 		function removeCableOptionsDvrCount() {
 			data.critrCableOptionsDvrCount = data.cableOptionsDvrNAOption;
+		}
+		
+		function showCableOptionsSpecialChannels() {
+			var r = data.critrCableService && data.critrCableOptionsSpecialChannels && data.critrCableOptionsSpecialChannels;
+			return r;
+		}
+		
+		function removeCableOptionsSpecialChannels() {
+			data.critrCableOptionsSpecialChannels = null;
 		}
 	}
 });

@@ -42,6 +42,7 @@ define([
 			$scope.$watch(function () { return data.critrPhoneService; }, watchChangeListener, true);
 			$scope.$watch(function () { return data.critrCableOptionsBoxCount; }, watchChangeListener, true);
 			$scope.$watch(function () { return data.critrCableOptionsDvrCount; }, watchChangeListener, true);
+			$scope.$watch(function () { return data.critrCableOptionsSpecialChannels; }, watchChangeListener, true);
 			$scope.$watch(function () { return data.critrSort; }, watchChangeListener, true);
 		}
 		
@@ -102,6 +103,9 @@ define([
 				}
 				if (data.critrCableOptionsDvrCount != data.cableOptionsDvrNAOption) {
 					critr.cableOptionDvrCount = data.critrCableOptionsDvrCount;
+				}
+				if (data.critrCableOptionsSpecialChannels && data.critrCableOptionsSpecialChannels) {
+					critr.cableOptionSpecialChannels = data.critrCableOptionsSpecialChannels;
 				}
 			}
 			
