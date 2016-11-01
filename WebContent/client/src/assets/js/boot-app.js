@@ -9,10 +9,10 @@
 			angular : "client/vendor/angular/angular-1.5.8.js"
 		},
 		{
-			uiRouter : "client/vendor/angular/angular-ui-router-0.3.1.min.js"
+			uiRouter : "client/vendor/angular/extras/angular-ui-router-0.3.1.min.js"
 		},
 		{
-			ngMessages : "client/vendor/angular/angular-messages-1.5.9.min.js"
+			ngMessages : "client/vendor/angular/extras/angular-messages-1.5.9.min.js"
 		},
 		{
 			uiBootstrap : "client/vendor/angular/extras/ui-bootstrap-tpls-1.3.3.js"
