@@ -6,6 +6,7 @@ define(['app/res/AppUris'], function(appUris) {
 			isSignupUniqueEmail : isSignupUniqueEmail,
 			isPwdValidChk : isPwdValidChk,
 			signup : signup,
+			qsignup : qsignup,
 			login : login,
 			getUser : getUser,
 			pwdForgot : pwdForgot,
@@ -83,6 +84,24 @@ define(['app/res/AppUris'], function(appUris) {
 			function f(error) {
 				// TODO
 			}
+		}
+		
+		function qsignup(signup) {
+			return $http({
+			    method : 'POST',
+			    url : appUris.getRestUrl('/auth/qsignup'),
+			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
+			    transformRequest : function(obj) {
+			        var str = [];
+			        for (var p in obj) {
+			        	str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+			        }
+			        return str.join("&");
+			    },
+			    data : {
+			    	p0: JSON.stringify(signup)
+			    }
+			});
 		}
 		
 		function login(email, password) {

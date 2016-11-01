@@ -1,7 +1,7 @@
-define([
-	'app/res/AppUris'
-], function(uris) {
-	var service = function($http) {
+define(['app/res/AppUris'], function(appUris) {
+	return ['$http', srvc];
+	
+	function srvc($http) {
 		var service = {
 			getProviderList : getProviderList,
 			getProviderListPage : getProviderListPage
@@ -10,7 +10,7 @@ define([
 		return service;
 		
 		function getProviderList(searchCritr) {
-			return $http.get(uris.getRestUrl('/provider/list'), {
+			return $http.get(appUris.getRestUrl('/provider/list'), {
 				params : {
 					p0 : searchCritr
 				}
@@ -18,7 +18,7 @@ define([
 		}
 		
 		function getProviderListPage(searchCritr, offset, limit) {
-			return $http.get(uris.getRestUrl('/provider/list/page'), {
+			return $http.get(appUris.getRestUrl('/provider/list/page'), {
 				params : {
 					p0 : searchCritr,
 					p1 : offset,
@@ -27,6 +27,4 @@ define([
 			});
 		}
 	};
-	
-	return ['$http', service];
 });

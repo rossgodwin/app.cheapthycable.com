@@ -9,6 +9,13 @@ Namecheap.com
 
 Mailgun.org
 
+## Server
+
+### Rewrite
+
+Servlet extension
+http://www.ocpsoft.org/rewrite
+
 ### Email templating
 
 Thymeleaf.org

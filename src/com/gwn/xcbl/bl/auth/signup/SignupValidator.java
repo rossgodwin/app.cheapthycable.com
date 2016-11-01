@@ -21,7 +21,7 @@ public class SignupValidator {
 		return errs;
 	}
 	
-	private static boolean chkEmpty(List<String> errs, SignupDTO signup) {
+	protected boolean chkEmpty(List<String> errs, SignupDTO signup) {
 		List<String> myErrs = new ArrayList<String>();
 		if (StringUtils.isEmpty(signup.getEmail())) {
 			myErrs.add("Email is required.");
@@ -36,7 +36,7 @@ public class SignupValidator {
 		return myErrs.size() == 0;
 	}
 	
-	private static boolean chkUniqueEmail(List<String> errs, SignupDTO signup) {
+	protected boolean chkUniqueEmail(List<String> errs, SignupDTO signup) {
 		List<String> myErrs = new ArrayList<String>();
 		if (DAOFactory.getInstance().getUserDAO().findByUsername(signup.getEmail()) != null) {
 			myErrs.add("Email is already being used.");
@@ -45,7 +45,7 @@ public class SignupValidator {
 		return myErrs.size() == 0;
 	}
 	
-	private static boolean chkPwds(List<String> errs, SignupDTO signup) {
+	protected boolean chkPwds(List<String> errs, SignupDTO signup) {
 		List<String> myErrs = new ArrayList<String>();
 		if (!signup.getPassword().equals(signup.getPasswordConfirm())) {
 			myErrs.add("Passwords do not match.");

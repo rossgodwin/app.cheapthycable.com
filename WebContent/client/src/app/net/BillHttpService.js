@@ -1,7 +1,7 @@
-define([
-	'app/res/AppUris'
-], function(uris) {
-	var service = function($http) {
+define(['app/res/AppUris'], function(appUris) {
+	return ['$http', srvc];
+	
+	function srvc($http) {
 		return {
 			getMyBillsList : getMyBillsList,
 			getBillsListPage : getBillsListPage,
@@ -14,7 +14,7 @@ define([
 		};
 		
 		function getMyBillsList() {
-			return $http.get(uris.getRestUrl('/bill/my/list'), {
+			return $http.get(appUris.getRestUrl('/bill/my/list'), {
 				params : {
 				}
 			}).then(c)
@@ -30,7 +30,7 @@ define([
 		}
 		
 		function getBillsListPage(criteria, offset, limit) {
-			return $http.get(uris.getRestUrl('/bill/list/page'), {
+			return $http.get(appUris.getRestUrl('/bill/list/page'), {
 				params : {
 					p0 : JSON.stringify(criteria),
 					p1 : offset,
@@ -42,7 +42,7 @@ define([
 		function saveBill(obj) {
 			return $http({
 			    method : 'POST',
-			    url : uris.getRestUrl('/bill/save'),
+			    url : appUris.getRestUrl('/bill/save'),
 			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
 			    transformRequest : function(obj) {
 			        var str = [];
@@ -58,7 +58,7 @@ define([
 		}
 		
 		function getLatestBill() {
-			return $http.get(uris.getRestUrl('/bill/latest'), {
+			return $http.get(appUris.getRestUrl('/bill/latest'), {
 				params : {
 				}
 			});
@@ -67,7 +67,7 @@ define([
 		function deleteBill(billId) {
 			return $http({
 			    method : 'POST',
-			    url : uris.getRestUrl('/bill/' + billId + '/delete'),
+			    url : appUris.getRestUrl('/bill/' + billId + '/delete'),
 			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
 			    transformRequest : function(obj) {
 			        var str = [];
@@ -90,7 +90,7 @@ define([
 		}
 		
 		function getBillExplorerResults(zipCode, radius) {
-			return $http.get(uris.getRestUrl('/bill/explorer/results'), {
+			return $http.get(appUris.getRestUrl('/bill/explorer/results'), {
 				params : {
 					p0 : zipCode,
 			    	p1 : radius
@@ -99,7 +99,7 @@ define([
 			
 //			return $http({
 //			    method : 'POST',
-//			    url : uris.getRestUrl('/bill/explorer/results'),
+//			    url : appUris.getRestUrl('/bill/explorer/results'),
 //			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
 //			    transformRequest : function(obj) {
 //			        var str = [];
@@ -127,7 +127,7 @@ define([
 		function getBillsByTotalAmount(zipCode, radius, totalAmount) {
 			return $http({
 			    method : 'POST',
-			    url : uris.getRestUrl('/bill/report/billsByTotalAmount'),
+			    url : appUris.getRestUrl('/bill/report/billsByTotalAmount'),
 			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
 			    transformRequest : function(obj) {
 			        var str = [];
@@ -156,7 +156,7 @@ define([
 		function getBillsByTotalAmount2(zipCode, radius, totalAmount) {
 			return $http({
 			    method : 'POST',
-			    url : uris.getRestUrl('/bill/report/billsByTotalAmount'),
+			    url : appUris.getRestUrl('/bill/report/billsByTotalAmount'),
 			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
 			    transformRequest : function(obj) {
 			        var str = [];
@@ -173,6 +173,4 @@ define([
 			});
 		}
 	};
-	
-	return ['$http', service];
 });

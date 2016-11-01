@@ -7,7 +7,7 @@ define([
 	'app/public/forgot/PwdForgotSuccessCtrlr',
 	'app/public/reset/PwdResetCtrlr',
 	'app/public/reset/PwdResetSuccessCtrlr',
-	'app/public/signup/SignupModule'
+	'app/public/qsignup/SignupModule'
 ], function(
 	ValuesEqualRqrdDrctv,
 	PwdValidChkDrctv,

@@ -1,4 +1,4 @@
-define(['app/res/AppConsts'], function(appConsts) {
+define(['app/res/AppConsts', 'app/res/AppUris'], function(appConsts, appUris) {
 	return ['$window', '$state', 'spinnerService', 'SignupModel', 'AuthHttpService', ctrlr];
 	
 	function ctrlr($window, $state, spinnerService, SignupModel, AuthHttpService) {
@@ -6,7 +6,6 @@ define(['app/res/AppConsts'], function(appConsts) {
 		
 		// public variables
 		vm.serverErrs = [];
-		vm.pwdMinLength = $window.pwdMinLength;
 		vm.signup = SignupModel;
 		
 		// public functions
@@ -26,17 +25,21 @@ define(['app/res/AppConsts'], function(appConsts) {
 			
 			spinnerService.show(appConsts.screenLoadingSpinner);
 			
-			AuthHttpService.signup(vm.signup).then(function(result) {
+			AuthHttpService.qsignup(vm.signup).then(function(response) {
 				spinnerService.hide(appConsts.screenLoadingSpinner);
 				
-				if (result.resultCode === 1) {
-					$state.go('app.signup-verify', {email : vm.signup.email}, {});
-				} else {
-					var errs = result.errs;
+				console.log('response: ' + JSON.stringify(response));
+				
+				if (response.data.resultCode === 1) {
+		    		$window.location.href = appUris.getAppUrl();
+		    	} else {
+		    		var errs = response.data.errs;
 					for (var i = 0; i < errs.length; i++) {
 						vm.serverErrs.push(errs[i]);
 					}
-				}
+		    	}
+			}).catch(function(error) {
+				// TODO
 			});
 		};
 		

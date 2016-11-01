@@ -21,12 +21,6 @@ define([
 	module.controller('SignupVerifyCtrlr', SignupVerifyCtrlr);
 	module.controller('SignupVerifiedCtrlr', SignupVerifiedCtrlr);
 	
-	var authorizeResolve = {
-		authorize : ['AuthService', function(AuthService) {
-			return AuthService.authorize(['USER']);
-		}]
-	};
-	
 	module.config(['$stateProvider', function($stateProvider) {
 		$stateProvider
 		.state('app.signup', {

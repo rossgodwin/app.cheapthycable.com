@@ -149,6 +149,60 @@ public class AuthRS extends BaseRS {
 		return Response.ok(json, MediaType.APPLICATION_JSON).build();
 	}
 	
+	/**
+	 * Quick signup
+	 * 
+	 * @param signupJson
+	 * @param httpRequest
+	 * @return
+	 */
+	@POST
+	@Path("/qsignup")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response qsignup(
+			@FormParam(ReqParams.PARAM0) String signupJson,
+			@Context HttpServletRequest httpRequest) {
+		final String tempPwd = "asdfasdf4";
+		
+		SignupDTO signup = new Gson().fromJson(signupJson, SignupDTO.class);
+		signup.setPassword(tempPwd);
+		signup.setPasswordConfirm(tempPwd);
+		
+		ResponseDTO<UserDTO> response;
+		
+		SignupValidator validator = new SignupValidator() {
+			
+			@Override
+			protected boolean chkPwds(List<String> errs, SignupDTO signup) {
+				return true;
+			}
+		};
+		
+		List<String> errs = validator.isValid(signup);
+		if (errs.size() == 0) {
+			User user = SignupHelper.setupAccount(signup);
+			user.setValidated(true);
+			HibernateUtil.getSessionFactory().getCurrentSession().update(user);
+			
+			try {
+				HibernateUtil.commit();
+				httpRequest.login(user.getUsername(), signup.getPassword());
+				response = new ResponseDTO<UserDTO>(new SafeUserDtoTransformer().transform(user));
+			} catch (ServletException e) {
+				log.error(e);
+				HibernateUtil.rollback();
+				response = new ResponseDTO<UserDTO>(ResponseDTO.RESULT_FAIL);
+				response.setErrs(Arrays.asList(new String[] {e.getMessage()}));
+			}
+		} else {
+			response = new ResponseDTO<UserDTO>(ResponseDTO.RESULT_FAIL);
+			response.setErrs(errs);
+		}
+		
+		String json = new Gson().toJson(response);
+		return Response.ok(json, MediaType.APPLICATION_JSON).build();
+	}
+	
 	@POST
 	@Path("/login")
 	@Produces({MediaType.APPLICATION_JSON})
