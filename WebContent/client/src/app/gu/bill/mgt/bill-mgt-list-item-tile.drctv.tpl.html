@@ -10,7 +10,7 @@
 						{{ctrlr.bill.totalAmount | currency}}
 					</span>
 					<br>
-					<div ng-class="ctrlr.getTotalAmountClasses()">{{ctrlr.amountRelativeToAvg() | currency}} <span class="glyphicon glyphicon-arrow-up" aria-hidden="true" ng-if="ctrlr.isTotalAmountUnderAvg()"></span><span class="glyphicon glyphicon-arrow-down" aria-hidden="true" ng-if="ctrlr.isTotalAmountOverAvg()"></span> average</div>
+					<div ng-class="ctrlr.getTotalAmountClasses()">{{ctrlr.amountRelativeToAvg() | currency}} <span class="glyphicon glyphicon-arrow-down" aria-hidden="true" ng-if="ctrlr.isTotalAmountUnderAvg()"></span><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" ng-if="ctrlr.isTotalAmountOverAvg()"></span> average</div>
 					<span style="padding-top: 5px;">
 						<span class="color-primary bold gi-1_5x" style="padding-right: 5px;" ng-if="ctrlr.isTotalAmountUnderAvg()">Brag!</span>
 						<span class="color-primary bold gi-1_5x" style="padding-right: 5px;" ng-if="ctrlr.isTotalAmountAvg() || ctrlr.isTotalAmountOverAvg()">Complain!</span>
