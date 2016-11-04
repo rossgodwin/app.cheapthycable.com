@@ -162,11 +162,12 @@ public class AuthRS extends BaseRS {
 	public Response qsignup(
 			@FormParam(ReqParams.PARAM0) String signupJson,
 			@Context HttpServletRequest httpRequest) {
-		final String tempPwd = "asdfasdf4";
+//		final String tempPwd = "asdfasdf4";
 		
 		SignupDTO signup = new Gson().fromJson(signupJson, SignupDTO.class);
-		signup.setPassword(tempPwd);
-		signup.setPasswordConfirm(tempPwd);
+//		signup.setPassword(tempPwd);
+//		signup.setPasswordConfirm(tempPwd);
+		signup.setPasswordConfirm(signup.getPassword());
 		
 		ResponseDTO<UserDTO> response;
 		
@@ -186,6 +187,14 @@ public class AuthRS extends BaseRS {
 			
 			try {
 				HibernateUtil.commit();
+				
+				try {
+					Email email = SignupHelper.buildEmail(httpRequest, user);
+					Emailer.sendEmail(email);
+				} catch (Exception e) {
+					log.error(e);
+				}
+				
 				httpRequest.login(user.getUsername(), signup.getPassword());
 				response = new ResponseDTO<UserDTO>(new SafeUserDtoTransformer().transform(user));
 			} catch (ServletException e) {

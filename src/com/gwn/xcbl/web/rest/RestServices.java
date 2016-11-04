@@ -12,6 +12,7 @@ public class RestServices extends Application {
 	private Set<Object> singletons = new HashSet<Object>();
 	
 	public RestServices() {
+		singletons.add(new AccountRS());
 		singletons.add(new AuthRS());
 		singletons.add(new BillRS());
 		singletons.add(new GeoZipCodeRS());

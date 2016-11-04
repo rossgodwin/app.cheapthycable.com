@@ -16,6 +16,19 @@
 			</div>
 		</div>
 		
+		<div class="form-group" ng-class="ctrlr.getCssClasses(form, form.password)">
+			<label>Password</label>
+			<input type="password" name="password" class="form-control" placeholder="at least {{ctrlr.pwdMinLength}} characters" ng-model="ctrlr.signup.password" ng-model-options="{updateOn: 'blur'}" required pwd-valid-chk>
+			<div ng-messages="form.password.$error" ng-if="form.password.$dirty || form.$submitted">
+				<div ng-message="required" class="help-block">This field is required.</div>
+				<div ng-message="pwdValidChk" class="help-block">
+					<ul ng-hide="errs === 0">
+						<li ng-repeat="err in errs">{{err}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
 		<button class="btn btn-brand btn-brand-primary btn-lg btn-block" type="submit">Signup</button>
 		
 		<hr>

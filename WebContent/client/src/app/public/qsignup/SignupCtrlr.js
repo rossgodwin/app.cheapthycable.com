@@ -6,6 +6,7 @@ define(['app/res/AppConsts', 'app/res/AppUris'], function(appConsts, appUris) {
 		
 		// public variables
 		vm.serverErrs = [];
+		vm.pwdMinLength = $window.pwdMinLength;
 		vm.signup = SignupModel;
 		
 		// public functions
@@ -27,8 +28,6 @@ define(['app/res/AppConsts', 'app/res/AppUris'], function(appConsts, appUris) {
 			
 			AuthHttpService.qsignup(vm.signup).then(function(response) {
 				spinnerService.hide(appConsts.screenLoadingSpinner);
-				
-				console.log('response: ' + JSON.stringify(response));
 				
 				if (response.data.resultCode === 1) {
 		    		$window.location.href = appUris.getAppUrl();

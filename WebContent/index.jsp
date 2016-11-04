@@ -96,7 +96,7 @@
 				<span class="pg-lead-text">How</span><span style="font-size: 1.25em;">&nbsp;does it work?</span>
 				<p style="padding: 20px;">Sign up in just seconds. Take a quick
 					survey about your internet, cable tv and/or phone bill. No personal
-					information whatsoever is collected, just an email address. Then
+					information whatsoever is collected, just an email address, and we do not sell this information. Then
 					you will have access to search what others in your zip code, city
 					and state are paying for similar services. You are then armed with
 					information for negotiating a lower cable bill.</p>
@@ -131,7 +131,7 @@
 		</div>
 	</div>
 
-	<footer class="pg-footer">
+	<!--<footer class="pg-footer">
 		<div class="row" style="padding-top: 10px;">
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
@@ -145,7 +145,7 @@
 			</div>
 			<div class="col-md-3"></div>
 		</div>
-	</footer>
+	</footer>-->
 
 	<script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
 </body>

@@ -11,7 +11,7 @@ define([
 	SignupVerifyCtrlr,
 	SignupVerifiedCtrlr
 ) {
-	var module = angular.module('app.signup', ['ngMessages']);
+	var module = angular.module('app.signup', []);
 	
 	module.directive('signupUniqueEmailChk', SignupUniqueEmailChkDrctv);
 	

@@ -25,6 +25,10 @@ public class Account implements ILongId {
 	@Type(type = "com.gwn.xcbl.data.hibernate.ut.LocalDateTimeUserType")
 	private LocalDateTime createDate;
 
+	@Column(name = "receive_lower_bill_alerts", nullable = false)
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean receiveLowerBillAlerts;
+	
 	public Long getId() {
 		return id;
 	}
@@ -39,5 +43,13 @@ public class Account implements ILongId {
 
 	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
+	}
+
+	public boolean isReceiveLowerBillAlerts() {
+		return receiveLowerBillAlerts;
+	}
+
+	public void setReceiveLowerBillAlerts(boolean receiveLowerBillAlerts) {
+		this.receiveLowerBillAlerts = receiveLowerBillAlerts;
 	}
 }

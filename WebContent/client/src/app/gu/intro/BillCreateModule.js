@@ -1,7 +1,9 @@
 define([
+	'app/res/AppConsts',
 	'app/gu/bill/create/BillCreateModule',
 	'app/gu/intro/BillCreateCtrlr'
 ], function(
+	appConsts,
 	BillCreateModule,
 	BillCreateCtrlr) {
 	var moduleName = 'app.gu.intro.bill.create';
@@ -90,7 +92,20 @@ define([
 			templateUrl : 'client/src/app/gu/bill/create/view/bill-create-node7.tpl.html',
 			controller : 'BillCreateNode7Ctrlr',
 			controllerAs : 'ctrlr',
-			resolve : authorizeResolve
+			resolve : {
+				authorize : authorizeResolve.authorize,
+				receiveLowerBillAlerts : ['$q', 'authorize', 'spinnerService', 'AccountHttpService', function($q, authorize, spinnerService, AccountHttpService) {
+					spinnerService.show(appConsts.screenLoadingSpinner);
+					
+					var defer = $q.defer();
+					AccountHttpService.receiveLowerBillAlerts().then(function(result) {
+						spinnerService.hide(appConsts.screenLoadingSpinner);
+						
+						defer.resolve(result.data.result);
+					});
+					return defer.promise;
+				}]
+			}
 		})
 	}]);
 	

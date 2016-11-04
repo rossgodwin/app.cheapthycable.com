@@ -3,7 +3,9 @@
  * http://plnkr.co/edit/UkHDqFD8P7tTEqSaCOcc?p=preview
  */
 define([], function() {
-	var principal = function($q, AuthHttpService) {
+	return ['$q', 'AuthHttpService', principal];
+	
+	function principal($q, AuthHttpService) {
 		var _identity = undefined;
 		var _authenticated = false;
 		
@@ -85,6 +87,4 @@ define([], function() {
 			return deferred.promise;
 		}
 	};
-	
-	return ['$q', 'AuthHttpService', principal];
 })

@@ -46,26 +46,26 @@ public class PwdValidator {
 		LengthRule lengthRule = new LengthRule(UserConstants.PWD_MIN_LENGTH, UserConstants.PWD_MAX_LENGTH);
 		WhitespaceRule whitespaceRule = new WhitespaceRule();
 		
-		CharacterCharacteristicsRule charRule = new CharacterCharacteristicsRule();
-		charRule.getRules().add(new DigitCharacterRule(1)); // require at least 1 digit in passwords
-		charRule.getRules().add(new NonAlphanumericCharacterRule(1)); // require at least 1 non-alphanumeric char
-		charRule.getRules().add(new UppercaseCharacterRule(1)); // require at least 1 upper case char
-		charRule.getRules().add(new LowercaseCharacterRule(1)); // require at least 1 lower case char
-		charRule.setNumberOfCharacteristics(3); // require at least 3 of the previous rules be met
-		
-		AlphabeticalSequenceRule alphaSeqRule = new AlphabeticalSequenceRule(); // don't allow alphabetical sequences
-		NumericalSequenceRule numSeqRule = new NumericalSequenceRule(3, false); // don't allow numerical sequences of length 3
-		QwertySequenceRule qwertySeqRule = new QwertySequenceRule(); // don't allow qwerty sequences
-		RepeatCharacterRegexRule repeatRule = new RepeatCharacterRegexRule(4); // don't allow 4 repeat characters
+//		CharacterCharacteristicsRule charRule = new CharacterCharacteristicsRule();
+//		charRule.getRules().add(new DigitCharacterRule(1)); // require at least 1 digit in passwords
+//		charRule.getRules().add(new NonAlphanumericCharacterRule(1)); // require at least 1 non-alphanumeric char
+//		charRule.getRules().add(new UppercaseCharacterRule(1)); // require at least 1 upper case char
+//		charRule.getRules().add(new LowercaseCharacterRule(1)); // require at least 1 lower case char
+//		charRule.setNumberOfCharacteristics(3); // require at least 3 of the previous rules be met
+//		
+//		AlphabeticalSequenceRule alphaSeqRule = new AlphabeticalSequenceRule(); // don't allow alphabetical sequences
+//		NumericalSequenceRule numSeqRule = new NumericalSequenceRule(3, false); // don't allow numerical sequences of length 3
+//		QwertySequenceRule qwertySeqRule = new QwertySequenceRule(); // don't allow qwerty sequences
+//		RepeatCharacterRegexRule repeatRule = new RepeatCharacterRegexRule(4); // don't allow 4 repeat characters
 		
 		List<Rule> rules = new ArrayList<Rule>();
 		rules.add(lengthRule);
 		rules.add(whitespaceRule);
-		rules.add(charRule);
-		rules.add(alphaSeqRule);
-		rules.add(numSeqRule);
-		rules.add(qwertySeqRule);
-		rules.add(repeatRule);
+//		rules.add(charRule);
+//		rules.add(alphaSeqRule);
+//		rules.add(numSeqRule);
+//		rules.add(qwertySeqRule);
+//		rules.add(repeatRule);
 		
 		return rules;
 	}
