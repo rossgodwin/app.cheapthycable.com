@@ -8,9 +8,7 @@ define(['app/res/AppUris'], function(appUris) {
 			saveBill : saveBill,
 			getLatestBill : getLatestBill,
 			deleteBill : deleteBill,
-			getBillExplorerResults : getBillExplorerResults,
-			getBillsByTotalAmount : getBillsByTotalAmount,
-			getBillsByTotalAmount2 : getBillsByTotalAmount2
+			getBillExplorerStats : getBillExplorerStats
 		};
 		
 		function getMyBillsList() {
@@ -76,7 +74,6 @@ define(['app/res/AppUris'], function(appUris) {
 			        }
 			        return str.join("&");
 			    }
-//				    data : {p0 : JSON.stringify(obj)}
 			}).then(c)
 			.catch(f);
 			
@@ -89,88 +86,20 @@ define(['app/res/AppUris'], function(appUris) {
 			}
 		}
 		
-		function getBillExplorerResults(zipCode, radius) {
-			return $http.get(appUris.getRestUrl('/bill/explorer/results'), {
-				params : {
-					p0 : zipCode,
-			    	p1 : radius
-				}
-			});
-			
-//			return $http({
-//			    method : 'POST',
-//			    url : appUris.getRestUrl('/bill/explorer/results'),
-//			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
-//			    transformRequest : function(obj) {
-//			        var str = [];
-//			        for (var p in obj) {
-//			        	str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-//			        }
-//			        return str.join("&");
-//			    },
-//			    data : {
-//			    	p0 : zipCode,
+//		function getBillExplorerResults(zipCode, radius) {
+//			return $http.get(appUris.getRestUrl('/bill/explorer/results'), {
+//				params : {
+//					p0 : zipCode,
 //			    	p1 : radius
-//			    }
-//			}).then(c)
-//			.catch(f);
-//			
-//			function c(response) {
-//				return response.data.result;
-//			}
-//			
-//			function f(error) {
-//				// TODO
-//			}
-		}
-		
-		function getBillsByTotalAmount(zipCode, radius, totalAmount) {
-			return $http({
-			    method : 'POST',
-			    url : appUris.getRestUrl('/bill/report/billsByTotalAmount'),
-			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
-			    transformRequest : function(obj) {
-			        var str = [];
-			        for (var p in obj) {
-			        	str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-			        }
-			        return str.join("&");
-			    },
-			    data : {
-			    	p0 : zipCode,
-			    	p1 : radius,
-			    	p2 : totalAmount
-			    }
-			}).then(c)
-			.catch(f);
-			
-			function c(response) {
-				return response.data.result;
-			}
-			
-			function f(error) {
-				// TODO
-			}
-		}
-		
-		function getBillsByTotalAmount2(zipCode, radius, totalAmount) {
-			return $http({
-			    method : 'POST',
-			    url : appUris.getRestUrl('/bill/report/billsByTotalAmount'),
-			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
-			    transformRequest : function(obj) {
-			        var str = [];
-			        for (var p in obj) {
-			        	str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-			        }
-			        return str.join("&");
-			    },
-			    data : {
-			    	p0 : zipCode,
-			    	p1 : radius,
-			    	p2 : totalAmount
-			    }
-			});
+//				}
+//			});
+//		}
+		function getBillExplorerStats(criteria) {
+			return $http.get(appUris.getRestUrl('/bill/explorer/stats'), {
+				params : {
+					p0 : JSON.stringify(criteria)
+				}
+			})
 		}
 	};
 });

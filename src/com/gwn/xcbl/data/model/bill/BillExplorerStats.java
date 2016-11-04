@@ -2,7 +2,7 @@ package com.gwn.xcbl.data.model.bill;
 
 import java.math.BigDecimal;
 
-public class BillLocationStats {
+public class BillExplorerStats {
 
 	private int countOfBills;
 	
@@ -14,7 +14,7 @@ public class BillLocationStats {
 	
 	private BigDecimal highestTotalAmount;
 
-	public BillLocationStats() {
+	public BillExplorerStats() {
 	}
 
 	public int getCountOfBills() {

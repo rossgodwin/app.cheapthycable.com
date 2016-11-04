@@ -2,7 +2,6 @@ package com.gwn.xcbl.bl.bill.report;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.hibernate.SQLQuery;
@@ -11,15 +10,17 @@ import com.gwn.xcbl.data.entity.BillTableMetadata;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.BillDAOImpl;
 import com.gwn.xcbl.data.hibernate.dao.DAOUtils;
-import com.gwn.xcbl.data.hibernate.entity.Bill;
 import com.gwn.xcbl.data.model.HaversineFormulaCritr;
-import com.gwn.xcbl.data.model.bill.BillLocationStats;
+import com.gwn.xcbl.data.model.bill.BillExplorerStats;
 import com.gwn.xcbl.data.shared.bill.report.BillReportCritrDTO;
 
-// TODO rename BillStatsDAOImpl
+/**
+ * @deprecated
+ * TODO delete
+ */
 public class BillReportDAO {
 
-	public BillLocationStats getReportData(BillReportCritrDTO critr) {
+	public BillExplorerStats getReportData(BillReportCritrDTO critr) {
 		StringBuilder qsb = new StringBuilder();
 		Map<String, Object> params = new HashMap<>();
 		
@@ -40,7 +41,7 @@ public class BillReportDAO {
 		
 		Object[] qr = (Object[])q.uniqueResult();
 		
-		BillLocationStats r = new BillLocationStats();
+		BillExplorerStats r = new BillExplorerStats();
 		int count = ((Number)qr[0]).intValue();
 		r.setCountOfBills(count);
 		if (count > 0) {
@@ -59,22 +60,22 @@ public class BillReportDAO {
 		return roundedAmount;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<Bill> getBillsByTotalAmount(BillReportCritrDTO critr, String totalAmount) {
-		StringBuilder qsb = new StringBuilder();
-		Map<String, Object> params = new HashMap<>();
-		
-		qsb.append("select *");
-		qsb.append(" from ").append(BillTableMetadata.TABLE_NAME).append(" as b");
-		qsb.append(" where 1 = 1");
-		BillDAOImpl.appendSqlZipCodeRadiusCritr("b", qsb, new HaversineFormulaCritr(critr.getLatitude(), critr.getLongitude(), critr.getRadius(), critr.getDistanceUnit()));
-		BillDAOImpl.appendSqlTotalAmountEqualsCritr("b", qsb, params, new BigDecimal(totalAmount));
-		
-		SQLQuery q = HibernateUtil.getSessionFactory().getCurrentSession().createSQLQuery(qsb.toString());
-		q.addEntity(Bill.class);
-		DAOUtils.applyParameters(q, params);
-		
-		List<Bill> r = q.list();
-		return r;
-	}
+//	@SuppressWarnings("unchecked")
+//	public List<Bill> getBillsByTotalAmount(BillReportCritrDTO critr, String totalAmount) {
+//		StringBuilder qsb = new StringBuilder();
+//		Map<String, Object> params = new HashMap<>();
+//		
+//		qsb.append("select *");
+//		qsb.append(" from ").append(BillTableMetadata.TABLE_NAME).append(" as b");
+//		qsb.append(" where 1 = 1");
+//		BillDAOImpl.appendSqlZipCodeRadiusCritr("b", qsb, new HaversineFormulaCritr(critr.getLatitude(), critr.getLongitude(), critr.getRadius(), critr.getDistanceUnit()));
+//		BillDAOImpl.appendSqlTotalAmountEqualsCritr("b", qsb, params, new BigDecimal(totalAmount));
+//		
+//		SQLQuery q = HibernateUtil.getSessionFactory().getCurrentSession().createSQLQuery(qsb.toString());
+//		q.addEntity(Bill.class);
+//		DAOUtils.applyParameters(q, params);
+//		
+//		List<Bill> r = q.list();
+//		return r;
+//	}
 }

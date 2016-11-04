@@ -28,28 +28,33 @@ define([
 		
 		function init() {
 			addWatchs();
-			setAllBillsPage(1);
+			loadBillStats();
 		}
 		
 		function addWatchs() {
-			$scope.$watch(function () { return data.critrMileRadius; }, watchChangeListener, true);
-			$scope.$watch(function () { return data.critrExactTotalAmount; }, watchChangeListener, true);
-			$scope.$watch(function () { return data.critrProvider; }, watchChangeListener, true);
-			$scope.$watch(function () { return data.critrProviderName; }, watchChangeListener, true);
-			$scope.$watch(function () { return data.critrServicesSetOperator; }, watchChangeListener, true);
-			$scope.$watch(function () { return data.critrInternetService; }, watchChangeListener, true);
-			$scope.$watch(function () { return data.critrCableService; }, watchChangeListener, true);
-			$scope.$watch(function () { return data.critrPhoneService; }, watchChangeListener, true);
-			$scope.$watch(function () { return data.critrCableOptionsBoxCount; }, watchChangeListener, true);
-			$scope.$watch(function () { return data.critrCableOptionsDvrCount; }, watchChangeListener, true);
-			$scope.$watch(function () { return data.critrCableOptionsSpecialChannels; }, watchChangeListener, true);
-			$scope.$watch(function () { return data.critrSort; }, watchChangeListener, true);
+			$scope.$watch(function () { return data.critrMileRadius; }, watchChangeListener1, true);
+			$scope.$watch(function () { return data.critrExactTotalAmount; }, watchChangeListener2, true);
+			$scope.$watch(function () { return data.critrProvider; }, watchChangeListener1, true);
+			$scope.$watch(function () { return data.critrProviderName; }, watchChangeListener1, true);
+			$scope.$watch(function () { return data.critrServicesSetOperator; }, watchChangeListener1, true);
+			$scope.$watch(function () { return data.critrInternetService; }, watchChangeListener1, true);
+			$scope.$watch(function () { return data.critrCableService; }, watchChangeListener1, true);
+			$scope.$watch(function () { return data.critrPhoneService; }, watchChangeListener1, true);
+			$scope.$watch(function () { return data.critrCableOptionsBoxCount; }, watchChangeListener1, true);
+			$scope.$watch(function () { return data.critrCableOptionsDvrCount; }, watchChangeListener1, true);
+			$scope.$watch(function () { return data.critrCableOptionsSpecialChannels; }, watchChangeListener1, true);
+			$scope.$watch(function () { return data.critrSort; }, watchChangeListener1, true);
 		}
 		
-		function watchChangeListener(newValue, oldValue) {
+		function watchChangeListener1(newValue, oldValue) {
 			if (newValue !== oldValue) {
-				console.log('new change listener');
-				setAllBillsPage(1);
+				loadBillStats();
+			}
+		}
+		
+		function watchChangeListener2(newValue, oldValue) {
+			if (newValue !== oldValue) {
+				setAllBillsPageSpinnerCtrl(1, true);
 			}
 		}
 		
@@ -65,15 +70,7 @@ define([
 			$window.scrollTo(0, angular.element(document.getElementById('billExplorerSearch')).offsetTop);
 		}
 		
-		function setAllBillsPage(pageNumber) {
-			if (pageNumber < 1) {
-				return;
-			}
-			
-			spinnerService.show(appConsts.screenLoadingSpinner);
-			
-			paginationCtrlr.update(vm.allBills.length, pageNumber, vm.pageSize);
-			
+		function buildCritr() {
 			var critr = {
 				zipCode : data.critrZipCode,
 				mileRadius : data.critrMileRadius,
@@ -87,16 +84,6 @@ define([
 				sorts : [{option : data.critrSort.option, order : data.critrSort.order}]
 			};
 			
-//			if (data.critrInternetService) {
-//				critr.internetService = data.critrInternetService;
-//			}
-//			if (data.critrCableService) {
-//				critr.cableService = data.critrCableService;
-//			}
-//			if (data.critrPhoneService) {
-//				critr.phoneService = data.critrPhoneService;
-//			}
-			
 			if (data.critrCableService) {
 				if (data.critrCableOptionsBoxCount != data.cableOptionsBoxNAOption) {
 					critr.cableOptionBoxCount = data.critrCableOptionsBoxCount;
@@ -108,6 +95,45 @@ define([
 					critr.cableOptionSpecialChannels = data.critrCableOptionsSpecialChannels;
 				}
 			}
+			
+			return critr;
+		}
+		
+		function loadBillStats() {
+			spinnerService.show(appConsts.screenLoadingSpinner);
+			
+			var critr = buildCritr();
+			critr.exactTotalAmount = null;
+			
+			BillHttpService.getBillExplorerStats(critr).then(function(response) {
+				var result = response.data.result;
+				
+				data.lowestTotalAmount = result.lowestTotalAmount;
+				data.averageTotalAmount = result.averageTotalAmount;
+				data.highestTotalAmount = result.highestTotalAmount;
+				
+				setAllBillsPageSpinnerCtrl(1, false);
+			}).catch(function(error) {
+				// TODO
+			});
+		}
+		
+		function setAllBillsPage(pageNumber) {
+			setAllBillsPageSpinnerCtrl(pageNumber, true);
+		}
+		
+		function setAllBillsPageSpinnerCtrl(pageNumber, showSpinner) {
+			if (pageNumber < 1) {
+				return;
+			}
+			
+			if (showSpinner) {
+				spinnerService.show(appConsts.screenLoadingSpinner);
+			}
+			
+			paginationCtrlr.update(vm.allBills.length, pageNumber, vm.pageSize);
+			
+			var critr = buildCritr();
 			
 			BillHttpService.getBillsListPage(critr, paginationCtrlr.startPage, vm.pageSize).then(function(response) {
 				var page = response.data.result;

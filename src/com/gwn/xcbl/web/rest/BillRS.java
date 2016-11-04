@@ -31,13 +31,13 @@ import com.gwn.xcbl.bl.bill.BillCreateObserver;
 import com.gwn.xcbl.bl.bill.report.BillReportDAO;
 import com.gwn.xcbl.common.UserPrincipal;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
+import com.gwn.xcbl.data.hibernate.dao.BillDAOImpl;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.entity.Bill;
-import com.gwn.xcbl.data.hibernate.entity.GeoZipCode;
 import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.data.model.AuthenticationException;
 import com.gwn.xcbl.data.model.HaversineFormulaConsts;
-import com.gwn.xcbl.data.model.bill.BillLocationStats;
+import com.gwn.xcbl.data.model.bill.BillExplorerStats;
 import com.gwn.xcbl.data.shared.PagingResultDTO;
 import com.gwn.xcbl.data.shared.ReqParams;
 import com.gwn.xcbl.data.shared.ResponseDTO;
@@ -45,7 +45,7 @@ import com.gwn.xcbl.data.shared.bill.BillDTO;
 import com.gwn.xcbl.data.shared.bill.BillLocationStatsDTO;
 import com.gwn.xcbl.data.shared.bill.BillSearchCritrDTO;
 import com.gwn.xcbl.data.shared.bill.create.BillCreateDTO;
-import com.gwn.xcbl.data.shared.bill.report.BillExplorerResultsDTO;
+import com.gwn.xcbl.data.shared.bill.report.BillExplorerStatsDTO;
 import com.gwn.xcbl.data.shared.bill.report.BillReportCritrDTO;
 import com.gwn.xcbl.data.transformer.ProviderDtoTransformer;
 import com.gwn.xcbl.data.transformer.bill.BillCableOptionsDtoTransformer;
@@ -101,7 +101,10 @@ public class BillRS extends BaseRS {
 //			critr.setInternetService(obj.isInternetService());
 //			critr.setPhoneService(obj.isPhoneService());
 			
-			BillLocationStats stats = new BillReportDAO().getReportData(critr);
+			/**
+			 * look at using {@link BillDAOImpl#getBillExplorerStatsByCritr}
+			 */
+			BillExplorerStats stats = new BillReportDAO().getReportData(critr);
 			
 			BillLocationStatsDTO statsDto = new BillLocationStatsDTO();
 			statsDto.setMileRadius(radius);
@@ -269,81 +272,78 @@ public class BillRS extends BaseRS {
 		}
 	}
 	
+//	@GET
+//	@Path("/explorer/results")
+//	@Produces({MediaType.APPLICATION_JSON})
+//	public Response getBillExplorerResults(
+//			@QueryParam(ReqParams.PARAM0) String zipCode,
+//			@QueryParam(ReqParams.PARAM1) double radius,
+//			@Context HttpServletRequest httpRequest) {
+//		try {
+//			long accountId = getAuthAccountId(httpRequest);
+//			
+//			GeoZipCode geoZipCode = null;
+//			if (StringUtils.isNotEmpty(zipCode)) {
+//				List<GeoZipCode> zipCodes = DAOFactory.getInstance().getGeoZipCodeDAO().findByZipCode(zipCode);
+//				geoZipCode = zipCodes.get(0);
+//			} else {
+//				Bill obj = DAOFactory.getInstance().getBillDAO().findLatestBill(accountId, true);
+//				geoZipCode = obj.getGeoZipCode();
+//			}
+//			
+//			if (geoZipCode == null) {
+//				// TODO throw exception
+//			}
+//			
+//			BillReportCritrDTO critr = new BillReportCritrDTO();
+//			critr.setLatitude(geoZipCode.getLatitude().doubleValue());
+//			critr.setLongitude(geoZipCode.getLongitude().doubleValue());
+//			critr.setRadius(radius);
+//			critr.setDistanceUnit(HaversineFormulaConsts.DISTANCE_UNIT_MILES);
+//			
+//			BillExplorerStats stats = new BillReportDAO().getReportData(critr);
+//			
+//			BillExplorerStatsDTO dto = new BillExplorerStatsDTO();
+//			dto.setCountOfBills(stats.getCountOfBills());
+//			dto.setCountOfZipCodes(stats.getCountOfZipCodes());
+//			dto.setHighestTotalAmount(stats.getHighestTotalAmount().toString());
+//			dto.setAverageTotalAmount(stats.getAverageTotalAmount().toString());
+//			dto.setLowestTotalAmount(stats.getLowestTotalAmount().toString());
+//			
+//			ResponseDTO<BillExplorerStatsDTO> response = new ResponseDTO<BillExplorerStatsDTO>(dto);
+//			String json = new Gson().toJson(response);
+//			
+//			return Response.ok(json, MediaType.APPLICATION_JSON).build();
+//		} catch (AuthenticationException e) {
+//			return Response.status(Response.Status.UNAUTHORIZED).build();
+//		}
+//	}
+	
 	@GET
-	@Path("/explorer/results")
+	@Path("/explorer/stats")
 	@Produces({MediaType.APPLICATION_JSON})
 	public Response getBillExplorerResults(
-			@QueryParam(ReqParams.PARAM0) String zipCode,
-			@QueryParam(ReqParams.PARAM1) double radius,
+			@QueryParam(ReqParams.PARAM0) String critrJson,
 			@Context HttpServletRequest httpRequest) {
 		try {
-			long accountId = getAuthAccountId(httpRequest);
+			getAuthAccountId(httpRequest);
 			
-			GeoZipCode geoZipCode = null;
-			if (StringUtils.isNotEmpty(zipCode)) {
-				List<GeoZipCode> zipCodes = DAOFactory.getInstance().getGeoZipCodeDAO().findByZipCode(zipCode);
-				geoZipCode = zipCodes.get(0);
-			} else {
-				Bill obj = DAOFactory.getInstance().getBillDAO().findLatestBill(accountId, true);
-				geoZipCode = obj.getGeoZipCode();
-			}
+//			GsonBuilder gsonBldr = new GsonBuilder();
+//			gsonBldr.registerTypeAdapter(BigDecimal.class, new SafeBigDecimalAdptr());
+//			Gson gson = gsonBldr.create();
+//			BillSearchCritrDTO critr = gson.fromJson(critrJson, BillSearchCritrDTO.class);
+			BillSearchCritrDTO critr = new Gson().fromJson(critrJson, BillSearchCritrDTO.class);
 			
-			if (geoZipCode == null) {
-				// TODO throw exception
-			}
+			BillExplorerStats obj = new BillDAOImpl().getBillExplorerStatsByCritr(critr);
 			
-			BillReportCritrDTO critr = new BillReportCritrDTO();
-			critr.setLatitude(geoZipCode.getLatitude().doubleValue());
-			critr.setLongitude(geoZipCode.getLongitude().doubleValue());
-			critr.setRadius(radius);
-			critr.setDistanceUnit(HaversineFormulaConsts.DISTANCE_UNIT_MILES);
+			BillExplorerStatsDTO dto = new BillExplorerStatsDTO();
+			dto.setCountOfBills(obj.getCountOfBills());
+			dto.setCountOfZipCodes(obj.getCountOfZipCodes());
+			dto.setHighestTotalAmount(obj.getHighestTotalAmount() != null ? obj.getHighestTotalAmount().toString() : "");
+			dto.setAverageTotalAmount(obj.getAverageTotalAmount() != null ? obj.getAverageTotalAmount().toString() : "");
+			dto.setLowestTotalAmount(obj.getLowestTotalAmount() != null ? obj.getLowestTotalAmount().toString() : "");
 			
-			BillLocationStats stats = new BillReportDAO().getReportData(critr);
-			
-			BillExplorerResultsDTO dto = new BillExplorerResultsDTO();
-			dto.setCountOfBills(stats.getCountOfBills());
-			dto.setCountOfZipCodes(stats.getCountOfZipCodes());
-			dto.setHighestTotalAmount(stats.getHighestTotalAmount().toString());
-			dto.setAverageTotalAmount(stats.getAverageTotalAmount().toString());
-			dto.setLowestTotalAmount(stats.getLowestTotalAmount().toString());
-			
-			ResponseDTO<BillExplorerResultsDTO> response = new ResponseDTO<BillExplorerResultsDTO>(dto);
-			String json = new Gson().toJson(response);
-			
-			return Response.ok(json, MediaType.APPLICATION_JSON).build();
-		} catch (AuthenticationException e) {
-			return Response.status(Response.Status.UNAUTHORIZED).build();
-		}
-	}
-	
-	@POST
-	@Path("/report/billsByTotalAmount")
-	@Produces({MediaType.APPLICATION_JSON})
-	public Response billsByTotalAmount(
-			@FormParam(ReqParams.PARAM0) String zipCode,
-			@FormParam(ReqParams.PARAM1) double radius,
-			@FormParam(ReqParams.PARAM2) String totalAmount,
-			@Context HttpServletRequest httpRequest) {
-		try {
-			authenticate(httpRequest);
-			
-			List<GeoZipCode> zipCodes = DAOFactory.getInstance().getGeoZipCodeDAO().findByZipCode(zipCode);
-			// TODO throw error if zipCodes is null
-			
-			BillReportCritrDTO critr = new BillReportCritrDTO();
-			critr.setLatitude(zipCodes.get(0).getLatitude().doubleValue());
-			critr.setLongitude(zipCodes.get(0).getLongitude().doubleValue());
-			critr.setRadius(radius);
-			critr.setDistanceUnit(HaversineFormulaConsts.DISTANCE_UNIT_MILES);
-			
-			List<Bill> objs = new BillReportDAO().getBillsByTotalAmount(critr, totalAmount);
-			
-			BillDtoTransformer trnsfmr = new BillDtoTransformer();
-			trnsfmr.setPrvdrTrnsfmr(new ProviderDtoTransformer());
-			trnsfmr.setGeoZipCodeTrnsfmr(new GeoZipCodeDtoTransformer());
-			List<BillDTO> dtos = (List<BillDTO>) CollectionUtils.collect(objs, trnsfmr);
-			
-			ResponseDTO<List<BillDTO>> response = new ResponseDTO<List<BillDTO>>(dtos);
+			ResponseDTO<BillExplorerStatsDTO> response = new ResponseDTO<BillExplorerStatsDTO>(dto);
 			String json = new Gson().toJson(response);
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();

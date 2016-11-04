@@ -15,11 +15,13 @@ import com.gwn.xcbl.data.dao.util.QueryOrderByBuilder;
 import com.gwn.xcbl.data.entity.BillCableOptionsTableMetadata;
 import com.gwn.xcbl.data.entity.BillTableMetadata;
 import com.gwn.xcbl.data.entity.ProviderTableMetadata;
+import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.entity.Bill;
 import com.gwn.xcbl.data.hibernate.entity.GeoZipCode;
 import com.gwn.xcbl.data.model.HaversineFormulaConsts;
 import com.gwn.xcbl.data.model.HaversineFormulaCritr;
 import com.gwn.xcbl.data.model.QueryComposite;
+import com.gwn.xcbl.data.model.bill.BillExplorerStats;
 import com.gwn.xcbl.data.shared.ILongId;
 import com.gwn.xcbl.data.shared.SetOperator;
 import com.gwn.xcbl.data.shared.SortOrder;
@@ -121,9 +123,6 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, ILongId> implements B
 		appendSqlTotalAmountEqualsCritr("b", qsb, params, critr.getExactTotalAmount());
 		appendSqlProviderCritr("b", qsb, params, critr.getProviderId());
 		appendSqlProviderNameMatchCritr("b", qsb, params, critr.getMatchProviderName());
-//		appendSqlInternetServiceCritr("b", qsb, params, critr.getInternetService());
-//		appendSqlCableServiceCritr("b", qsb, params, critr.getCableService());
-//		appendSqlPhoneServiceCritr("b", qsb, params, critr.getPhoneService());
 		appendSqlServicesCritr("b", qsb, params, critr);
 		appendSqlCableOptionCritr("b", qsb, params, critr);
 		
@@ -136,18 +135,6 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, ILongId> implements B
 		qc.setParams(params);
 		return qc;
 	}
-	
-//	private HaversineFormulaCritr toHaversineFormulaCritr(String zipCode, Double mileRadius) {
-//		List<GeoZipCode> zipCodes = DAOFactory.getInstance().getGeoZipCodeDAO().findByZipCode(zipCode);
-//		
-//		HaversineFormulaCritr c = new HaversineFormulaCritr();
-//		c.setLatitude(zipCodes.get(0).getLatitude().doubleValue());
-//		c.setLongitude(zipCodes.get(0).getLongitude().doubleValue());
-//		c.setRadius(mileRadius);
-//		c.setDistanceUnit(HaversineFormulaConsts.DISTANCE_UNIT_MILES);
-//		
-//		return c;
-//	}
 	
 	public static void appendSqlZipCodeRadiusCritr(String tableAlias, StringBuilder qsb, HaversineFormulaCritr critr) {
 		qsb.append(" and exists (");
@@ -323,5 +310,43 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, ILongId> implements B
 			}
 			qsb.append(")");
 		}
+	}
+	
+	public BillExplorerStats getBillExplorerStatsByCritr(BillSearchCritrDTO critr) {
+		StringBuilder selectQsb = new StringBuilder();
+		selectQsb.append("select count(1),");
+		selectQsb.append(" count(distinct ").append(BillTableMetadata.COL_GEO_ZIP_CODE_ID).append("),");
+		selectQsb.append(" min(").append(BillTableMetadata.COL_TOTAL_AMOUNT).append("),");
+		selectQsb.append(" avg(").append(BillTableMetadata.COL_TOTAL_AMOUNT).append("),");
+		selectQsb.append(" max(").append(BillTableMetadata.COL_TOTAL_AMOUNT).append(")");
+		
+		StringBuilder qsb = new StringBuilder();
+		qsb.append(selectQsb.toString());
+		
+		QueryComposite qc = findBillsByCritrSqlQuery(critr, false);
+		qsb.append(" ").append(qc.getQueryString().toString());
+		
+		SQLQuery q = HibernateUtil.getSessionFactory().getCurrentSession().createSQLQuery(qsb.toString());
+		DAOUtils.applyParameters(q, qc.getParams());
+		
+		Object[] qr = (Object[])q.uniqueResult();
+		
+		BillExplorerStats r = new BillExplorerStats();
+		int count = ((Number)qr[0]).intValue();
+		r.setCountOfBills(count);
+		if (count > 0) {
+			r.setCountOfZipCodes(((Number)qr[1]).intValue());
+			r.setLowestTotalAmount(roundAmount((BigDecimal)qr[2]));
+			r.setAverageTotalAmount(roundAmount((BigDecimal)qr[3]));
+			r.setHighestTotalAmount(roundAmount((BigDecimal)qr[4]));
+		}
+		
+		return r;
+	}
+	
+	// TODO can this go into a more abstract helper class ???
+	private BigDecimal roundAmount(BigDecimal amount) {
+		BigDecimal roundedAmount = amount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+		return roundedAmount;
 	}
 }

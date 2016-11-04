@@ -6,35 +6,19 @@ define([], function() {
 				startBill : '='
 			},
 			templateUrl : "client/src/app/gu/bill/explorer/bill-explorer.drctv.tpl.html",
-			controller : ['$scope', 'billExplorerData', 'BillHttpService', ctrlr],
+			controller : ['$scope', 'billExplorerData', ctrlr],
 			controllerAs : 'ctrlr',
 			bindToController : true
 		};
 	}];
 	
-	function ctrlr($scope, data, BillHttpService) {
+	function ctrlr($scope, data) {
 		var vm = this;
 		
 		init();
 		
 		function init() {
-			$scope.$watch(function () { return data.critrMileRadius; }, function (critrMileRadius) {
-				updateTotals();
-			}, true);
-			
 			data.setLatestBill(vm.startBill);
-		}
-		
-		function updateTotals() {
-			BillHttpService.getBillExplorerResults(data.critrZipCode, data.critrMileRadius).then(function(response) {
-				var result = response.data.result;
-				
-				data.lowestTotalAmount = result.lowestTotalAmount;
-				data.averageTotalAmount = result.averageTotalAmount;
-				data.highestTotalAmount = result.highestTotalAmount;
-			}).catch(function(error) {
-				// TODO
-			});
 		}
 	}
 });
