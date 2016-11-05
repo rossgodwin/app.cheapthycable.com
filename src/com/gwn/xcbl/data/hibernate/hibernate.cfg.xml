@@ -31,6 +31,7 @@
         <mapping class="com.gwn.xcbl.data.hibernate.entity.Bill" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.BillCableOptions" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.BillInternetOptions" />
+        <mapping class="com.gwn.xcbl.data.hibernate.entity.CurrentBill" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.Environment" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.GeoZipCode" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.Provider" />

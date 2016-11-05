@@ -222,16 +222,16 @@ public class BillRS extends BaseRS {
 	}
 	
 	@GET
-	@Path("/latest")
+	@Path("/current")
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response getLatestBill(
+	public Response getCurrentBill(
 			@Context HttpServletRequest httpRequest) {
 		try {
 			long accountId = getAuthAccountId(httpRequest);
 			
 			ResponseDTO<BillDTO> response = null;
 			
-			Bill obj = DAOFactory.getInstance().getBillDAO().findLatestBill(accountId, true);
+			Bill obj = DAOFactory.getInstance().getBillDAO().findCurrentBill(accountId);
 			if (obj != null) {
 				BillDTO dto = getBillDtoTrnsfmr().transform(obj);
 				response = new ResponseDTO<BillDTO>(dto);

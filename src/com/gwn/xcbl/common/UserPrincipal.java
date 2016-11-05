@@ -6,7 +6,9 @@ import com.gwn.xcbl.data.shared.UserRole;
 
 public class UserPrincipal implements Principal {
 
-	private Long userId;
+	private long accountId;
+	
+	private long userId;
 	
 	private String username;
 	
@@ -14,17 +16,31 @@ public class UserPrincipal implements Principal {
 
 	public UserPrincipal() {}
 	
-	public UserPrincipal(Long userId, String username, UserRole role) {
+	public UserPrincipal(long accountId, long userId, String username, UserRole role) {
+		this.accountId = accountId;
 		this.userId = userId;
 		this.username = username;
 		this.role = role;
 	}
-	
-	public Long getUserId() {
+
+	@Override
+	public String getName() {
+		return username;
+	}
+
+	public long getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(long accountId) {
+		this.accountId = accountId;
+	}
+
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -34,11 +50,6 @@ public class UserPrincipal implements Principal {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	@Override
-	public String getName() {
-		return username;
 	}
 
 	public UserRole getRole() {

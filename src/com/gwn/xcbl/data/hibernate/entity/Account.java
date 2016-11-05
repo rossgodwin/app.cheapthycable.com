@@ -17,6 +17,12 @@ import com.gwn.xcbl.data.shared.ILongId;
 @Table(name = "account")
 public class Account implements ILongId {
 
+	public static Account idInstance(long id) {
+		Account r = new Account();
+		r.setId(id);
+		return r;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id = -1L;

@@ -29,6 +29,8 @@ import org.jboss.security.auth.spi.AbstractServerLoginModule;
 
 import com.gwn.xcbl.bl.account.UserPasswordHelper;
 import com.gwn.xcbl.common.UserPrincipal;
+import com.gwn.xcbl.data.entity.UserTableMetadata;
+import com.gwn.xcbl.data.hibernate.entity.Account;
 import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.data.shared.UserRole;
 
@@ -109,14 +111,28 @@ public class LoginModule extends AbstractServerLoginModule {
 		};
 		
 		User user = null;
-		Object[] results = (Object[]) getQueryRunner().query("select id, username, password, role, email from user where username = ?", h, username);
+		
+		StringBuilder qsb = new StringBuilder();
+		qsb.append("select ")
+			.append(UserTableMetadata.COL_ID).append(", ")
+			.append(UserTableMetadata.COL_ACCOUNT_ID).append(", ")
+			.append(UserTableMetadata.COL_USERNAME).append(", ")
+			.append(UserTableMetadata.COL_PASSWORD).append(", ")
+			.append(UserTableMetadata.COL_ROLE).append(", ")
+			.append(UserTableMetadata.COL_EMAIL)
+			.append(" from ").append(UserTableMetadata.TABLE_NAME)
+			.append(" where ").append(UserTableMetadata.COL_USERNAME).append(" = ?");
+		
+		Object[] results = (Object[]) getQueryRunner().query(qsb.toString(), h, username);
+		
 		if (results != null) {
 			user = new User();
 			user.setId(((Number)results[0]).longValue());
-			user.setUsername((String)results[1]);
-			user.setPassword((String)results[2]);
-			user.setRole(UserRole.valueOf((String)results[3]));
-			user.setEmail((String)results[4]);
+			user.setAccount(Account.idInstance(((Number)results[1]).longValue()));
+			user.setUsername((String)results[2]);
+			user.setPassword((String)results[3]);
+			user.setRole(UserRole.valueOf((String)results[4]));
+			user.setEmail((String)results[5]);
 		}
 		return user;
 	}
@@ -153,7 +169,7 @@ public class LoginModule extends AbstractServerLoginModule {
 		if (plainPasswordChars != null) {
 			String plainPassword = new String(plainPasswordChars);
 			if (UserPasswordHelper.checkPassword(plainPassword, user.getPassword())) {
-				principal = new UserPrincipal(user.getId(), user.getUsername(), user.getRole());
+				principal = new UserPrincipal(user.getAccount().getId(), user.getId(), user.getUsername(), user.getRole());
 				return true;
 			} else {
 				throw new FailedLoginException("Invalid password");

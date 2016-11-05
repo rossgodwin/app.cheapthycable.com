@@ -13,12 +13,13 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
+import com.gwn.xcbl.data.entity.UserTableMetadata;
 import com.gwn.xcbl.data.shared.ILongId;
 import com.gwn.xcbl.data.shared.UserConstants;
 import com.gwn.xcbl.data.shared.UserRole;
 
 @Entity
-@Table(name = "user")
+@Table(name = UserTableMetadata.TABLE_NAME)
 public class User implements ILongId {
 
 	@Id
@@ -26,20 +27,20 @@ public class User implements ILongId {
 	private Long id = -1L;
 	
 	@ManyToOne
-	@JoinColumn(name = "account_id", nullable = false)
+	@JoinColumn(name = UserTableMetadata.COL_ACCOUNT_ID, nullable = false)
 	private Account account;
 	
-	@Column(name = "username", nullable = false, length = UserConstants.MAX_SIZE_EMAIL)
+	@Column(name = UserTableMetadata.COL_USERNAME, nullable = false, length = UserConstants.MAX_SIZE_EMAIL)
 	private String username;
 	
-	@Column(name = "password", nullable = false)
+	@Column(name = UserTableMetadata.COL_PASSWORD, nullable = false)
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "role", nullable = false)
+	@Column(name = UserTableMetadata.COL_ROLE, nullable = false)
 	private UserRole role;
 	
-	@Column(name = "email", nullable = false, length = UserConstants.MAX_SIZE_EMAIL)
+	@Column(name = UserTableMetadata.COL_EMAIL, nullable = false, length = UserConstants.MAX_SIZE_EMAIL)
 	private String email;
 	
 	@Column(name = "validated", nullable = false)

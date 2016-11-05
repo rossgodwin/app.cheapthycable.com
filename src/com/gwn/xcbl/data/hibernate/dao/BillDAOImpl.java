@@ -17,6 +17,7 @@ import com.gwn.xcbl.data.entity.BillTableMetadata;
 import com.gwn.xcbl.data.entity.ProviderTableMetadata;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.entity.Bill;
+import com.gwn.xcbl.data.hibernate.entity.CurrentBill;
 import com.gwn.xcbl.data.hibernate.entity.GeoZipCode;
 import com.gwn.xcbl.data.model.HaversineFormulaConsts;
 import com.gwn.xcbl.data.model.HaversineFormulaCritr;
@@ -40,6 +41,14 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, ILongId> implements B
 	public Bill findById(Long id, boolean readOnly) {
 		Query q = getSession().createQuery("from " + Bill.class.getSimpleName() + " b where b.id = :id");
 		q.setParameter("id", id);
+		Bill r = (Bill) q.uniqueResult();
+		return r;
+	}
+	
+	@Override
+	public Bill findCurrentBill(long accountId) {
+		Query q = getSession().createQuery("select b.bill from " + CurrentBill.class.getSimpleName() + " b where b.account.id = :accountId");
+		q.setParameter("accountId", accountId);
 		Bill r = (Bill) q.uniqueResult();
 		return r;
 	}
@@ -70,18 +79,6 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, ILongId> implements B
 		qc.setQueryString(qsb.toString());
 		qc.setParams(params);
 		return qc;
-	}
-	
-	public Bill findLatestBill(long accountId, boolean readOnly) {
-		StringBuilder qsb = new StringBuilder();
-		qsb.append("from " + Bill.class.getSimpleName() + " b0 where b0.account.id = :accountId");
-		// TODO use {@link AccountDAOImpl#appendIdEqualsCritr}
-		qsb.append(" and b0.id = (select max(b1.id) from " + Bill.class.getSimpleName() + " b1 where b1.account.id = :accountId)");
-		
-		Query q = getSession().createQuery(qsb.toString());
-		q.setParameter("accountId", accountId);
-		Bill r = (Bill) q.uniqueResult();
-		return r;
 	}
 	
 	@SuppressWarnings("unchecked")

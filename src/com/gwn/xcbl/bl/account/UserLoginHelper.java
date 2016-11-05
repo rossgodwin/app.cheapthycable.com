@@ -34,7 +34,7 @@ public class UserLoginHelper {
 	}
 	
 	public static UserPrincipal getPrincipal(User user) {
-		UserPrincipal principal = new UserPrincipal(user.getId(), user.getUsername(), user.getRole());
+		UserPrincipal principal = new UserPrincipal(user.getAccount().getId(), user.getId(), user.getUsername(), user.getRole());
 		return principal;
 	}
 }

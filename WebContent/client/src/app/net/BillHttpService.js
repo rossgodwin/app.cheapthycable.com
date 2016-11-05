@@ -56,7 +56,7 @@ define(['app/res/AppUris'], function(appUris) {
 		}
 		
 		function getLatestBill() {
-			return $http.get(appUris.getRestUrl('/bill/latest'), {
+			return $http.get(appUris.getRestUrl('/bill/current'), {
 				params : {
 				}
 			});
