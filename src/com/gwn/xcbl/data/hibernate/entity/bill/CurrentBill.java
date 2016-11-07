@@ -1,4 +1,4 @@
-package com.gwn.xcbl.data.hibernate.entity;
+package com.gwn.xcbl.data.hibernate.entity.bill;
 
 import java.io.Serializable;
 
@@ -8,13 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.gwn.xcbl.data.hibernate.entity.Account;
+
 @Entity
 @Table(name = "vw_current_bill")
 public class CurrentBill implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id

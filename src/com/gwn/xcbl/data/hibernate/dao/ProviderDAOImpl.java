@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 
 import com.gwn.xcbl.data.dao.ProviderDAO;
-import com.gwn.xcbl.data.dao.util.QueryOrderByBuilder;
-import com.gwn.xcbl.data.entity.ProviderTableMetadata;
 import com.gwn.xcbl.data.hibernate.entity.Provider;
 import com.gwn.xcbl.data.model.QueryComposite;
+import com.gwn.xcbl.data.query.QueryOrderByBuilder;
+import com.gwn.xcbl.data.query.QueryUtils;
+import com.gwn.xcbl.data.query.h.ProviderHqueryUtils;
 import com.gwn.xcbl.data.shared.ILongId;
 import com.gwn.xcbl.data.shared.ProviderSearchCritrDTO;
 
@@ -55,7 +55,7 @@ public class ProviderDAOImpl extends GenericHibernateDAO<Provider, ILongId> impl
 		Map<String, Object> params = new HashMap<>();
 		
 		qsb.append("from " + Provider.class.getSimpleName() + " p where 1 = 1");
-		appendNameLikeCritr("p", qsb, params, critr.getName());
+		ProviderHqueryUtils.appendNameLikeCritr("p", qsb, params, critr.getName());
 		
 		if (orderBy) {
 			qsb.append(" ").append(new QueryOrderByBuilder().addKeyword().addOrderBy("p.name").addOrderBy("p.id").asString());
@@ -66,29 +66,13 @@ public class ProviderDAOImpl extends GenericHibernateDAO<Provider, ILongId> impl
 		qc.setParams(params);
 		return qc;
 	}
-	
-	public static void appendNameLikeCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, String name) {
-		if (StringUtils.isNotEmpty(name)) {
-			String param = DAOUtils.generateRandomUniqueParam(params);
-			qsb.append(" and lower(").append(tableAlias).append(".name) like :").append(param);
-			params.put(param, "%" + name + "%");
-		}
-	}
-	
-	public static void appendSqlNameLikeCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, String name) {
-		if (StringUtils.isNotEmpty(name)) {
-			String param = DAOUtils.generateRandomUniqueParam(params);
-			qsb.append(" and lower(").append(tableAlias).append(".").append(ProviderTableMetadata.COL_NAME).append(") like :").append(param);
-			params.put(param, "%" + name + "%");
-		}
-	}
 
 	@Override
 	public Provider findByName(String name) {
 		StringBuilder qsb = new StringBuilder();
 		qsb.append("from " + Provider.class.getSimpleName() + " u where");
 		
-		String param = DAOUtils.generateRandomParam();
+		String param = QueryUtils.generateRandomParam();
 		qsb.append(" lower(u.name) = :").append(param);
 		
 		Query q = getSession().createQuery(qsb.toString());

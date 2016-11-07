@@ -1,4 +1,4 @@
-package com.gwn.xcbl.data.hibernate.entity;
+package com.gwn.xcbl.data.hibernate.entity.bill;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,6 +18,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 import com.gwn.xcbl.data.entity.BillTableMetadata;
+import com.gwn.xcbl.data.hibernate.entity.Account;
+import com.gwn.xcbl.data.hibernate.entity.GeoZipCode;
+import com.gwn.xcbl.data.hibernate.entity.Provider;
 import com.gwn.xcbl.data.shared.ILongId;
 import com.gwn.xcbl.data.shared.bill.BillConstants;
 
@@ -30,7 +33,7 @@ public class Bill implements ILongId {
 	private Long id = -1L;
 	
 	@ManyToOne()
-	@JoinColumn(name = "account_id", nullable = false)
+	@JoinColumn(name = BillTableMetadata.COL_ACCOUNT_ID, nullable = false)
 	private Account account;
 	
 	@ManyToOne()

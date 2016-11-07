@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import com.gwn.xcbl.data.hibernate.entity.Account;
-import com.gwn.xcbl.data.hibernate.entity.Bill;
+import com.gwn.xcbl.data.hibernate.entity.bill.Bill;
 import com.gwn.xcbl.data.shared.bill.create.BillCreateDTO;
 
 public class BillCreateObservable {

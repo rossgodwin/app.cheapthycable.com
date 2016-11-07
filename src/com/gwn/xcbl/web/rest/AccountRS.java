@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
+import com.gwn.xcbl.bl.account.AccountHelper;
 import com.gwn.xcbl.common.UserPrincipal;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
@@ -36,7 +37,7 @@ public class AccountRS extends BaseRS {
 			
 			User user = DAOFactory.getInstance().getUserDAO().findByUsername(principal.getUsername());
 			
-			ResponseDTO<Boolean> response = new ResponseDTO<Boolean>(user.getAccount().isReceiveLowerBillAlerts());
+			ResponseDTO<Boolean> response = new ResponseDTO<Boolean>(user.getAccount().isBillAlertReceive());
 			String json = new Gson().toJson(response);
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
@@ -68,7 +69,7 @@ public class AccountRS extends BaseRS {
 					HibernateUtil.getSessionFactory().getCurrentSession().update(user);
 				}
 				
-				user.getAccount().setReceiveLowerBillAlerts(true);
+				AccountHelper.setReceiveBillAlerts(user.getAccount());
 				HibernateUtil.getSessionFactory().getCurrentSession().update(user.getAccount());
 				
 				response = new ResponseDTO<Void>(ResponseDTO.RESULT_OK);

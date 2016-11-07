@@ -1,4 +1,4 @@
-package com.gwn.xcbl.data.hibernate.entity;
+package com.gwn.xcbl.data.hibernate.entity.bill;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

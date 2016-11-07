@@ -6,11 +6,11 @@ import java.util.Date;
 import org.apache.commons.collections4.Transformer;
 
 import com.gwn.xcbl.data.hibernate.entity.Account;
-import com.gwn.xcbl.data.hibernate.entity.Bill;
-import com.gwn.xcbl.data.hibernate.entity.BillCableOptions;
-import com.gwn.xcbl.data.hibernate.entity.BillInternetOptions;
 import com.gwn.xcbl.data.hibernate.entity.GeoZipCode;
 import com.gwn.xcbl.data.hibernate.entity.Provider;
+import com.gwn.xcbl.data.hibernate.entity.bill.Bill;
+import com.gwn.xcbl.data.hibernate.entity.bill.BillCableOptions;
+import com.gwn.xcbl.data.hibernate.entity.bill.BillInternetOptions;
 import com.gwn.xcbl.data.shared.AccountDTO;
 import com.gwn.xcbl.data.shared.ProviderDTO;
 import com.gwn.xcbl.data.shared.bill.BillCableOptionsDTO;

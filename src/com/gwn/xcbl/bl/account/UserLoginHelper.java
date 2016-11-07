@@ -4,7 +4,6 @@ import javax.security.auth.login.FailedLoginException;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.gwn.xcbl.common.UserPrincipal;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.entity.User;
 
@@ -26,15 +25,5 @@ public class UserLoginHelper {
 		}
 		
 		return false;
-	}
-	
-	public static UserPrincipal getPrincipal(String username) {
-		User user = DAOFactory.getInstance().getUserDAO().findByUsername(username);
-		return getPrincipal(user);
-	}
-	
-	public static UserPrincipal getPrincipal(User user) {
-		UserPrincipal principal = new UserPrincipal(user.getAccount().getId(), user.getId(), user.getUsername(), user.getRole());
-		return principal;
 	}
 }

@@ -23,13 +23,15 @@ import com.gwn.xcbl.common.AppConstants;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.entity.Account;
-import com.gwn.xcbl.data.hibernate.entity.Bill;
-import com.gwn.xcbl.data.hibernate.entity.BillCableOptions;
-import com.gwn.xcbl.data.hibernate.entity.BillInternetOptions;
 import com.gwn.xcbl.data.hibernate.entity.GeoZipCode;
 import com.gwn.xcbl.data.hibernate.entity.Provider;
 import com.gwn.xcbl.data.hibernate.entity.User;
+import com.gwn.xcbl.data.hibernate.entity.bill.Bill;
+import com.gwn.xcbl.data.hibernate.entity.bill.BillCableOptions;
+import com.gwn.xcbl.data.hibernate.entity.bill.BillInternetOptions;
 import com.gwn.xcbl.data.model.GeoZipCodeUtils;
+import com.gwn.xcbl.data.shared.SetOperator;
+import com.gwn.xcbl.data.shared.bill.BillSearchCritrDTO;
 import com.gwn.xcbl.data.shared.bill.create.BillCreateDTO;
 import com.gwn.xcbl.web.AppServletContextUtils;
 import com.gwn.xcbl.web.HttpServletRequestHelper;
@@ -127,5 +129,23 @@ public class BillHelper {
 		email.setLogoBodyPart(new EmailBodyPart("inline", logoRealPath, MediaType.APPLICATION_OCTET_STREAM_TYPE));
 		
 		return email;
+	}
+	
+	public static BillSearchCritrDTO buildSimilarBillSearchCritr(Bill bill) {
+		BillSearchCritrDTO critr = new BillSearchCritrDTO();
+		
+		critr.setServicesSetOperator(SetOperator.MATCHES);
+		critr.setInternetService(bill.isInternetService());
+		critr.setCableService(bill.isCableService());
+		critr.setPhoneService(bill.isPhoneService());
+		
+		BillCableOptions cableOptions = bill.getCableOptions();
+		if (cableOptions != null) {
+			critr.setCableOptionBoxCount(cableOptions.getBoxCount());
+			critr.setCableOptionDvrCount(cableOptions.getDvrCount());
+			critr.setCableOptionSpecialChannels(cableOptions.isSpecialChannels());
+		}
+		
+		return critr;
 	}
 }

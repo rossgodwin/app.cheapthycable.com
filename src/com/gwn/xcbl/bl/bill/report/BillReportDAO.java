@@ -6,12 +6,13 @@ import java.util.Map;
 
 import org.hibernate.SQLQuery;
 
+import com.gwn.xcbl.bl.CurrencyUtils;
 import com.gwn.xcbl.data.entity.BillTableMetadata;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
-import com.gwn.xcbl.data.hibernate.dao.BillDAOImpl;
 import com.gwn.xcbl.data.hibernate.dao.DAOUtils;
 import com.gwn.xcbl.data.model.HaversineFormulaCritr;
 import com.gwn.xcbl.data.model.bill.BillExplorerStats;
+import com.gwn.xcbl.data.query.s.bill.BillSqueryUtils;
 import com.gwn.xcbl.data.shared.bill.report.BillReportCritrDTO;
 
 /**
@@ -31,10 +32,10 @@ public class BillReportDAO {
 		qsb.append(" max(").append(BillTableMetadata.COL_TOTAL_AMOUNT).append(")");
 		qsb.append(" from ").append(BillTableMetadata.TABLE_NAME).append(" as b");
 		qsb.append(" where 1 = 1");
-		BillDAOImpl.appendSqlZipCodeRadiusCritr("b", qsb, new HaversineFormulaCritr(critr.getLatitude(), critr.getLongitude(), critr.getRadius(), critr.getDistanceUnit()));
-		BillDAOImpl.appendSqlInternetServiceCritr("b", qsb, params, critr.getInternetService());
-		BillDAOImpl.appendSqlCableServiceCritr("b", qsb, params, critr.getCableService());
-		BillDAOImpl.appendSqlPhoneServiceCritr("b", qsb, params, critr.getPhoneService());
+		BillSqueryUtils.appendHaversineCritr("b", qsb, new HaversineFormulaCritr(critr.getLatitude(), critr.getLongitude(), critr.getRadius(), critr.getDistanceUnit()));
+		BillSqueryUtils.appendInternetServiceCritr("b", qsb, params, critr.getInternetService());
+		BillSqueryUtils.appendCableServiceCritr("b", qsb, params, critr.getCableService());
+		BillSqueryUtils.appendPhoneServiceCritr("b", qsb, params, critr.getPhoneService());
 		
 		SQLQuery q = HibernateUtil.getSessionFactory().getCurrentSession().createSQLQuery(qsb.toString());
 		DAOUtils.applyParameters(q, params);
@@ -46,19 +47,19 @@ public class BillReportDAO {
 		r.setCountOfBills(count);
 		if (count > 0) {
 			r.setCountOfZipCodes(((Number)qr[1]).intValue());
-			r.setLowestTotalAmount(roundAmount((BigDecimal)qr[2]));
-			r.setAverageTotalAmount(roundAmount((BigDecimal)qr[3]));
-			r.setHighestTotalAmount(roundAmount((BigDecimal)qr[4]));
+			r.setLowestTotalAmount(CurrencyUtils.roundCurrency((BigDecimal)qr[2]));
+			r.setAverageTotalAmount(CurrencyUtils.roundCurrency((BigDecimal)qr[3]));
+			r.setHighestTotalAmount(CurrencyUtils.roundCurrency((BigDecimal)qr[4]));
 		}
 		
 		return r;
 	}
 	
-	// TODO can this go into a more abstract helper class ???
-	private BigDecimal roundAmount(BigDecimal amount) {
-		BigDecimal roundedAmount = amount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
-		return roundedAmount;
-	}
+//	// TODO can this go into a more abstract helper class ???
+//	private BigDecimal roundAmount(BigDecimal amount) {
+//		BigDecimal roundedAmount = amount.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+//		return roundedAmount;
+//	}
 	
 //	@SuppressWarnings("unchecked")
 //	public List<Bill> getBillsByTotalAmount(BillReportCritrDTO critr, String totalAmount) {

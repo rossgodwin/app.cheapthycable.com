@@ -6,6 +6,8 @@ public interface BillTableMetadata {
 	
 	public static final String COL_ID = "id";
 	
+	public static final String COL_ACCOUNT_ID = "account_id";
+	
 	public static final String COL_PROVIDER_ID = "provider_id";
 	
 	public static final String COL_PROVIDER_OTHER = "provider_other";

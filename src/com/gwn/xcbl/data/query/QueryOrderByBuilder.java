@@ -1,15 +1,21 @@
-package com.gwn.xcbl.data.dao.util;
+package com.gwn.xcbl.data.query;
 
 import com.gwn.xcbl.data.shared.SortOrder;
 
 public class QueryOrderByBuilder {
 
+	private String keyword = "order by";
+	
 	private StringBuilder result = new StringBuilder();
 	
 	private int orderByCount = 0;
 	
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	
 	public QueryOrderByBuilder addKeyword() {
-		result.append("order by");
+		result.append(keyword);
 		return this;
 	}
 	

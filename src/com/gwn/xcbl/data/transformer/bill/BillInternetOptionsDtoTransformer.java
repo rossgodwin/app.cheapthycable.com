@@ -2,8 +2,8 @@ package com.gwn.xcbl.data.transformer.bill;
 
 import org.apache.commons.collections4.Transformer;
 
-import com.gwn.xcbl.data.hibernate.entity.Bill;
-import com.gwn.xcbl.data.hibernate.entity.BillInternetOptions;
+import com.gwn.xcbl.data.hibernate.entity.bill.Bill;
+import com.gwn.xcbl.data.hibernate.entity.bill.BillInternetOptions;
 import com.gwn.xcbl.data.shared.bill.BillDTO;
 import com.gwn.xcbl.data.shared.bill.BillInternetOptionsDTO;
 

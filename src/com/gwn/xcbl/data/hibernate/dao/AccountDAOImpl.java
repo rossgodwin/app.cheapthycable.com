@@ -1,7 +1,5 @@
 package com.gwn.xcbl.data.hibernate.dao;
 
-import java.util.Map;
-
 import org.hibernate.Query;
 
 import com.gwn.xcbl.data.dao.AccountDAO;
@@ -21,11 +19,5 @@ public class AccountDAOImpl extends GenericHibernateDAO<Account, ILongId> implem
 		q.setParameter("id", id);
 		Account r = (Account) q.uniqueResult();
 		return r;
-	}
-	
-	public static void appendIdEqualsCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, long accountId) {
-		String param = DAOUtils.generateRandomUniqueParam(params);
-		qsb.append(" and ").append(tableAlias).append(".id = :").append(param);
-		params.put(param, accountId);
 	}
 }
