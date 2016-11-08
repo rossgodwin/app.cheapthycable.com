@@ -93,7 +93,7 @@ public class BillSqueryUtils {
 					qsb.append("select 1");
 					qsb.append(" from ").append(ProviderTableMetadata.TABLE_NAME).append(" p");
 					qsb.append(" where p.").append(ProviderTableMetadata.COL_ID).append(" = ").append(tableAlias).append(".").append(BillTableMetadata.COL_PROVIDER_ID);
-					ProviderSqueryUtils.appendSqlNameLikeCritr("p", qsb, params, providerName);
+					ProviderSqueryUtils.appendNameLikeCritr("p", qsb, params, providerName);
 				}
 				qsb.append(") or ");
 				

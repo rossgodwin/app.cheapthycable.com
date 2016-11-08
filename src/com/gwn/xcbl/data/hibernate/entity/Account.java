@@ -1,6 +1,5 @@
 package com.gwn.xcbl.data.hibernate.entity;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -32,19 +31,6 @@ public class Account implements ILongId {
 	@Type(type = "com.gwn.xcbl.data.hibernate.ut.LocalDateTimeUserType")
 	private LocalDateTime createDate;
 
-	@Column(name = "bill_alert_receive", nullable = false)
-	@Type(type = "org.hibernate.type.NumericBooleanType")
-	private boolean billAlertReceive;
-	
-	@Column(name = "bill_alert_receive_frequency_days")
-	private Integer billAlertReceiveFrequencyDays;
-	
-	@Column(name = "bill_alert_receive_mile_radius")
-	private Double billAlertReceiveMileRadius;
-	
-	@Column(name = "bill_alert_receive_amount_below")
-	private BigDecimal billAlertReceiveAmountBelow;
-
 	public Long getId() {
 		return id;
 	}
@@ -59,37 +45,5 @@ public class Account implements ILongId {
 
 	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
-	}
-
-	public boolean isBillAlertReceive() {
-		return billAlertReceive;
-	}
-
-	public void setBillAlertReceive(boolean billAlertReceive) {
-		this.billAlertReceive = billAlertReceive;
-	}
-
-	public Integer getBillAlertReceiveFrequencyDays() {
-		return billAlertReceiveFrequencyDays;
-	}
-
-	public void setBillAlertReceiveFrequencyDays(Integer billAlertReceiveFrequencyDays) {
-		this.billAlertReceiveFrequencyDays = billAlertReceiveFrequencyDays;
-	}
-
-	public Double getBillAlertReceiveMileRadius() {
-		return billAlertReceiveMileRadius;
-	}
-
-	public void setBillAlertReceiveMileRadius(Double billAlertReceiveMileRadius) {
-		this.billAlertReceiveMileRadius = billAlertReceiveMileRadius;
-	}
-
-	public BigDecimal getBillAlertReceiveAmountBelow() {
-		return billAlertReceiveAmountBelow;
-	}
-
-	public void setBillAlertReceiveAmountBelow(BigDecimal billAlertReceiveAmountBelow) {
-		this.billAlertReceiveAmountBelow = billAlertReceiveAmountBelow;
 	}
 }

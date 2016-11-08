@@ -16,10 +16,11 @@ import javax.ws.rs.core.Response;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
-import com.gwn.xcbl.bl.account.AccountHelper;
+import com.gwn.xcbl.bl.ba.BaAlertHelper;
 import com.gwn.xcbl.common.UserPrincipal;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
+import com.gwn.xcbl.data.hibernate.dao.ba.BaAlertDAOImpl;
 import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.data.model.AuthenticationException;
 import com.gwn.xcbl.data.shared.ResponseDTO;
@@ -33,11 +34,11 @@ public class AccountRS extends BaseRS {
 	public Response receiveLowerBillAlerts(
 			@Context HttpServletRequest httpRequest) {
 		try {
-			UserPrincipal principal = authenticate(httpRequest);
+			long accountId = getAuthAccountId(httpRequest);
 			
-			User user = DAOFactory.getInstance().getUserDAO().findByUsername(principal.getUsername());
+			int count = new BaAlertDAOImpl().countEmailAlertsByAccount(accountId);
 			
-			ResponseDTO<Boolean> response = new ResponseDTO<Boolean>(user.getAccount().isBillAlertReceive());
+			ResponseDTO<Boolean> response = new ResponseDTO<Boolean>(count > 0);
 			String json = new Gson().toJson(response);
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
@@ -69,8 +70,9 @@ public class AccountRS extends BaseRS {
 					HibernateUtil.getSessionFactory().getCurrentSession().update(user);
 				}
 				
-				AccountHelper.setReceiveBillAlerts(user.getAccount());
-				HibernateUtil.getSessionFactory().getCurrentSession().update(user.getAccount());
+//				AccountHelper.setReceiveBillAlerts(user.getAccount());
+//				HibernateUtil.getSessionFactory().getCurrentSession().update(user.getAccount());
+				BaAlertHelper.addDefaultEmailAlert(user.getAccount());
 				
 				response = new ResponseDTO<Void>(ResponseDTO.RESULT_OK);
 			} else {

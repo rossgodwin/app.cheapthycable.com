@@ -33,8 +33,8 @@
         <mapping class="com.gwn.xcbl.data.hibernate.entity.GeoZipCode" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.Provider" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.User" />
-        <mapping class="com.gwn.xcbl.data.hibernate.entity.ba.BaLastAlert" />
-        <mapping class="com.gwn.xcbl.data.hibernate.entity.ba.BaNextAlert" />
+        <mapping class="com.gwn.xcbl.data.hibernate.entity.ba.BaAlert" />
+        <mapping class="com.gwn.xcbl.data.hibernate.entity.ba.BaAlertSentLog" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.Bill" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.BillCableOptions" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.BillInternetOptions" />

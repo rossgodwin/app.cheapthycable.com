@@ -13,27 +13,24 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-import com.gwn.xcbl.data.hibernate.entity.Account;
+import com.gwn.xcbl.data.entity.ba.BaAlertSentLogTableMetadata;
 
 @Entity
-@Table(name = "ba_last_alert")
-public class BaLastAlert {
+@Table(name = BaAlertSentLogTableMetadata.TABLE_NAME)
+public class BaAlertSentLog {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id = -1L;
 	
 	@ManyToOne()
-	@JoinColumn(name = "account_id", nullable = false)
-	private Account account;
+	@JoinColumn(name = BaAlertSentLogTableMetadata.COL_ALERT_ID, nullable = false)
+	private BaAlert alert;
 	
-	@Column(name = "alerted_date", nullable = false)
+	@Column(name = BaAlertSentLogTableMetadata.COL_ALERTED_DATE, nullable = false)
 	@Type(type = "com.gwn.xcbl.data.hibernate.ut.LocalDateTimeUserType")
 	private LocalDateTime alertedDate;
 
-	public BaLastAlert() {
-	}
-	
 	public Long getId() {
 		return id;
 	}
@@ -42,12 +39,12 @@ public class BaLastAlert {
 		this.id = id;
 	}
 
-	public Account getAccount() {
-		return account;
+	public BaAlert getAlert() {
+		return alert;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setAlert(BaAlert alert) {
+		this.alert = alert;
 	}
 
 	public LocalDateTime getAlertedDate() {

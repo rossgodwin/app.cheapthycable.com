@@ -17,6 +17,9 @@ public class Environment {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type", nullable = false)
 	private EnvironmentType type;
+	
+	@Column(name = "domain_url", nullable = false)
+	private String domainUrl;
 
 	public EnvironmentType getType() {
 		return type;
@@ -24,5 +27,13 @@ public class Environment {
 
 	public void setType(EnvironmentType type) {
 		this.type = type;
+	}
+
+	public String getDomainUrl() {
+		return domainUrl;
+	}
+
+	public void setDomainUrl(String domainUrl) {
+		this.domainUrl = domainUrl;
 	}
 }

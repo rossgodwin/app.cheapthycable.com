@@ -5,6 +5,10 @@ import com.gwn.xcbl.data.dao.BillDAO;
 import com.gwn.xcbl.data.dao.GeoZipCodeDAO;
 import com.gwn.xcbl.data.dao.ProviderDAO;
 import com.gwn.xcbl.data.dao.UserDAO;
+import com.gwn.xcbl.data.dao.ba.BaAlertDAO;
+import com.gwn.xcbl.data.dao.ba.BaAlertSentLogDAO;
+import com.gwn.xcbl.data.hibernate.dao.ba.BaAlertDAOImpl;
+import com.gwn.xcbl.data.hibernate.dao.ba.BaAlertSentLogDAOImpl;
 
 public class DAOFactory {
 
@@ -19,6 +23,10 @@ public class DAOFactory {
 	private ProviderDAO providerDAO;
 	
 	private UserDAO userDAO;
+	
+	private BaAlertDAO baAlertDAO;
+	
+	private BaAlertSentLogDAO baAlertSentLogDAO;
 	
 	public static DAOFactory getInstance() {
 		if (instance == null) {
@@ -60,5 +68,19 @@ public class DAOFactory {
 			userDAO = new UserDAOImpl();
 		}
 		return userDAO;
+	}
+	
+	public BaAlertDAO getBaAlertDAO() {
+		if (baAlertDAO == null) {
+			baAlertDAO = new BaAlertDAOImpl();
+		}
+		return baAlertDAO;
+	}
+	
+	public BaAlertSentLogDAO getBaAlertSentLogDAO() {
+		if (baAlertSentLogDAO == null) {
+			baAlertSentLogDAO = new BaAlertSentLogDAOImpl();
+		}
+		return baAlertSentLogDAO;
 	}
 }

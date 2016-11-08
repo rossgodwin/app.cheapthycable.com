@@ -23,7 +23,6 @@ public class TlfUtils {
 		ServletContextTemplateResolver resolver = new ServletContextTemplateResolver(servletContext);
 		resolver.setTemplateMode("HTML");
 		resolver.setPrefix("/WEB-INF/templates/");
-//		resolver.setSuffix(".html");
 		resolver.setCacheTTLMs(3600000L);
 		
 		TemplateEngine engine = new TemplateEngine();

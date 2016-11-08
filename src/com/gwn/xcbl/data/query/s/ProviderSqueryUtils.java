@@ -9,7 +9,7 @@ import com.gwn.xcbl.data.query.QueryUtils;
 
 public class ProviderSqueryUtils {
 
-	public static void appendSqlNameLikeCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, String name) {
+	public static void appendNameLikeCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, String name) {
 		if (StringUtils.isNotEmpty(name)) {
 			String param = QueryUtils.generateRandomUniqueParam(params);
 			qsb.append(" and lower(").append(tableAlias).append(".").append(ProviderTableMetadata.COL_NAME).append(") like :").append(param);

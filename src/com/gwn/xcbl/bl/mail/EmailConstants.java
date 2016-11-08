@@ -28,4 +28,7 @@ public interface EmailConstants {
 	
 	public static final String VARIABLE_TWITTER_HOME_PAGE_URL = "twitterHomePageUrl";
 	public static final String VARIABLE_FB_HOME_PAGE_URL = "fbHomePageUrl";
+	
+	public static final String VARIABLE_BILL_COUNT = "billCount";
+	public static final String VARIABLE_BILLS = "bills";
 }

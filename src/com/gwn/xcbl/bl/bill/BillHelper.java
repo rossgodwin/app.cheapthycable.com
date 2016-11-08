@@ -1,7 +1,9 @@
 package com.gwn.xcbl.bl.bill;
 
 import java.net.URISyntaxException;
+import java.text.MessageFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -147,5 +149,51 @@ public class BillHelper {
 		}
 		
 		return critr;
+	}
+	
+	public static String getServicesStr(Bill bill, String seperator) {
+		List<String> services = new ArrayList<String>();
+		if (bill.isInternetService()) {
+			services.add("Internet");
+		}
+		if (bill.isCableService()) {
+			services.add("Cable");
+		}
+		if (bill.isPhoneService()) {
+			services.add("Phone");
+		}
+		String r = StringUtils.join(services, seperator);
+		return r;
+	}
+	
+	public static String getAllOptionsStr(Bill bill, String seperator) {
+		List<String> options = new ArrayList<String>();
+		
+		BillInternetOptions internetOptions = bill.getInternetOptions();
+		if (internetOptions != null) {
+			if (internetOptions.isModem()) {
+				options.add("Modem");
+			}
+			if (internetOptions.getDownloadSpeedMbpsRngLower() != null && internetOptions.getDownloadSpeedMbpsRngUpper() != null) {
+				String r = MessageFormat.format("{0} - {1} Mbps", internetOptions.getDownloadSpeedMbpsRngLower(), internetOptions.getDownloadSpeedMbpsRngUpper());
+				options.add(r);
+			}
+		}
+		
+		BillCableOptions cableOptions = bill.getCableOptions();
+		if (cableOptions != null) {
+			if (cableOptions.getDvrCount() != null && cableOptions.getDvrCount() > 0) {
+				options.add(cableOptions.getDvrCount() + " DVR" + (cableOptions.getDvrCount() > 1 ? "s" : ""));
+			}
+			if (cableOptions.getBoxCount() != null && cableOptions.getBoxCount() > 0) {
+				options.add(cableOptions.getBoxCount() + " Box" + (cableOptions.getBoxCount() > 1 ? "es" : ""));
+			}
+			if (cableOptions.isSpecialChannels()) {
+				options.add("Special Channels");
+			}
+		}
+		
+		String r = StringUtils.join(options, seperator);
+		return r;
 	}
 }

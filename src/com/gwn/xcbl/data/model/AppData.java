@@ -38,4 +38,8 @@ public class AppData {
 	public boolean isEnvProd() {
 		return environment.getType().equals(EnvironmentType.PROD);
 	}
+	
+	public String getDomainUrl() {
+		return environment.getDomainUrl();
+	}
 }

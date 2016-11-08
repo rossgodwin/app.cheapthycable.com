@@ -1,0 +1,77 @@
+<!-- 
+	Variables:
+	productName
+	logoImgSrc
+	billCount
+	bills
+	twitterHomePageUrl
+	fbHomePageUrl
+	productUrl
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style type="text/css">
+			table {
+			    border-collapse: collapse;
+			    width: 100%;
+			}
+			
+			table, th, td {
+			    border: 1px solid #d6d6d8;
+			    padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td style="background-color: #f0f0f0;"><img th:alt="@{${productName}}" th:src="@{${logoImgSrc}}">
+			</tr>
+			<tr>
+				<td>
+					<p th:if="${billCount == 1}">
+						We just wanted to let you know that we found a bill that is lower than yours.
+					</p>
+					<p th:if="${billCount > 1}">
+						We just wanted to let you know that we found [[${billCount}]] bills that are lower than yours.
+					</p>
+					
+					<p>
+						<table>
+							<tr>
+								<th>Zip Code</th>
+								<th>Total Amount</th>
+								<th>Provider Name</th>
+								<th>Services</th>
+								<th>Options</th>
+							</tr>
+							<tr th:each="bill : ${bills}">
+								<td th:text="${bill.zipCode}"></td>
+								<td th:text="${bill.totalAmount}"></td>
+								<td th:text="${bill.providerName}"></td>
+								<td th:text="${bill.services}"></td>
+								<td th:text="${bill.options}"></td>
+							</tr>
+						</table>
+					</p>
+					
+					<p>
+						<span style="text-align: center;">
+							For ideas on how to lower your bill, check out our social media pages.
+							<span style="margin-right: 5px;"><a th:href="@{${twitterHomePageUrl}}" target="_blank">Twitter</a></span>
+							<a th:href="@{${fbHomePageUrl}}" target="_blank">Facebook</a>
+						</span>
+					</p>
+					
+					<p>
+						Thank you,
+						<br/>
+						<a th:href="@{${productUrl}}">[[${productName}]]</a>
+					</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
