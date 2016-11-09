@@ -9,6 +9,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import com.gwn.xcbl.bl.ba.email.BaEmailRun;
+import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.EnvironmentDAOImpl;
 import com.gwn.xcbl.data.model.AppData;
 
@@ -22,12 +23,16 @@ public class AppSrvltCtxLstnr implements ServletContextListener {
 	
 	@Override
 	public void contextInitialized(ServletContextEvent arg0) {
-		AppData.getInstance().setEnvironment(new EnvironmentDAOImpl().getEnvironment());
+		HibernateUtil.beginTransaction();
+		
+		AppData.getInstance().load(new EnvironmentDAOImpl().getEnvironment());
 		
 		if (AppData.getInstance().isEnvProd()) {
 			scheduler = Executors.newSingleThreadScheduledExecutor();
 			scheduler.scheduleAtFixedRate(new BaEmailRun(arg0.getServletContext()), 0, 4, TimeUnit.HOURS);
 		}
+		
+		HibernateUtil.closeSession();
 	}
 	
 	@Override

@@ -34,4 +34,8 @@ public class HibernateUtil {
 		getSessionFactory().getCurrentSession().getTransaction().rollback();
 		getSessionFactory().getCurrentSession().beginTransaction();
 	}
+	
+	public static void closeSession() {
+		getSessionFactory().getCurrentSession().close();
+	}
 }

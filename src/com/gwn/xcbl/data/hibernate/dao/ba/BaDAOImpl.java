@@ -38,6 +38,19 @@ public class BaDAOImpl extends BaseDAO {
 		return r;
 	}
 	
+	/**
+	 * Criteria:
+	 * <ul>
+	 * <li>bills that are not owned by the alert account</li>
+	 * <li>bills that are within the alert radius of the current bill zip code</li>
+	 * <li>bills that have been created since the last sent alert</li>
+	 * <li>bills that are similar i.e. services and options</li>
+	 * <li>bills whose total amount is less than the current bill total amount minus the alert amount below setting</li>
+	 * </ul>
+	 * 	
+	 * @param alert
+	 * @return
+	 */
 	private QueryComposite findAlertBillsSqlQuery(BaAlert alert) {
 		Account account = alert.getAccount();
 		Bill currentBill = DAOFactory.getInstance().getBillDAO().findCurrentBill(account.getId());

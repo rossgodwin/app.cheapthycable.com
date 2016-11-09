@@ -72,7 +72,7 @@ public class AccountRS extends BaseRS {
 				
 //				AccountHelper.setReceiveBillAlerts(user.getAccount());
 //				HibernateUtil.getSessionFactory().getCurrentSession().update(user.getAccount());
-				BaAlertHelper.addDefaultEmailAlert(user.getAccount());
+				BaAlertHelper.addDefaultAlert(user.getAccount());
 				
 				response = new ResponseDTO<Void>(ResponseDTO.RESULT_OK);
 			} else {

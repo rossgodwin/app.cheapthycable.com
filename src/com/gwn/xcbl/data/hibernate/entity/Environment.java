@@ -20,6 +20,9 @@ public class Environment {
 	
 	@Column(name = "domain_url", nullable = false)
 	private String domainUrl;
+	
+	@Column(name = "bill_alert_enabled", nullable = false)
+	private boolean billAlertEnabled;
 
 	public EnvironmentType getType() {
 		return type;
@@ -35,5 +38,13 @@ public class Environment {
 
 	public void setDomainUrl(String domainUrl) {
 		this.domainUrl = domainUrl;
+	}
+
+	public boolean isBillAlertEnabled() {
+		return billAlertEnabled;
+	}
+
+	public void setBillAlertEnabled(boolean billAlertEnabled) {
+		this.billAlertEnabled = billAlertEnabled;
 	}
 }

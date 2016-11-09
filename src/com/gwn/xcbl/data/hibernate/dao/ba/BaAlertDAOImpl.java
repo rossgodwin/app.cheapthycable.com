@@ -13,6 +13,7 @@ import com.gwn.xcbl.data.entity.ba.BaAlertTableMetadata;
 import com.gwn.xcbl.data.hibernate.dao.DAOUtils;
 import com.gwn.xcbl.data.hibernate.dao.GenericHibernateDAO;
 import com.gwn.xcbl.data.hibernate.entity.ba.BaAlert;
+import com.gwn.xcbl.data.hibernate.entity.ba.BaAlertSentLog;
 import com.gwn.xcbl.data.model.QueryComposite;
 import com.gwn.xcbl.data.query.QueryOrderByBuilder;
 import com.gwn.xcbl.data.query.s.ba.BaAlertSqueryUtils;
@@ -52,6 +53,20 @@ public class BaAlertDAOImpl extends GenericHibernateDAO<BaAlert, ILongId> implem
 		return r;
 	}
 	
+	/**
+	 * Criteria:
+	 * <ul>
+	 * <li>alerts flagged to receive emails</li>
+	 * <li>alerts that do not have a entry in the {@link BaAlertSentLog} table
+	 * 		or alerts that do have a entry in the {@link BaAlertSentLog} table
+	 * 		but the current date time is greater than the last sent date time plus
+	 * 		the alert receive frequency days setting 
+	 * </li>
+	 * 
+	 * @param currentDate
+	 * @param orderBy
+	 * @return
+	 */
 	private QueryComposite findAlertsToSendSqlQuery(LocalDateTime currentDate, boolean orderBy) {
 		StringBuilder qsb = new StringBuilder();
 		Map<String, Object> params = new HashMap<>();

@@ -8,7 +8,7 @@ import com.gwn.xcbl.data.hibernate.entity.ba.BaAlert;
 
 public class BaAlertHelper {
 
-	public static BaAlert addDefaultEmailAlert(Account account) {
+	public static BaAlert addDefaultAlert(Account account) {
 		BaAlert dbo = new BaAlert();
 		dbo.setAccount(account);
 		dbo.setReceiveEmail(true);

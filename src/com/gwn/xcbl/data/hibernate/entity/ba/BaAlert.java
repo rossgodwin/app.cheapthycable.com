@@ -15,10 +15,11 @@ import org.hibernate.annotations.Type;
 
 import com.gwn.xcbl.data.entity.ba.BaAlertTableMetadata;
 import com.gwn.xcbl.data.hibernate.entity.Account;
+import com.gwn.xcbl.data.shared.ILongId;
 
 @Entity
 @Table(name = BaAlertTableMetadata.TABLE_NAME)
-public class BaAlert {
+public class BaAlert implements ILongId {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

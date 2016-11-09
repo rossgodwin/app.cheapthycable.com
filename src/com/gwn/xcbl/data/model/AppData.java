@@ -14,14 +14,13 @@ public class AppData {
 		return instance;
 	}
 	
-	private Environment environment;
+	private EnvironmentType environmentType;
+	
+	private String domainUrl;
 
-	public Environment getEnvironment() {
-		return environment;
-	}
-
-	public void setEnvironment(Environment environment) {
-		this.environment = environment;
+	public void load(Environment environment) {
+		setEnvironmentType(environment.getType());
+		setDomainUrl(environment.getDomainUrl());
 	}
 	
 	public String getFbAppId() {
@@ -32,14 +31,26 @@ public class AppData {
 	}
 	
 	public boolean isEnvDev() {
-		return environment.getType().equals(EnvironmentType.DEV);
+		return environmentType.equals(EnvironmentType.DEV);
 	}
 	
 	public boolean isEnvProd() {
-		return environment.getType().equals(EnvironmentType.PROD);
+		return environmentType.equals(EnvironmentType.PROD);
 	}
-	
+
+	public EnvironmentType getEnvironmentType() {
+		return environmentType;
+	}
+
+	public void setEnvironmentType(EnvironmentType environmentType) {
+		this.environmentType = environmentType;
+	}
+
 	public String getDomainUrl() {
-		return environment.getDomainUrl();
+		return domainUrl;
+	}
+
+	public void setDomainUrl(String domainUrl) {
+		this.domainUrl = domainUrl;
 	}
 }
