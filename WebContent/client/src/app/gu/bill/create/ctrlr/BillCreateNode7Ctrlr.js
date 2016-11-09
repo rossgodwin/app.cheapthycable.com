@@ -1,12 +1,12 @@
 define(['app/res/AppConsts'], function(appConsts) {
-	return ['receiveLowerBillAlerts', '$state', 'fbHlprPrvdr', 'twitterHlprPrvdr', 'spinnerService', 'billCreateNavHlpr', 'principal', 'AccountHttpService', '$uibModal', ctrlr];
+	return ['receiveBillAlerts', '$state', 'fbHlprPrvdr', 'twitterHlprPrvdr', 'spinnerService', 'billCreateNavHlpr', 'principal', 'BaAlertHttpService', '$uibModal', ctrlr];
 	
-	function ctrlr(receiveLowerBillAlerts, $state, fbHlprPrvdr, twitterHlprPrvdr, spinnerService, navHlpr, principal, AccountHttpService, $uibModal) {
+	function ctrlr(receiveBillAlerts, $state, fbHlprPrvdr, twitterHlprPrvdr, spinnerService, navHlpr, principal, BaAlertHttpService, $uibModal) {
 		var vm = this;
 		
 		// public variables
 		vm.serverErrs = [];
-		vm.ask = !receiveLowerBillAlerts;
+		vm.ask = !receiveBillAlerts;
 		
 		// public functions
 		vm.tweet = tweet;
@@ -19,7 +19,7 @@ define(['app/res/AppConsts'], function(appConsts) {
 		init();
 		
 		function init() {
-			vm.email = principal.getId().email;
+			vm.email = principal.getUserEmail();
 		}
 		
 		function tweet() {
@@ -44,7 +44,7 @@ define(['app/res/AppConsts'], function(appConsts) {
 			
 			spinnerService.show(appConsts.screenLoadingSpinner);
 			
-			AccountHttpService.billAlertRegister(vm.email).then(function(response) {
+			BaAlertHttpService.addDefaultAlert(vm.email).then(function(response) {
 				spinnerService.hide(appConsts.screenLoadingSpinner);
 				
 				if (response.data.resultCode === 1) {

@@ -95,11 +95,11 @@ define([
 			controllerAs : 'ctrlr',
 			resolve : {
 				authorize : authorizeResolve.authorize,
-				receiveLowerBillAlerts : ['$q', 'authorize', 'spinnerService', 'AccountHttpService', function($q, authorize, spinnerService, AccountHttpService) {
+				receiveBillAlerts : ['$q', 'authorize', 'spinnerService', 'BaAlertHttpService', function($q, authorize, spinnerService, BaAlertHttpService) {
 					spinnerService.show(appConsts.screenLoadingSpinner);
 					
 					var defer = $q.defer();
-					AccountHttpService.receiveLowerBillAlerts().then(function(result) {
+					BaAlertHttpService.receiveAlerts().then(function(result) {
 						spinnerService.hide(appConsts.screenLoadingSpinner);
 						
 						defer.resolve(result.data.result);

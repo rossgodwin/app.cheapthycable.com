@@ -3,18 +3,18 @@ define(['app/res/AppUris'], function(appUris) {
 	
 	function srvc($http) {
 		return {
-			receiveLowerBillAlerts : receiveLowerBillAlerts,
-			billAlertRegister : billAlertRegister
+			receiveAlerts : receiveAlerts,
+			addDefaultAlert : addDefaultAlert
 		};
 		
-		function receiveLowerBillAlerts() {
-			return $http.get(appUris.getRestUrl('/account/receiveLowerBillAlerts'), null);
+		function receiveAlerts() {
+			return $http.get(appUris.getRestUrl('/baAlert/receiveAlerts'), null);
 		}
 		
-		function billAlertRegister(email) {
+		function addDefaultAlert(email) {
 			return $http({
 			    method : 'POST',
-			    url : appUris.getRestUrl('/account/billAlertRegister'),
+			    url : appUris.getRestUrl('/baAlert/addDefaultAlert'),
 			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
 			    transformRequest : function(obj) {
 			        var str = [];

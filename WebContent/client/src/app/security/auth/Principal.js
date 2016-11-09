@@ -16,11 +16,21 @@ define([], function() {
 			isInAnyRole : isInAnyRole,
 			authenticate : authenticate,
 			identity : identity,
-			getId : getId
+			getId : getId,
+			getUserEmail : getUserEmail,
+			getUserAccountId : getUserAccountId
 		}
 		
 		function getId() {
 			return _identity;
+		}
+		
+		function getUserEmail() {
+			return _identity.email;
+		}
+		
+		function getUserAccountId() {
+			return _identity.account.id;
 		}
 		
 		function isIdentityResolved() {

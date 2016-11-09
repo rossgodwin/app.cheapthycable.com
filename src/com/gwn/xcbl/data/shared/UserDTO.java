@@ -11,6 +11,8 @@ public class UserDTO implements Serializable, ILongId {
 
 	private Long id = -1L;
 	
+	private AccountDTO account;
+	
 	private String username;
 	
 	private UserRole role;
@@ -23,6 +25,14 @@ public class UserDTO implements Serializable, ILongId {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public AccountDTO getAccount() {
+		return account;
+	}
+
+	public void setAccount(AccountDTO account) {
+		this.account = account;
 	}
 
 	public String getUsername() {

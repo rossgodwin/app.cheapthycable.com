@@ -25,11 +25,11 @@ import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.data.model.AuthenticationException;
 import com.gwn.xcbl.data.shared.ResponseDTO;
 
-@Path("/account")
-public class AccountRS extends BaseRS {
+@Path("/baAlert")
+public class BaAlertRS extends BaseRS {
 
 	@GET
-	@Path("/receiveLowerBillAlerts")
+	@Path("/receiveAlerts")
 	@Produces({MediaType.APPLICATION_JSON})
 	public Response receiveLowerBillAlerts(
 			@Context HttpServletRequest httpRequest) {
@@ -48,9 +48,9 @@ public class AccountRS extends BaseRS {
 	}
 	
 	@POST
-	@Path("/billAlertRegister")
+	@Path("/addDefaultAlert")
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response billAlertRegister(
+	public Response addDefaultAlert(
 			@FormParam("email") String email,
 			@Context HttpServletRequest httpRequest) {
 		try {
@@ -70,8 +70,6 @@ public class AccountRS extends BaseRS {
 					HibernateUtil.getSessionFactory().getCurrentSession().update(user);
 				}
 				
-//				AccountHelper.setReceiveBillAlerts(user.getAccount());
-//				HibernateUtil.getSessionFactory().getCurrentSession().update(user.getAccount());
 				BaAlertHelper.addDefaultAlert(user.getAccount());
 				
 				response = new ResponseDTO<Void>(ResponseDTO.RESULT_OK);
