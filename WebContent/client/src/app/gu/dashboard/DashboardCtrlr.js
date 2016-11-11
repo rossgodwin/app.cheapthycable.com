@@ -15,6 +15,7 @@ define(['app/res/AppUris'], function(appUris) {
 		vm.stateGo = stateGo;
 		vm.onMyBillsSelect = onMyBillsSelect;
 		vm.onBillExplorerSelect = onBillExplorerSelect;
+		vm.onSettingsSelect = onSettingsSelect;
 		vm.redirectToFb = redirectToFb;
 		vm.redirectToTwitter = redirectToTwitter;
 		vm.logout = logout;
@@ -44,6 +45,10 @@ define(['app/res/AppUris'], function(appUris) {
 					}
 				}
 			});
+		}
+		
+		function onSettingsSelect() {
+			stateGo('app.gu.settings');
 		}
 		
 		function redirectToFb() {

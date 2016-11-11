@@ -8,11 +8,14 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
@@ -22,8 +25,13 @@ import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.dao.ba.BaAlertDAOImpl;
 import com.gwn.xcbl.data.hibernate.entity.User;
+import com.gwn.xcbl.data.hibernate.entity.ba.BaAlert;
 import com.gwn.xcbl.data.model.AuthenticationException;
+import com.gwn.xcbl.data.shared.PagingResultDTO;
+import com.gwn.xcbl.data.shared.ReqParams;
 import com.gwn.xcbl.data.shared.ResponseDTO;
+import com.gwn.xcbl.data.shared.ba.BaAlertDTO;
+import com.gwn.xcbl.data.transformer.ba.BaAlertDtoTransformer;
 
 @Path("/baAlert")
 public class BaAlertRS extends BaseRS {
@@ -79,6 +87,52 @@ public class BaAlertRS extends BaseRS {
 			}
 			
 			String json = new Gson().toJson(response);
+			return Response.ok(json, MediaType.APPLICATION_JSON).build();
+		} catch (AuthenticationException e) {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		}
+	}
+	
+	@GET
+	@Path("/my/list/page")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response getMyAlertListPage(
+			@QueryParam(ReqParams.PARAM0) Integer offset,
+			@QueryParam(ReqParams.PARAM1) Integer limit,
+			@Context HttpServletRequest httpRequest) {
+		try {
+			long accountId = getAuthAccountId(httpRequest);
+			
+			List<BaAlert> objs = DAOFactory.getInstance().getBaAlertDAO().findAccountAlerts(accountId, offset, limit);
+			int total = DAOFactory.getInstance().getBaAlertDAO().countAccountAlerts(accountId);
+			List<BaAlertDTO> dtos = (List<BaAlertDTO>) CollectionUtils.collect(objs, new BaAlertDtoTransformer());
+			
+			ResponseDTO<PagingResultDTO<BaAlertDTO>> response = new ResponseDTO<PagingResultDTO<BaAlertDTO>>(new PagingResultDTO<>(offset, limit, total, dtos));
+			String json = new Gson().toJson(response);
+			
+			return Response.ok(json, MediaType.APPLICATION_JSON).build();
+		} catch (AuthenticationException e) {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		}
+	}
+	
+	@POST
+	@Path("/{alertId}/delete")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response deleteAlert(
+			@PathParam("alertId") Long alertId,
+			@Context HttpServletRequest httpRequest) {
+		try {
+			authenticate(httpRequest);
+			
+			// TODO create facade to validate user has permission to delete alert
+			BaAlert dbo = DAOFactory.getInstance().getBaAlertDAO().findById(alertId, false);
+			
+			HibernateUtil.getSessionFactory().getCurrentSession().delete(dbo);
+			
+			ResponseDTO<Void> response = new ResponseDTO<Void>(ResponseDTO.RESULT_OK);
+			String json = new Gson().toJson(response);
+			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
 		} catch (AuthenticationException e) {
 			return Response.status(Response.Status.UNAUTHORIZED).build();

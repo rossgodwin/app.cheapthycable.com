@@ -23,6 +23,9 @@ WebContent\WEB-INF\templates\emails
 
 ## Client
 
+### Icons
+https://icomoon.io/app
+
 ### Resources
 https://cdnjs.com/libraries
 

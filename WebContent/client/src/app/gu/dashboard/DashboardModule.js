@@ -1,11 +1,12 @@
 define([
 	'app/gu/dashboard/DashboardCtrlr',
-	'app/gu/dashboard/bill/BillModule'
+	'app/gu/dashboard/bill/BillModule',
+	'app/gu/dashboard/settings/SettingsModule'
 ], function(
 	DashboardCtrlr,
-	BillModule
-) {
-	var module = angular.module('app.gu.dashboard', ['app.gu.dashboard.bill']);
+	BillModule,
+	SettingsModule) {
+	var module = angular.module('app.gu.dashboard', ['app.gu.dashboard.bill', 'app.gu.dashboard.settings']);
 	
 	module.controller('GuDashboardCtrlr', DashboardCtrlr);
 	

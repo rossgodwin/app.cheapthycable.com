@@ -13,8 +13,6 @@ import com.gwn.xcbl.bl.mail.data.model.Email;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.dao.EnvironmentDAOImpl;
-import com.gwn.xcbl.data.hibernate.dao.ba.BaAlertDAOImpl;
-import com.gwn.xcbl.data.hibernate.dao.ba.BaDAOImpl;
 import com.gwn.xcbl.data.hibernate.entity.Environment;
 import com.gwn.xcbl.data.hibernate.entity.ba.BaAlert;
 import com.gwn.xcbl.data.hibernate.entity.bill.Bill;
@@ -47,7 +45,7 @@ public class BaEmailRun implements Runnable {
 		LocalDateTime currentDate = LocalDateTime.now();
 		boolean eval = true;
 		do {
-			List<BaAlert> alerts = new BaAlertDAOImpl().findAlertsToSend(currentDate, 0, 1);
+			List<BaAlert> alerts = new BaEmailDAO().findAlertsToSend(currentDate, 0, 1);
 			if (alerts.size() > 0) {
 				Collection<Long> alertIds = ILongId.Utils.getIds(alerts);
 				for (Long alertId : alertIds) {
@@ -62,7 +60,7 @@ public class BaEmailRun implements Runnable {
 	private void emailAlert(long alertId) {
 		BaAlert alert = DAOFactory.getInstance().getBaAlertDAO().findById(alertId, true);
 		
-		List<Bill> bills = new BaDAOImpl().findAlertBills(alert, 0, 5);
+		List<Bill> bills = new BaEmailDAO().findAlertBills(alert, 0, 5);
 		if (bills.size() > 0) {
 			try {
 				Email email = new BaEmailBuilder(servletCtx).buildEmail(alert.getAccount(), bills);

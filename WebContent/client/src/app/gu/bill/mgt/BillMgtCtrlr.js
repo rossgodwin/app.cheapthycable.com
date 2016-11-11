@@ -1,4 +1,4 @@
-define(['app/res/AppConsts'], function(consts) {
+define(['app/res/AppConsts'], function(appConsts) {
 	return ['newBillStateName', '$state', 'BillHttpService', 'spinnerService', '$uibModal', ctrlr];
 	
 	function ctrlr(newBillStateName, $state, BillHttpService, spinnerService, $uibModal) {
@@ -16,7 +16,7 @@ define(['app/res/AppConsts'], function(consts) {
 		init();
 		
 		function init() {
-			spinnerService.show(consts.screenLoadingSpinner);
+			spinnerService.show(appConsts.screenLoadingSpinner);
 			loadBills();
 		}
 		
@@ -31,7 +31,7 @@ define(['app/res/AppConsts'], function(consts) {
 		function loadBills() {
 			BillHttpService.getMyBillsList().then(function(bills) {
 				vm.bills = bills;
-				spinnerService.hide(consts.screenLoadingSpinner);
+				spinnerService.hide(appConsts.screenLoadingSpinner);
 			})
 		}
 		
@@ -62,7 +62,7 @@ define(['app/res/AppConsts'], function(consts) {
 			});
 			
 			modal.result.then(function() {
-				spinnerService.show(consts.screenLoadingSpinner);
+				spinnerService.show(appConsts.screenLoadingSpinner);
 				BillHttpService.deleteBill(billId).then(function() {
 					loadBills();
 				})

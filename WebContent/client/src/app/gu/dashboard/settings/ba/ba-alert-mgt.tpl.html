@@ -1,0 +1,44 @@
+<app-titlebar-0 titlebar-text="ctrlr.titlebarText" titlebar-back="ctrlr.titlebarBack()"></app-titlebar-0>
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-1"></div>
+		<div class="col-lg-10 col-xs-12">
+			<div style="margin-bottom: 10px;">
+				<button type="button" class="btn btn-brand btn-brand-primary btn-md" ng-click="ctrlr.addAlert()">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Alert
+				</button>
+			</div>
+			<div class="panel panel-default">
+				<span ng-if="ctrlr.bills.length == 0">No Alerts</span>
+				<div class="panel-body">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Frequency</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="obj in ctrlr.objs">
+								<td>{{obj.receiveEmailFrequencyDays}} Days</td>
+								<td>
+									<button type="button" class="btn btn-default" aria-label="Delete" ng-click="ctrlr.deleteAlert(obj)">
+										<span class="glyphicon icon-cross" aria-hidden="true"></span>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer"
+					ng-if="ctrlr.objsPageNumbers.length > 1">
+					<app-pagination current-page-number="ctrlr.objsCurrentPage"
+						page-numbers="ctrlr.objsPageNumbers"
+						total-pages="ctrlr.objsTotalPages"
+						set-page="ctrlr.setObjsPage"></app-pagination>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-1"></div>
+	</div>
+</div>
