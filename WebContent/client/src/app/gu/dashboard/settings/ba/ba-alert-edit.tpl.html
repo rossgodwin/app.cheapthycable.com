@@ -4,20 +4,29 @@
 	<div class="row">
 		<div class="col-lg-4 col-sm-3"></div>
 		<div class="col-lg-4 col-sm-6">
-			<div class="form-group form-inline">
+			<div class="alert alert-danger" role="alert" ng-if="ctrlr.errs.length > 0">
+				<table>
+					<tr>
+						<td style="vertical-align: top; padding-right: 5px;"><strong>Whoops:</strong></td>
+						<td><div ng-repeat="err in ctrlr.errs">{{err}}</div></td>
+					</tr>
+				</table>
+			</div>
+			
+			<!--<div class="form-group form-inline">
 				<label>Receive Email:</label>
 				<div class="input-group">
-					<toggle-switch ng-model="ctrlr.receiveEmail" on-label="Yes" off-label="No"></toggle-switch>
+					<toggle-switch ng-model="ctrlr.model.receiveEmail" on-label="Yes" off-label="No"></toggle-switch>
 				</div>
-			</div>
+			</div>-->
 			
 			<div class="form-group form-inline">
 				<label>Receive Frequency?</label>
 				<div class="input-group">
 					<div class="btn-group" uib-dropdown>
-						<button type="button" class="btn btn-default" uib-dropdown-toggle>{{ctrlr.receiveEmailFrequencyDays}} <span class="caret"></span></button>
+						<button type="button" class="btn btn-default" uib-dropdown-toggle>{{ctrlr.model.receiveEmailFrequencyDays}} <span class="caret"></span></button>
 						<ul class="dropdown-menu" uib-dropdown-menu>
-							<li><a ng-click="ctrlr.receiveEmailFrequencyDays = frequencyDayOption" ng-repeat="frequencyDayOption in ctrlr.frequencyDayOptions">{{frequencyDayOption}}</a></li>
+							<li><a ng-click="ctrlr.model.receiveEmailFrequencyDays = frequencyDayOption" ng-repeat="frequencyDayOption in ctrlr.frequencyDayOptions">{{frequencyDayOption}}</a></li>
 						</ul>
 						<div class="input-group-addon">Days</div>
 					</div>
@@ -28,9 +37,9 @@
 				<label>Mile Radius?</label>
 				<div class="input-group">
 					<div class="btn-group" uib-dropdown>
-						<button type="button" class="btn btn-default" uib-dropdown-toggle>{{ctrlr.critrMileRadius}} <span class="caret"></span></button>
+						<button type="button" class="btn btn-default" uib-dropdown-toggle>{{ctrlr.model.critrMileRadius}} <span class="caret"></span></button>
 						<ul class="dropdown-menu" uib-dropdown-menu>
-							<li><a ng-click="ctrlr.critrMileRadius = mileRadiusOption" ng-repeat="mileRadiusOption in ctrlr.mileRadiusOptions">{{mileRadiusOption}}</a></li>
+							<li><a ng-click="ctrlr.model.critrMileRadius = mileRadiusOption" ng-repeat="mileRadiusOption in ctrlr.mileRadiusOptions">{{mileRadiusOption}}</a></li>
 						</ul>
 						<div class="input-group-addon">Miles</div>
 					</div>
@@ -41,12 +50,12 @@
 				<label>Amount Below:</label>
 				<div class="input-group">
 					<div class="input-group-addon">$</div>
-					<input type="text" name="critrAmountBelow" class="form-control" ng-model="ctrlr.critrAmountBelow" placeholder="0.00" ng-currency min="0" fraction="2">
+					<input type="text" name="amountBelow" class="form-control" ng-model="ctrlr.model.critrAmountBelow" placeholder="0.00" ng-currency min="0" fraction="2">
 				</div>
 			</div>
 			
 			<div style="text-align: center;">
-				<button class="btn btn-brand btn-brand-primary" ng-click="ctrlr.finish()">Save</button>
+				<button class="btn btn-brand btn-brand-primary" ng-click="ctrlr.save()">Save</button>
 			</div>
 		</div>
 		<div class="col-lg-4 col-sm-3"></div>

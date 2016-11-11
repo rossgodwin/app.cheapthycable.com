@@ -3,14 +3,15 @@ define(['app/res/AppUris'], function(appUris) {
 	
 	function srvc($http) {
 		return {
-			receiveAlerts : receiveAlerts,
+			hasAlert : hasAlert,
 			addDefaultAlert : addDefaultAlert,
 			getMyAlertListPage : getMyAlertListPage,
-			deleteAlert : deleteAlert
+			deleteAlert : deleteAlert,
+			saveOrUpdateAlert : saveOrUpdateAlert
 		};
 		
-		function receiveAlerts() {
-			return $http.get(appUris.getRestUrl('/baAlert/receiveAlerts'), null);
+		function hasAlert() {
+			return $http.get(appUris.getRestUrl('/baAlert/hasAlert'), null);
 		}
 		
 		function addDefaultAlert(email) {
@@ -51,6 +52,24 @@ define(['app/res/AppUris'], function(appUris) {
 			        	str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
 			        }
 			        return str.join("&");
+			    }
+			});
+		}
+		
+		function saveOrUpdateAlert(obj) {
+			return $http({
+			    method : 'POST',
+			    url : appUris.getRestUrl('/baAlert/saveOrUpdate'),
+			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
+			    transformRequest : function(obj) {
+			        var str = [];
+			        for (var p in obj) {
+			        	str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+			        }
+			        return str.join("&");
+			    },
+			    data : {
+			    	p0 : JSON.stringify(obj)
 			    }
 			});
 		}

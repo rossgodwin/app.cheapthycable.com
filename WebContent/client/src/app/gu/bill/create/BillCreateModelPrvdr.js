@@ -45,12 +45,6 @@ define([], function() {
 				geoZipCode = null;
 			}
 			
-//			return function() {
-//				defaultModel.reset();
-//				geoZipCode = null;
-//				return model;
-//			};
-			
 			function getServices() {
 				var r = [];
 				if (model.internetService) {

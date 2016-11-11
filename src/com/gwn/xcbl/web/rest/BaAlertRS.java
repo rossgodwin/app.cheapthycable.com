@@ -24,9 +24,11 @@ import com.gwn.xcbl.common.UserPrincipal;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.dao.ba.BaAlertDAOImpl;
+import com.gwn.xcbl.data.hibernate.entity.Account;
 import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.data.hibernate.entity.ba.BaAlert;
 import com.gwn.xcbl.data.model.AuthenticationException;
+import com.gwn.xcbl.data.shared.ILongId;
 import com.gwn.xcbl.data.shared.PagingResultDTO;
 import com.gwn.xcbl.data.shared.ReqParams;
 import com.gwn.xcbl.data.shared.ResponseDTO;
@@ -37,9 +39,9 @@ import com.gwn.xcbl.data.transformer.ba.BaAlertDtoTransformer;
 public class BaAlertRS extends BaseRS {
 
 	@GET
-	@Path("/receiveAlerts")
+	@Path("/hasAlert")
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response receiveLowerBillAlerts(
+	public Response hasAlert(
 			@Context HttpServletRequest httpRequest) {
 		try {
 			long accountId = getAuthAccountId(httpRequest);
@@ -131,6 +133,34 @@ public class BaAlertRS extends BaseRS {
 			HibernateUtil.getSessionFactory().getCurrentSession().delete(dbo);
 			
 			ResponseDTO<Void> response = new ResponseDTO<Void>(ResponseDTO.RESULT_OK);
+			String json = new Gson().toJson(response);
+			
+			return Response.ok(json, MediaType.APPLICATION_JSON).build();
+		} catch (AuthenticationException e) {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		}
+	}
+	
+	@POST
+	@Path("/saveOrUpdate")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response saveOrUpdateAlert(
+			@FormParam(ReqParams.PARAM0) String alertJson,
+			@Context HttpServletRequest httpRequest) {
+		try {
+			long accountId = getAuthAccountId(httpRequest);
+			
+			Account account = DAOFactory.getInstance().getAccountDAO().findById(accountId, true);
+			
+			BaAlertDTO dto = new Gson().fromJson(alertJson, BaAlertDTO.class);
+			
+			if (!ILongId.Utils.isPersistent(dto)) {
+				BaAlertHelper.save(account, dto);
+			} else {
+				// TODO handle update
+			}
+			
+			ResponseDTO<BaAlertDTO> response = new ResponseDTO<BaAlertDTO>(dto);
 			String json = new Gson().toJson(response);
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();

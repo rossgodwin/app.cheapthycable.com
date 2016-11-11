@@ -1,10 +1,14 @@
 define([
+	'app/gu/dashboard/settings/ba/BaAlertModelPrvdr',
 	'app/gu/dashboard/settings/ba/BaAlertMgtCtrlr',
 	'app/gu/dashboard/settings/ba/BaAlertEditCtrlr'
 ], function(
+	BaAlertModelPrvdr,
 	BaAlertMgtCtrlr,
 	BaAlertEditCtrlr) {
 	var module = angular.module('app.gu.dashboard.ba', []);
+	
+	module.provider('baAlertModel', BaAlertModelPrvdr);
 	
 	module.controller('BaAlertMgtCtrlr', BaAlertMgtCtrlr);
 	module.controller('BaAlertEditCtrlr', BaAlertEditCtrlr);

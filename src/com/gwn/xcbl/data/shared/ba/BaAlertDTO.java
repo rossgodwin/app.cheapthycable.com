@@ -3,8 +3,9 @@ package com.gwn.xcbl.data.shared.ba;
 import java.math.BigDecimal;
 
 import com.gwn.xcbl.data.shared.AccountDTO;
+import com.gwn.xcbl.data.shared.ILongId;
 
-public class BaAlertDTO {
+public class BaAlertDTO implements ILongId {
 
 	private Long id = -1L;
 	

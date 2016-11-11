@@ -99,7 +99,7 @@ define([
 					spinnerService.show(appConsts.screenLoadingSpinner);
 					
 					var defer = $q.defer();
-					BaAlertHttpService.receiveAlerts().then(function(result) {
+					BaAlertHttpService.hasAlert().then(function(result) {
 						spinnerService.hide(appConsts.screenLoadingSpinner);
 						
 						defer.resolve(result.data.result);
