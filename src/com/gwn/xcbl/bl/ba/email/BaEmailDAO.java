@@ -11,6 +11,7 @@ import org.hibernate.SQLQuery;
 
 import com.gwn.xcbl.bl.bill.BillHelper;
 import com.gwn.xcbl.data.entity.BillTableMetadata;
+import com.gwn.xcbl.data.entity.CurrentBillViewMetadata;
 import com.gwn.xcbl.data.entity.ba.BaAlertTableMetadata;
 import com.gwn.xcbl.data.hibernate.dao.BaseDAO;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
@@ -87,11 +88,11 @@ public class BaEmailDAO extends BaseDAO {
 	/**
 	 * Criteria:
 	 * <ul>
-	 * <li>bills that are not owned by the alert account</li>
-	 * <li>bills that are within the alert radius of the current bill zip code</li>
-	 * <li>bills that have been created since the last sent alert</li>
-	 * <li>bills that are similar i.e. services and options</li>
-	 * <li>bills whose total amount is less than the current bill total amount minus the alert amount below setting</li>
+	 * <li>current bills that are not owned by the alert account</li>
+	 * <li>current bills that are within the alert radius of the current bill zip code</li>
+	 * <li>current bills that have been created since the last sent alert</li>
+	 * <li>current bills that are similar i.e. services and options</li>
+	 * <li>current bills whose total amount is less than the current bill total amount minus the alert amount below setting</li>
 	 * </ul>
 	 * 	
 	 * @param alert
@@ -108,11 +109,10 @@ public class BaEmailDAO extends BaseDAO {
 		StringBuilder qsb = new StringBuilder();
 		Map<String, Object> params = new HashMap<>();
 		
-		qsb.append("from " + BillTableMetadata.TABLE_NAME + " b where 1 = 1");
+		qsb.append("from " + BillTableMetadata.TABLE_NAME + " b, " + CurrentBillViewMetadata.TABLE_NAME + " cb");
+		qsb.append(" where b." + BillTableMetadata.COL_ID + " = cb." + CurrentBillViewMetadata.COL_BILL_ID);
 		
 		BillSqueryUtils.appendAccountIdNotEqualsCritr("b", qsb, params, account.getId());
-		
-		// TODO criteria should only apply to their last bill rather than all bills on their account
 		
 		BillSqueryUtils.appendZipCodeRadiusCritr("b", qsb, currentBill.getGeoZipCode().getZipCode(), mileRadius);
 		if (lastSentAlert != null) {
