@@ -8,7 +8,7 @@ import com.gwn.xcbl.data.shared.ILongId;
 
 public interface BaAlertDAO extends GenericDAO<BaAlert, ILongId> {
 
-	public List<BaAlert> findAccountAlerts(long accountId, Integer offset, Integer limit);
+	public List<BaAlert> findSubscribedAlertsByAccount(long accountId, Integer offset, Integer limit);
 	
-	public int countAccountAlerts(long accountId);
+	public int countSubscribedAlertsByAccount(long accountId);
 }

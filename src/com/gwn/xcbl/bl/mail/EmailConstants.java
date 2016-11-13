@@ -1,5 +1,8 @@
 package com.gwn.xcbl.bl.mail;
 
+/**
+ * Careful modifying variables prefixed with VARIABLE_ as these are used in email templates (WebContent\WEB-INF\templates\emails)
+ */
 public interface EmailConstants {
 
 	public static final String PROPERTY_MG_API_BASE_URL = "https://api.mailgun.net/v3";
@@ -31,4 +34,6 @@ public interface EmailConstants {
 	
 	public static final String VARIABLE_BILL_COUNT = "billCount";
 	public static final String VARIABLE_BILLS = "bills";
+	
+	public static final String VARIABLE_BA_ALERT_UNSUBSCRIBE_URL = "unsubscribeUrl";
 }

@@ -105,8 +105,8 @@ public class BaAlertRS extends BaseRS {
 		try {
 			long accountId = getAuthAccountId(httpRequest);
 			
-			List<BaAlert> objs = DAOFactory.getInstance().getBaAlertDAO().findAccountAlerts(accountId, offset, limit);
-			int total = DAOFactory.getInstance().getBaAlertDAO().countAccountAlerts(accountId);
+			List<BaAlert> objs = DAOFactory.getInstance().getBaAlertDAO().findSubscribedAlertsByAccount(accountId, offset, limit);
+			int total = DAOFactory.getInstance().getBaAlertDAO().countSubscribedAlertsByAccount(accountId);
 			List<BaAlertDTO> dtos = (List<BaAlertDTO>) CollectionUtils.collect(objs, new BaAlertDtoTransformer());
 			
 			ResponseDTO<PagingResultDTO<BaAlertDTO>> response = new ResponseDTO<PagingResultDTO<BaAlertDTO>>(new PagingResultDTO<>(offset, limit, total, dtos));
@@ -119,18 +119,18 @@ public class BaAlertRS extends BaseRS {
 	}
 	
 	@POST
-	@Path("/{alertId}/delete")
+	@Path("/{alertId}/unsubscribe")
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response deleteAlert(
+	public Response alertUnsubscribe(
 			@PathParam("alertId") Long alertId,
 			@Context HttpServletRequest httpRequest) {
 		try {
 			authenticate(httpRequest);
 			
-			// TODO create facade to validate user has permission to delete alert
 			BaAlert dbo = DAOFactory.getInstance().getBaAlertDAO().findById(alertId, false);
+			dbo.setUnsubscribed(true);
 			
-			HibernateUtil.getSessionFactory().getCurrentSession().delete(dbo);
+			HibernateUtil.getSessionFactory().getCurrentSession().update(dbo);
 			
 			ResponseDTO<Void> response = new ResponseDTO<Void>(ResponseDTO.RESULT_OK);
 			String json = new Gson().toJson(response);

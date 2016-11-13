@@ -11,13 +11,13 @@ public class BaAlertDTO implements ILongId {
 	
 	private AccountDTO account;
 	
-	private boolean receiveEmail;
-	
 	private Integer receiveEmailFrequencyDays;
 	
 	private Double critrMileRadius;
 	
 	private BigDecimal critrAmountBelow;
+	
+	private boolean unsubscribed;
 	
 	public BaAlertDTO() {
 	}
@@ -36,14 +36,6 @@ public class BaAlertDTO implements ILongId {
 
 	public void setAccount(AccountDTO account) {
 		this.account = account;
-	}
-
-	public boolean isReceiveEmail() {
-		return receiveEmail;
-	}
-
-	public void setReceiveEmail(boolean receiveEmail) {
-		this.receiveEmail = receiveEmail;
 	}
 
 	public Integer getReceiveEmailFrequencyDays() {
@@ -68,5 +60,13 @@ public class BaAlertDTO implements ILongId {
 
 	public void setCritrAmountBelow(BigDecimal critrAmountBelow) {
 		this.critrAmountBelow = critrAmountBelow;
+	}
+
+	public boolean isUnsubscribed() {
+		return unsubscribed;
+	}
+
+	public void setUnsubscribed(boolean unsubscribed) {
+		this.unsubscribed = unsubscribed;
 	}
 }

@@ -7,10 +7,10 @@ define([], function() {
 		function model() {
 			var model = {};
 			var defaultModel = {
-				receiveEmail : true,
 				receiveEmailFrequencyDays : 14,
 				critrMileRadius : 75,
 				critrAmountBelow : 50,
+				unsubscribed : false,
 				reset : reset
 			};
 			

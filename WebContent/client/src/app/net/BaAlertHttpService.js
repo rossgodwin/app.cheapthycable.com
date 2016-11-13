@@ -6,7 +6,7 @@ define(['app/res/AppUris'], function(appUris) {
 			hasAlert : hasAlert,
 			addDefaultAlert : addDefaultAlert,
 			getMyAlertListPage : getMyAlertListPage,
-			deleteAlert : deleteAlert,
+			alertUnsubscribe : alertUnsubscribe,
 			saveOrUpdateAlert : saveOrUpdateAlert
 		};
 		
@@ -41,10 +41,10 @@ define(['app/res/AppUris'], function(appUris) {
 			})
 		}
 		
-		function deleteAlert(alertId) {
+		function alertUnsubscribe(alertId) {
 			return $http({
 			    method : 'POST',
-			    url : appUris.getRestUrl('/baAlert/' + alertId + '/delete'),
+			    url : appUris.getRestUrl('/baAlert/' + alertId + '/unsubscribe'),
 			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
 			    transformRequest : function(obj) {
 			        var str = [];

@@ -24,6 +24,14 @@
     <url-pattern>/srv/*</url-pattern>
   </filter-mapping>
   <servlet>
+    <servlet-name>BaAlertUnsubscribe</servlet-name>
+    <servlet-class>com.gwn.xcbl.web.servlet.BaAlertUnsubscribeSrvlt</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BaAlertUnsubscribe</servlet-name>
+    <url-pattern>/srv/BaAlertUnsubscribe</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>SignupVerify</servlet-name>
     <servlet-class>com.gwn.xcbl.web.servlet.SignupVerifySrvlt</servlet-class>
   </servlet>

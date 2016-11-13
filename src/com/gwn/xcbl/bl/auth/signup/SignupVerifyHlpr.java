@@ -26,8 +26,8 @@ public class SignupVerifyHlpr {
 
 	public static String getVerifyUrl(HttpServletRequest httpRequest, User user) throws URISyntaxException {
 		String baseUrl = HttpServletRequestHelper.getServerContextPath(httpRequest).toString();
-		URIBuilder bldr = new URIBuilder(baseUrl + "/" + SignupVerifyUrlIntf.URL);
-		bldr.setParameters(SignupVerifyUrlIntf.Util.getParams(user));
+		URIBuilder bldr = new URIBuilder(baseUrl + "/" + SignupVerifySrvltIntf.URL);
+		bldr.setParameters(SignupVerifySrvltIntf.Util.getParams(user));
 		String rslt = bldr.toString();
 		return rslt;
 	}

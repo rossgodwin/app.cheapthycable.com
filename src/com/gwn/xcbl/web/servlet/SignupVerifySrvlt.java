@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gwn.xcbl.bl.auth.signup.SignupHelper;
 import com.gwn.xcbl.bl.auth.signup.SignupVerifiedUrlIntf;
-import com.gwn.xcbl.bl.auth.signup.SignupVerifyUrlIntf;
+import com.gwn.xcbl.bl.auth.signup.SignupVerifySrvltIntf;
 import com.gwn.xcbl.bl.mail.Emailer;
 import com.gwn.xcbl.bl.mail.data.model.Email;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
@@ -22,7 +22,7 @@ import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.web.HttpServletRequestHelper;
 
-public class SignupVerifySrvlt extends HttpServlet implements SignupVerifyUrlIntf {
+public class SignupVerifySrvlt extends HttpServlet implements SignupVerifySrvltIntf {
 
 	/**
 	 * 

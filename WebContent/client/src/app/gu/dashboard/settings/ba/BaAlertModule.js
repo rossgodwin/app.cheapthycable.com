@@ -35,7 +35,7 @@ define([
 		})
 		.state('app.gu.ba.add', {
 			params : {
-				titlebarText : 'Alert - Add'
+				titlebarText : 'Add Alert'
 			},
 			url : '/add',
 			templateUrl : 'client/src/app/gu/dashboard/settings/ba/ba-alert-edit.tpl.html',

@@ -7,6 +7,7 @@
 	twitterHomePageUrl
 	fbHomePageUrl
 	productUrl
+	unsubscribeUrl
  -->
 <!DOCTYPE html>
 <html>
@@ -70,6 +71,11 @@
 						<br/>
 						<a th:href="@{${productUrl}}">[[${productName}]]</a>
 					</p>
+				</td>
+			</tr>
+			<tr>
+				<td style="background-color: #f0f0f0; text-align: center;">
+					<span style="font-size: .75em;"><a th:href="@{${unsubscribeUrl}}" target="_blank">Unsubscribe</a> from this alert</span>
 				</td>
 			</tr>
 		</table>

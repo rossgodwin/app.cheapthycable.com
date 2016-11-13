@@ -8,9 +8,11 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.http.client.utils.URIBuilder;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import com.gwn.xcbl.bl.ba.BaAlertUnsubscribeSrvltIntf;
 import com.gwn.xcbl.bl.mail.EmailConstants;
 import com.gwn.xcbl.bl.mail.EmailFromAddressFactory;
 import com.gwn.xcbl.bl.mail.data.model.Email;
@@ -21,6 +23,7 @@ import com.gwn.xcbl.common.AppConstants;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.entity.Account;
 import com.gwn.xcbl.data.hibernate.entity.User;
+import com.gwn.xcbl.data.hibernate.entity.ba.BaAlert;
 import com.gwn.xcbl.data.hibernate.entity.bill.Bill;
 import com.gwn.xcbl.data.model.AppData;
 import com.gwn.xcbl.web.AppServletContextUtils;
@@ -33,15 +36,9 @@ public class BaEmailBuilder {
 		this.servletCtx = servletCtx;
 	}
 	
-	/**
-	 * TODO add email opt out
-	 * 
-	 * @param account
-	 * @param bills
-	 * @return
-	 * @throws URISyntaxException
-	 */
-	public Email buildEmail(Account account, List<Bill> bills) throws URISyntaxException {
+	public Email buildEmail(BaAlert alert, List<Bill> bills) throws URISyntaxException {
+		Account account = alert.getAccount();
+		
 		TemplateEngine engine = TlfUtils.getTemplateEngine(servletCtx);
 		
 		String logoRealPath = AppServletContextUtils.getLogoRealPath(servletCtx);
@@ -57,6 +54,7 @@ public class BaEmailBuilder {
 		ctx.setVariable(EmailConstants.VARIABLE_TWITTER_HOME_PAGE_URL, AppConstants.TWITTER_HOME_PAGE_URL);
 		ctx.setVariable(EmailConstants.VARIABLE_FB_HOME_PAGE_URL, AppConstants.FB_HOME_PAGE_URL);
 		ctx.setVariable(EmailConstants.VARIABLE_PRODUCT_URL, AppData.getInstance().getDomainUrl());
+		ctx.setVariable(EmailConstants.VARIABLE_BA_ALERT_UNSUBSCRIBE_URL, getUnsubscribeUrl(alert));
 		
 		String htmlContent = engine.process("emails/bill-alert.html", ctx);
 		
@@ -68,5 +66,12 @@ public class BaEmailBuilder {
 		email.setLogoBodyPart(new EmailBodyPart("inline", logoRealPath, MediaType.APPLICATION_OCTET_STREAM_TYPE));
 		
 		return email;
+	}
+	
+	private static String getUnsubscribeUrl(BaAlert alert) throws URISyntaxException {
+		URIBuilder bldr = new URIBuilder(AppData.getInstance().getDomainUrl() + "/" + BaAlertUnsubscribeSrvltIntf.URL);
+		bldr.setParameters(BaAlertUnsubscribeSrvltIntf.Util.getParams(alert));
+		String rslt = bldr.toString();
+		return rslt;
 	}
 }

@@ -21,12 +21,15 @@
 							</tr>
 						</thead>
 						<tbody>
+							<tr ng-if="ctrlr.objs.length == 0">
+								<td colspan="3">No alerts</td>
+							</tr>
 							<tr ng-repeat="obj in ctrlr.objs">
 								<td><span style="font-size: .85em;">{{obj.receiveEmailFrequencyDays}} Days</span></td>
 								<td><span style="font-size: .85em;">{{obj.critrMileRadius}} Miles</span></td>
 								<td><span style="font-size: .85em;">{{obj.critrAmountBelow | currency}}</span></td>
 								<td>
-									<button type="button" class="btn btn-default" aria-label="Delete" ng-click="ctrlr.deleteAlert(obj)">
+									<button type="button" class="btn btn-default" aria-label="Delete" ng-click="ctrlr.alertUnsubscribe(obj)">
 										<span class="glyphicon icon-cross" aria-hidden="true"></span>
 									</button>
 								</td>

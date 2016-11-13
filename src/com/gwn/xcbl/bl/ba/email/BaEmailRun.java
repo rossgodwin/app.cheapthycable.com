@@ -43,18 +43,20 @@ public class BaEmailRun implements Runnable {
 	
 	private void emailAlerts() {
 		LocalDateTime currentDate = LocalDateTime.now();
-		boolean eval = true;
+		int ofst = 0;
+		int lmt = 1;
 		do {
-			List<BaAlert> alerts = new BaEmailDAO().findAlertsToSend(currentDate, 0, 1);
+			List<BaAlert> alerts = new BaEmailDAO().findAlertsToSend(currentDate, ofst, lmt);
 			if (alerts.size() > 0) {
 				Collection<Long> alertIds = ILongId.Utils.getIds(alerts);
 				for (Long alertId : alertIds) {
 					emailAlert(alertId);
 				}
+				ofst = ofst + lmt;
 			} else {
-				eval = false;
+				break;
 			}
-		} while (eval);
+		} while (true);
 	}
 	
 	private void emailAlert(long alertId) {
@@ -63,7 +65,7 @@ public class BaEmailRun implements Runnable {
 		List<Bill> bills = new BaEmailDAO().findAlertBills(alert, 0, 5);
 		if (bills.size() > 0) {
 			try {
-				Email email = new BaEmailBuilder(servletCtx).buildEmail(alert.getAccount(), bills);
+				Email email = new BaEmailBuilder(servletCtx).buildEmail(alert, bills);
 				Emailer.sendEmail(email);
 				BaAlertSentLogHelper.logSentAlert(alert);
 				HibernateUtil.commit();

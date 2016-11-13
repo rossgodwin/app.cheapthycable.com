@@ -33,8 +33,8 @@ public class BaAlertDAOImpl extends GenericHibernateDAO<BaAlert, ILongId> implem
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<BaAlert> findAccountAlerts(long accountId, Integer offset, Integer limit) {
-		QueryComposite qc = findAccountAlertsQuery(accountId, true);
+	public List<BaAlert> findSubscribedAlertsByAccount(long accountId, Integer offset, Integer limit) {
+		QueryComposite qc = findSubscribedAlertsByAccountQuery(accountId, true);
 		Query q = getSession().createQuery(qc.getQueryString());
 		DAOUtils.applyParameters(q, qc.getParams());
 		DAOUtils.applyPaging(q, offset, limit);
@@ -43,20 +43,22 @@ public class BaAlertDAOImpl extends GenericHibernateDAO<BaAlert, ILongId> implem
 	}
 	
 	@Override
-	public int countAccountAlerts(long accountId) {
-		QueryComposite qc = findAccountAlertsQuery(accountId, true);
+	public int countSubscribedAlertsByAccount(long accountId) {
+		QueryComposite qc = findSubscribedAlertsByAccountQuery(accountId, true);
 		Query q = getSession().createQuery("select count(*) " + qc.getQueryString());
 		DAOUtils.applyParameters(q, qc.getParams());
 		Number count = (Number)q.uniqueResult();
 		return count.intValue();
 	}
 	
-	private QueryComposite findAccountAlertsQuery(long accountId, boolean orderBy) {
+	private QueryComposite findSubscribedAlertsByAccountQuery(long accountId, boolean orderBy) {
 		StringBuilder qsb = new StringBuilder();
 		Map<String, Object> params = new HashMap<>();
 		
 		qsb.append("from " + BaAlert.class.getSimpleName() + " a where 1 = 1");
 		AccountHqueryUtils.appendIdEqualsCritr("a.account", qsb, params, accountId);
+		qsb.append(" and a.unsubscribed = :unsubscribed");
+		params.put("unsubscribed", false);
 		
 		if (orderBy) {
 			qsb.append(" ").append(new QueryOrderByBuilder().addKeyword().addOrderBy("a.id", SortOrder.DESC).asString());

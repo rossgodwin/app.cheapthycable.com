@@ -22,7 +22,7 @@ define([
 		vm.addAlert = addAlert;
 		vm.setObjsPage = setObjsPage;
 		vm.titlebarBack = back;
-		vm.deleteAlert = deleteAlert;
+		vm.alertUnsubscribe = alertUnsubscribe;
 		
 		init();
 		
@@ -60,11 +60,11 @@ define([
 			});
 		}
 		
-		function deleteAlert(alert) {
-			confirmDelete(alert.id);
+		function alertUnsubscribe(alert) {
+			confirmUnsubscribe(alert.id);
 		}
 		
-		function confirmDelete(alertId) {
+		function confirmUnsubscribe(alertId) {
 			var modal = $uibModal.open({
 				templateUrl : 'client/src/app/widget/modal/yes-no.modal.tpl.html',
 				controller : 'YesNoModalCtrlr',
@@ -72,10 +72,10 @@ define([
 				size : 'sm',
 				resolve : {
 					title : function() {
-						return "Confirm Delete";
+						return "Confirm Unsubscribe";
 					},
 					message : function() {
-						return "Are you sure you want to delete this alert?";
+						return "Are you sure you want to unsubscribe from this alert?";
 					},
 					yesButtonText : function() {
 						return "Ok";
@@ -88,7 +88,7 @@ define([
 			
 			modal.result.then(function() {
 				spinnerService.show(appConsts.screenLoadingSpinner);
-				BaAlertHttpService.deleteAlert(alertId).then(function() {
+				BaAlertHttpService.alertUnsubscribe(alertId).then(function() {
 					setObjsPage(1);
 				})
 			});

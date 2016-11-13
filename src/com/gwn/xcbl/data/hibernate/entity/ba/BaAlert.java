@@ -29,10 +29,6 @@ public class BaAlert implements ILongId {
 	@JoinColumn(name = BaAlertTableMetadata.COL_ACCOUNT_ID, nullable = false)
 	private Account account;
 	
-	@Column(name = BaAlertTableMetadata.COL_RECEIVE_EMAIL, nullable = false)
-	@Type(type = "org.hibernate.type.NumericBooleanType")
-	private boolean receiveEmail;
-	
 	@Column(name = BaAlertTableMetadata.COL_RECEIVE_EMAIL_FREQUENCY_DAYS)
 	private Integer receiveEmailFrequencyDays;
 	
@@ -41,6 +37,10 @@ public class BaAlert implements ILongId {
 	
 	@Column(name = "critr_amount_below")
 	private BigDecimal critrAmountBelow;
+	
+	@Column(name = BaAlertTableMetadata.COL_UNSUBSCRIBED, nullable = false)
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean unsubscribed;
 
 	public Long getId() {
 		return id;
@@ -56,14 +56,6 @@ public class BaAlert implements ILongId {
 
 	public void setAccount(Account account) {
 		this.account = account;
-	}
-
-	public boolean isReceiveEmail() {
-		return receiveEmail;
-	}
-
-	public void setReceiveEmail(boolean receiveEmail) {
-		this.receiveEmail = receiveEmail;
 	}
 
 	public Integer getReceiveEmailFrequencyDays() {
@@ -88,5 +80,13 @@ public class BaAlert implements ILongId {
 
 	public void setCritrAmountBelow(BigDecimal critrAmountBelow) {
 		this.critrAmountBelow = critrAmountBelow;
+	}
+
+	public boolean isUnsubscribed() {
+		return unsubscribed;
+	}
+
+	public void setUnsubscribed(boolean unsubscribed) {
+		this.unsubscribed = unsubscribed;
 	}
 }

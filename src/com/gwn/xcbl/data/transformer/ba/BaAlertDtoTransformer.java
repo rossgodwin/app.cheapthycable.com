@@ -18,10 +18,10 @@ public class BaAlertDtoTransformer implements Transformer<BaAlert, BaAlertDTO> {
 		if (accountTrnsfmr != null) {
 			r.setAccount(accountTrnsfmr.transform(input.getAccount()));
 		}
-		r.setReceiveEmail(input.isReceiveEmail());
 		r.setReceiveEmailFrequencyDays(input.getReceiveEmailFrequencyDays());
 		r.setCritrMileRadius(input.getCritrMileRadius());
 		r.setCritrAmountBelow(input.getCritrAmountBelow());
+		r.setUnsubscribed(input.isUnsubscribed());
 		return r;
 	}
 }

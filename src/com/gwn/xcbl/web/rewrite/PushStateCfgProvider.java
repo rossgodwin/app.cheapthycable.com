@@ -15,6 +15,7 @@ import org.ocpsoft.rewrite.servlet.config.Path;
 
 import com.gwn.xcbl.bl.auth.pwd.reset.ResetPwdUrlIntf;
 import com.gwn.xcbl.bl.auth.signup.SignupVerifiedUrlIntf;
+import com.gwn.xcbl.bl.ba.BaAlertUnsubscribeSuccessfulUrlIntf;
 import com.gwn.xcbl.data.model.AppData;
 
 /**
@@ -31,12 +32,16 @@ public class PushStateCfgProvider extends HttpConfigurationProvider {
 	
 	@Override
 	public Configuration getConfiguration(final ServletContext context) {
+		/**
+		 * Urls that do not require a authenticated user
+		 */
 		final List<String> publicUrls = new ArrayList<String>();
 		publicUrls.add("/login");
 		publicUrls.add("/signup");
 		publicUrls.add("/forgot");
 		publicUrls.add("/" + ResetPwdUrlIntf.API_URL);
 		publicUrls.add("/" + SignupVerifiedUrlIntf.API_URL);
+		publicUrls.add("/" + BaAlertUnsubscribeSuccessfulUrlIntf.API_URL);
 		
 		final List<String> secureUrls = new ArrayList<String>();
 		secureUrls.add("/app");

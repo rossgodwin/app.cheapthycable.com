@@ -10,8 +10,8 @@ import com.gwn.xcbl.data.entity.ba.BaVwAlertSentLogLastTableMetadata;
 public class BaAlertSqueryUtils {
 
 	public static void appendToSendCritr(String tableAlias, StringBuilder qsb, Map<String, Object> params, LocalDateTime currentDate) {
-		qsb.append(" and ").append(tableAlias).append(".").append(BaAlertTableMetadata.COL_RECEIVE_EMAIL).append(" = :receiveEmail");
-		params.put("receiveEmail", true);
+		qsb.append(" and ").append(tableAlias).append(".").append(BaAlertTableMetadata.COL_UNSUBSCRIBED).append(" = :unsubscribed");
+		params.put("unsubscribed", false);
 		
 		qsb.append(" and (");
 		{

@@ -7,6 +7,7 @@ define([
 	'app/public/forgot/PwdForgotSuccessCtrlr',
 	'app/public/reset/PwdResetCtrlr',
 	'app/public/reset/PwdResetSuccessCtrlr',
+	'app/public/ba/BaAlertUnsubscribeSuccessCtrlr',
 	'app/public/qsignup/SignupModule'
 ], function(
 	ValuesEqualRqrdDrctv,
@@ -17,6 +18,7 @@ define([
 	PwdForgotSuccessCtrlr,
 	PwdResetCtrlr,
 	PwdResetSuccessCtrlr,
+	BaAlertUnsubscribeSuccessCtrlr,
 	SignupModule) {
 	var module = angular.module('app.login', ['ngMessages', 'app.signup']);
 	
@@ -29,6 +31,7 @@ define([
 	module.controller('PwdForgotSuccessCtrlr', PwdForgotSuccessCtrlr);
 	module.controller('PwdResetCtrlr', PwdResetCtrlr);
 	module.controller('PwdResetSuccessCtrlr', PwdResetSuccessCtrlr);
+	module.controller('BaAlertUnsubscribeSuccessCtrlr', BaAlertUnsubscribeSuccessCtrlr);
 	
 	module.config(['$stateProvider', function($stateProvider) {
 		$stateProvider
@@ -68,6 +71,12 @@ define([
 			url : '/reset-password-success',
 			templateUrl : 'client/src/app/public/reset/pwd-reset-success.tpl.html',
 			controller : 'PwdResetSuccessCtrlr',
+			controllerAs : 'ctrlr'
+		})
+		.state('app.ba-unsubscribe-success', {
+			url : '/alert-unsubscribe-success',
+			templateUrl : 'client/src/app/public/ba/ba-alert-unsubscribe-success.tpl.html',
+			controller : 'BaAlertUnsubscribeSuccessCtrlr',
 			controllerAs : 'ctrlr'
 		});
 	}]);
