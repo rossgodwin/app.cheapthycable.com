@@ -1,8 +1,8 @@
-package com.gwn.xcbl.data.model.bill;
+package com.gwn.xcbl.data.model.be;
 
 import java.math.BigDecimal;
 
-public class BillExplorerStats {
+public class BeStats {
 
 	private int countOfBills;
 	
@@ -14,7 +14,7 @@ public class BillExplorerStats {
 	
 	private BigDecimal highestTotalAmount;
 
-	public BillExplorerStats() {
+	public BeStats() {
 	}
 
 	public int getCountOfBills() {

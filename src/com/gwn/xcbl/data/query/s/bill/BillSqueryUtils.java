@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gwn.xcbl.data.entity.BillTableMetadata;
+import com.gwn.xcbl.data.entity.CurrentBillViewMetadata;
 import com.gwn.xcbl.data.entity.ProviderTableMetadata;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.entity.GeoZipCode;
@@ -48,6 +49,15 @@ public class BillSqueryUtils {
 			qsb.append(") as d");
 			qsb.append(" where d.distance <= d.radius");
 			qsb.append(" and ").append(tableAlias).append(".").append(BillTableMetadata.COL_GEO_ZIP_CODE_ID).append(" = d.zip_code_id");
+		}
+		qsb.append(")");
+	}
+	
+	public static void appendCurrentBillCritr(String tableAlias, StringBuilder qsb) {
+		qsb.append(" and exists (");
+		{
+			qsb.append("select 1 from ").append(CurrentBillViewMetadata.TABLE_NAME).append(" cb");
+			qsb.append(" where ").append(tableAlias).append(".").append(BillTableMetadata.COL_ID).append(" = cb.").append(CurrentBillViewMetadata.COL_BILL_ID);
 		}
 		qsb.append(")");
 	}

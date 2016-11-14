@@ -1,8 +1,8 @@
-package com.gwn.xcbl.data.shared.bill.report;
+package com.gwn.xcbl.data.shared.be;
 
 import java.io.Serializable;
 
-public class BillExplorerStatsDTO implements Serializable {
+public class BeStatsDTO implements Serializable {
 
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class BillExplorerStatsDTO implements Serializable {
 	
 	private String highestTotalAmount;
 
-	public BillExplorerStatsDTO() {
+	public BeStatsDTO() {
 	}
 
 	public int getCountOfBills() {

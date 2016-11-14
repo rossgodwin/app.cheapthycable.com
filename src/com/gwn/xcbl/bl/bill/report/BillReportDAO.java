@@ -11,7 +11,7 @@ import com.gwn.xcbl.data.entity.BillTableMetadata;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOUtils;
 import com.gwn.xcbl.data.model.HaversineFormulaCritr;
-import com.gwn.xcbl.data.model.bill.BillExplorerStats;
+import com.gwn.xcbl.data.model.be.BeStats;
 import com.gwn.xcbl.data.query.s.bill.BillSqueryUtils;
 import com.gwn.xcbl.data.shared.bill.report.BillReportCritrDTO;
 
@@ -21,7 +21,7 @@ import com.gwn.xcbl.data.shared.bill.report.BillReportCritrDTO;
  */
 public class BillReportDAO {
 
-	public BillExplorerStats getReportData(BillReportCritrDTO critr) {
+	public BeStats getReportData(BillReportCritrDTO critr) {
 		StringBuilder qsb = new StringBuilder();
 		Map<String, Object> params = new HashMap<>();
 		
@@ -42,7 +42,7 @@ public class BillReportDAO {
 		
 		Object[] qr = (Object[])q.uniqueResult();
 		
-		BillExplorerStats r = new BillExplorerStats();
+		BeStats r = new BeStats();
 		int count = ((Number)qr[0]).intValue();
 		r.setCountOfBills(count);
 		if (count > 0) {

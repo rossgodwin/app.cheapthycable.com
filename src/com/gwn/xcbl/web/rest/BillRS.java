@@ -31,21 +31,21 @@ import com.gwn.xcbl.bl.bill.BillCreateObserver;
 import com.gwn.xcbl.bl.bill.report.BillReportDAO;
 import com.gwn.xcbl.common.UserPrincipal;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
-import com.gwn.xcbl.data.hibernate.dao.BillDAOImpl;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
+import com.gwn.xcbl.data.hibernate.dao.be.BeDAOImpl;
 import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.data.hibernate.entity.bill.Bill;
 import com.gwn.xcbl.data.model.AuthenticationException;
 import com.gwn.xcbl.data.model.HaversineFormulaConsts;
-import com.gwn.xcbl.data.model.bill.BillExplorerStats;
+import com.gwn.xcbl.data.model.be.BeStats;
 import com.gwn.xcbl.data.shared.PagingResultDTO;
 import com.gwn.xcbl.data.shared.ReqParams;
 import com.gwn.xcbl.data.shared.ResponseDTO;
+import com.gwn.xcbl.data.shared.be.BeStatsDTO;
 import com.gwn.xcbl.data.shared.bill.BillDTO;
 import com.gwn.xcbl.data.shared.bill.BillLocationStatsDTO;
 import com.gwn.xcbl.data.shared.bill.BillSearchCritrDTO;
 import com.gwn.xcbl.data.shared.bill.create.BillCreateDTO;
-import com.gwn.xcbl.data.shared.bill.report.BillExplorerStatsDTO;
 import com.gwn.xcbl.data.shared.bill.report.BillReportCritrDTO;
 import com.gwn.xcbl.data.transformer.ProviderDtoTransformer;
 import com.gwn.xcbl.data.transformer.bill.BillCableOptionsDtoTransformer;
@@ -102,9 +102,9 @@ public class BillRS extends BaseRS {
 //			critr.setPhoneService(obj.isPhoneService());
 			
 			/**
-			 * look at using {@link BillDAOImpl#getBillExplorerStatsByCritr}
+			 * look at using {@link BillDAOImpl#getBeStatsByCritr}
 			 */
-			BillExplorerStats stats = new BillReportDAO().getReportData(critr);
+			BeStats stats = new BillReportDAO().getReportData(critr);
 			
 			BillLocationStatsDTO statsDto = new BillLocationStatsDTO();
 			statsDto.setMileRadius(radius);
@@ -130,6 +130,7 @@ public class BillRS extends BaseRS {
 		return trnsfmr;
 	}
 	
+	// TODO change path to /be/list/page
 	@GET
 	@Path("/list/page")
 	@Produces({MediaType.APPLICATION_JSON})
@@ -139,15 +140,16 @@ public class BillRS extends BaseRS {
 			@QueryParam(ReqParams.PARAM2) Integer limit,
 			@Context HttpServletRequest httpRequest) {
 		try {
-			authenticate(httpRequest);
+			long accountId = getAuthAccountId(httpRequest);
 			
 			GsonBuilder gsonBldr = new GsonBuilder();
 			gsonBldr.registerTypeAdapter(BigDecimal.class, new SafeBigDecimalAdptr());
 			Gson gson = gsonBldr.create();
 			BillSearchCritrDTO critr = gson.fromJson(critrJson, BillSearchCritrDTO.class);
 			
-			List<Bill> objs = DAOFactory.getInstance().getBillDAO().findBillsByCritr(critr, offset, limit);
-			int total = DAOFactory.getInstance().getBillDAO().countBillsByCritr(critr);
+			BeDAOImpl dao = new BeDAOImpl();
+			List<Bill> objs = dao.findBeBillsByCritr(accountId, critr, offset, limit);
+			int total = dao.countBeBillsByCritr(accountId, critr);
 			
 			List<BillDTO> dtos = (List<BillDTO>) CollectionUtils.collect(objs, getBillDtoTrnsfmr());
 			
@@ -319,31 +321,28 @@ public class BillRS extends BaseRS {
 //		}
 //	}
 	
+	// TODO change path to /be/stats
 	@GET
 	@Path("/explorer/stats")
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response getBillExplorerResults(
+	public Response getBeStats(
 			@QueryParam(ReqParams.PARAM0) String critrJson,
 			@Context HttpServletRequest httpRequest) {
 		try {
-			getAuthAccountId(httpRequest);
+			long accountId = getAuthAccountId(httpRequest);
 			
-//			GsonBuilder gsonBldr = new GsonBuilder();
-//			gsonBldr.registerTypeAdapter(BigDecimal.class, new SafeBigDecimalAdptr());
-//			Gson gson = gsonBldr.create();
-//			BillSearchCritrDTO critr = gson.fromJson(critrJson, BillSearchCritrDTO.class);
 			BillSearchCritrDTO critr = new Gson().fromJson(critrJson, BillSearchCritrDTO.class);
 			
-			BillExplorerStats obj = new BillDAOImpl().getBillExplorerStatsByCritr(critr);
+			BeStats obj = new BeDAOImpl().getBeStatsByCritr(accountId, critr);
 			
-			BillExplorerStatsDTO dto = new BillExplorerStatsDTO();
+			BeStatsDTO dto = new BeStatsDTO();
 			dto.setCountOfBills(obj.getCountOfBills());
 			dto.setCountOfZipCodes(obj.getCountOfZipCodes());
 			dto.setHighestTotalAmount(obj.getHighestTotalAmount() != null ? obj.getHighestTotalAmount().toString() : "");
 			dto.setAverageTotalAmount(obj.getAverageTotalAmount() != null ? obj.getAverageTotalAmount().toString() : "");
 			dto.setLowestTotalAmount(obj.getLowestTotalAmount() != null ? obj.getLowestTotalAmount().toString() : "");
 			
-			ResponseDTO<BillExplorerStatsDTO> response = new ResponseDTO<BillExplorerStatsDTO>(dto);
+			ResponseDTO<BeStatsDTO> response = new ResponseDTO<BeStatsDTO>(dto);
 			String json = new Gson().toJson(response);
 			
 			return Response.ok(json, MediaType.APPLICATION_JSON).build();
