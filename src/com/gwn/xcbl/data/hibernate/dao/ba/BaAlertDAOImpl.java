@@ -71,9 +71,9 @@ public class BaAlertDAOImpl extends GenericHibernateDAO<BaAlert, ILongId> implem
 	}
 	
 	public int countEmailAlertsByAccount(long accountId) {
-		Query q = getSession().createQuery("select count(*) from " + BaAlert.class.getSimpleName() + " a where a.account.id = :accountId and a.receiveEmail = :receiveEmail");
+		Query q = getSession().createQuery("select count(*) from " + BaAlert.class.getSimpleName() + " a where a.account.id = :accountId and a.unsubscribed = :unsubscribed");
 		q.setParameter("accountId", accountId);
-		q.setParameter("receiveEmail", true);
+		q.setParameter("unsubscribed", false);
 		Number count = (Number)q.uniqueResult();
 		return count.intValue();
 	}
