@@ -84,13 +84,24 @@ define([
 	
 //	setTimeout(asyncBootstrap, (2 * 1000));
 	setTimeout(asyncBootstrap, 1);
-//	asyncBootstrap2();
 	
 	function asyncBootstrap() {
 		angular.bootstrap(document.getElementsByTagName("body")[0], [moduleName]);
 	}
 	
 	function removeSplash() {
+		/**
+		 * The native childNode.remove() is a new experimental method that is not is supported in Internet Explorer, only in Edge
+		 * http://stackoverflow.com/questions/20428877/javascript-remove-doesnt-work-in-ie
+		 */
+		if (!('remove' in Element.prototype)) {
+		    Element.prototype.remove = function() {
+		        if (this.parentNode) {
+		            this.parentNode.removeChild(this);
+		        }
+		    };
+		}
+		
 		var element = document.getElementById('app-splash');
 		element.remove();
 		element = null;
