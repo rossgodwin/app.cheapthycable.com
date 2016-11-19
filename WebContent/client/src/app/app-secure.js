@@ -1,4 +1,5 @@
 define([
+	'app/res/AppUris',
 	'app/gu/AppSecureTemplates',
 	'app/core/CoreModule',
 	'app/security/SecurityInterceptor',
@@ -6,6 +7,7 @@ define([
 	'app/admin/MainModule',
 	'app/social/SocialModule'
 ], function(
+	appUris,
 	Templates,
 	CoreModule,
 	SecurityInterceptor,
@@ -43,7 +45,7 @@ define([
 		})
 	}]);
 	
-	module.run(['$templateCache', '$compile', '$rootScope', '$state', 'AuthService', 'principal', 'BillHttpService', function($templateCache, $compile, $rootScope, $state, AuthService, principal, BillHttpService) {
+	module.run(['$location', '$templateCache', '$compile', '$rootScope', '$state', 'AuthService', 'principal', 'BillHttpService', function($location, $templateCache, $compile, $rootScope, $state, AuthService, principal, BillHttpService) {
 		var templatesHTML = $templateCache.get('app.templates');
 		$compile(templatesHTML)($rootScope);
 		
@@ -57,14 +59,16 @@ define([
 					if (response.data.resultCode === 1) {
 						var latestBill = response.data.result;
 						
-						var startState;
 						if (angular.isUndefined(latestBill)) {
-							startState = 'app.gu.intro.welcome';
+							$state.go('app.gu.intro.welcome', {}, {location : false});
 						} else {
-							startState = 'app.gu.dashboard';
+							var url = $location.path();
+							if (url == appUris.getAppUrl()) {
+								$state.go('app.gu.dashboard', {}, {location : false});
+							} else {
+								$location.path($location.path());
+							}
 						}
-						
-						$state.go(startState, {}, {location : false});
 						
 						removeSplash();
 					}
@@ -73,16 +77,6 @@ define([
 		})
 	}])
 	
-//	angular.bootstrap(document.getElementsByTagName("body")[0], [moduleName]);
-	
-//	setTimeout(function asyncBootstrap() {
-//		angular.bootstrap(document.getElementsByTagName("body")[0], [moduleName]);
-//
-//			},
-//			( 2 * 1000 )
-//		);
-	
-//	setTimeout(asyncBootstrap, (2 * 1000));
 	setTimeout(asyncBootstrap, 1);
 	
 	function asyncBootstrap() {

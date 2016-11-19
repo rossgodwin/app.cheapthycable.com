@@ -15,6 +15,7 @@ public class RestServices extends Application {
 		singletons.add(new AuthRS());
 		singletons.add(new BaAlertRS());
 		singletons.add(new BillRS());
+		singletons.add(new DsqBillCommentRS());
 		singletons.add(new GeoZipCodeRS());
 		singletons.add(new ProviderRS());
 	}

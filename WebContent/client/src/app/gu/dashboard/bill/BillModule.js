@@ -5,13 +5,15 @@ define([
 	'app/gu/bill/mgt/BillMgtListItemTileDrctv',
 	'app/gu/bill/mgt/BillMgtCtrlr',
 	'app/gu/dashboard/bill/BillCreateModule',
-	'app/gu/dashboard/bill/BillExplorerModule'
+	'app/gu/dashboard/bill/BillExplorerModule',
+	'app/gu/dashboard/bill/comments/BillCommentsModule'
 ], function(
 	BillMgtListItemTileDrctv,
 	BillMgtCtrlr,
 	BillCreateModule,
-	BillExplorerModule) {
-	var module = angular.module('app.gu.dashboard.bill', ['app.gu.dashboard.bill.create', 'app.gu.dashboard.bill.explorer']);
+	BillExplorerModule,
+	BillCommentsModule) {
+	var module = angular.module('app.gu.dashboard.bill', ['app.gu.dashboard.bill.create', 'app.gu.dashboard.bill.explorer', 'app.gu.dashboard.bill.comments']);
 	
 	module.value('newBillStateName', 'app.gu.bill.create.node0');
 	

@@ -23,6 +23,9 @@ public class Environment {
 	
 	@Column(name = "bill_alert_enabled", nullable = false)
 	private boolean billAlertEnabled;
+	
+	@Column(name = "disqus_shortname", nullable = false)
+	private String disqusShortname;
 
 	public EnvironmentType getType() {
 		return type;
@@ -46,5 +49,13 @@ public class Environment {
 
 	public void setBillAlertEnabled(boolean billAlertEnabled) {
 		this.billAlertEnabled = billAlertEnabled;
+	}
+
+	public String getDisqusShortname() {
+		return disqusShortname;
+	}
+
+	public void setDisqusShortname(String disqusShortname) {
+		this.disqusShortname = disqusShortname;
 	}
 }

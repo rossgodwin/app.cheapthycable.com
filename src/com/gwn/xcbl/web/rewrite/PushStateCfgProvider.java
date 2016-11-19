@@ -46,15 +46,17 @@ public class PushStateCfgProvider extends HttpConfigurationProvider {
 		final List<String> secureUrls = new ArrayList<String>();
 		secureUrls.add("/app");
 		
-		String appPublicEp = null;
-		String appSecureEp = null;
-		if (AppData.getInstance().isEnvProd()) {
-			appPublicEp = "/client/dist/index-app-public.jsp";
-			appSecureEp = "/client/dist/index-app-secure.jsp";
-		} else {
-			appPublicEp = "/client/src/index-app-public.jsp";
-			appSecureEp = "/client/src/index-app-secure.jsp";
-		}
+//		String appPublicEp = null;
+//		String appSecureEp = null;
+//		if (AppData.getInstance().isEnvProd()) {
+//			appPublicEp = "/client/dist/index-app-public.jsp";
+//			appSecureEp = "/client/dist/index-app-secure.jsp";
+//		} else {
+//			appPublicEp = "/client/src/index-app-public.jsp";
+//			appSecureEp = "/client/src/index-app-secure.jsp";
+//		}
+		String appPublicEp = AppData.getInstance().getAppPublicEp();
+		String appSecureEp = AppData.getInstance().getAppSecureEp();
 		
 		// logs the domain used for testing
 //		return ConfigurationBuilder.begin()

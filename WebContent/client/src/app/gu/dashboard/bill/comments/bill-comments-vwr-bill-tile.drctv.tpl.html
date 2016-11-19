@@ -1,0 +1,36 @@
+<!--
+	https://css-tricks.com/centering-css-complete-guide/ 
+ -->
+<div class="app-bill-list-item-tile">
+	<div class="row" style="padding: 5px;">
+		<div class="col-sm-4">
+			<div class="app-bill-list-item-tile-price">
+				<p>
+					<span ng-class="ctrlr.getTotalAmountStyleClass()" class="app-bill-list-item-tile-price-amount">
+						{{ctrlr.bill.totalAmount | currency}}
+					</span>
+				</p>
+			</div>
+		</div>
+		<div class="col-sm-8">
+			<div class="app-bill-list-item-tile-details">
+				<div class="app-bill-list-item-tile-details-h1">
+					<span ng-if="ctrlr.bill.provider">{{ctrlr.bill.provider.name}}</span>
+					<span ng-if="!ctrlr.bill.provider">{{ctrlr.bill.providerOther}}</span>
+				</div>
+				<div class="app-bill-list-item-tile-details-h2">
+					{{ctrlr.bill.geoZipCode.city}}, {{ctrlr.bill.geoZipCode.stateCode}} {{ctrlr.bill.geoZipCode.zipCode}}
+				</div>
+				<div class="app-bill-list-item-tile-details-h2">
+					{{ctrlr.bill.validDateInMillis | date:'MM-dd-yyyy'}}
+				</div>
+				<div class="app-bill-list-item-tile-details-h3">
+					Services:&nbsp;&nbsp;{{ctrlr.getServicesStr()}}
+				</div>
+				<div class="app-bill-list-item-tile-details-h3">
+					Options:&nbsp;&nbsp;{{ctrlr.getAllOptionsStr()}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

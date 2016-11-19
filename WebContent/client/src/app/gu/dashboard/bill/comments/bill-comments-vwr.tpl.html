@@ -1,0 +1,20 @@
+<app-titlebar-0 titlebar-text="ctrlr.titlebarText" titlebar-back="ctrlr.titlebarBack()"></app-titlebar-0>
+
+<div class="container">
+	<div class="row" style="padding: 15px;">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div class="row" style="margin-bottom: 15px;">
+				<bill-comments-vwr-bill-tile bill="ctrlr.bill"></bill-comments-vwr-bill-tile>
+				<br>
+				<div style="text-align: center;" ng-show="ctrlr.newCommentSuccessVisible">
+					<span class="app-bill-comment-success">Thanks! Stay tuned! We've notified those involved in the discussion of your post.</span>
+				</div>
+			</div>
+			<div class="row">
+				<dir-disqus config="ctrlr.disqusConfig"></dir-disqus>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>

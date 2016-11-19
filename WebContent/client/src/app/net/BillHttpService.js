@@ -7,6 +7,7 @@ define(['app/res/AppUris'], function(appUris) {
 			getBillsListPage : getBillsListPage,
 			saveBill : saveBill,
 			getLatestBill : getLatestBill,
+			getBillDetail : getBillDetail,
 			deleteBill : deleteBill,
 			getBillExplorerStats : getBillExplorerStats
 		};
@@ -57,6 +58,13 @@ define(['app/res/AppUris'], function(appUris) {
 		
 		function getLatestBill() {
 			return $http.get(appUris.getRestUrl('/bill/current'), {
+				params : {
+				}
+			});
+		}
+		
+		function getBillDetail(billId) {
+			return $http.get(appUris.getRestUrl('/bill/' + billId + '/detail'), {
 				params : {
 				}
 			});

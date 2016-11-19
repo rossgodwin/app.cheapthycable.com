@@ -29,6 +29,7 @@
 			String twitterHomePageUrl = AppConstants.TWITTER_HOME_PAGE_URL;
 			String twitterIntentUrl = AppConstants.TWITTER_INTENT_URL;
 			String twitterScreenName = AppConstants.TWITTER_SCREEN_NAME;
+			String disqusShortname = AppData.getInstance().getDisqusShortname();
 		%>
 		var appName = '<%= appName %>';
 		var appUrl = '<%= appUrl %>';
@@ -37,6 +38,7 @@
 		var twitterHomePageUrl = '<%= twitterHomePageUrl %>';
 		var twitterIntentUrl = '<%= twitterIntentUrl %>';
 		var twitterScreenName = '<%= twitterScreenName %>';
+		var disqusShortname = '<%= disqusShortname %>';
 	</script>
 </head>
 <body>

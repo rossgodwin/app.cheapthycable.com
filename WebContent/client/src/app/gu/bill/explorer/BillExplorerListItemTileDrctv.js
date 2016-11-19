@@ -1,6 +1,9 @@
 define([
+	'app/res/AppUris',
 	'app/utils/BillUtils'
-], function(BillUtils) {
+], function(
+	appUris,
+	BillUtils) {
 	return [function drctv() {
 		return {
 			restrict : 'E',
@@ -9,13 +12,13 @@ define([
 				bill : '='
 			},
 			templateUrl : "client/src/app/gu/bill/explorer/bill-explorer-list-item-tile.drctv.tpl.html",
-			controller : ['billExplorerData', ctrlr],
+			controller : ['$window', 'billExplorerData', ctrlr],
 			controllerAs : 'ctrlr',
 			bindToController : true
 		};
 	}];
 
-	function ctrlr(data) {
+	function ctrlr($window, data) {
 		var vm = this;
 		
 		// public variables
@@ -29,6 +32,7 @@ define([
 		vm.getServicesStr = getServicesStr;
 		vm.getAllOptionsStr = getAllOptionsStr;
 		vm.tglCommentsExpanded = tglCommentsExpanded;
+		vm.goToBillComments = goToBillComments;
 		
 		function getTotalAmountStyleClass() {
 			return {
@@ -68,6 +72,13 @@ define([
 		
 		function tglCommentsExpanded() {
 			vm.commentsExpanded = !vm.commentsExpanded;
+		}
+		
+		function goToBillComments(bill) {
+//			var encBillId = new Hashids().encode(bill.id);
+//			console.log('encoded bill id: ' + encBillId);
+			var url = appUris.getAppUrl() + '/bill/' + bill.id + '/comments';
+			$window.open(url, '_blank');
 		}
 	};
 });

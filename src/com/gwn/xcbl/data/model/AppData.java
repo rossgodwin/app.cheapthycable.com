@@ -17,10 +17,33 @@ public class AppData {
 	private EnvironmentType environmentType;
 	
 	private String domainUrl;
+	
+	private String disqusShortname;
 
 	public void load(Environment environment) {
 		setEnvironmentType(environment.getType());
 		setDomainUrl(environment.getDomainUrl());
+		setDisqusShortname(environment.getDisqusShortname());
+	}
+	
+	public String getAppPublicEp() {
+		String rslt;
+		if (isEnvProd()) {
+			rslt = "/client/dist/index-app-public.jsp";
+		} else {
+			rslt = "/client/src/index-app-public.jsp";
+		}
+		return rslt;
+	}
+	
+	public String getAppSecureEp() {
+		String rslt;
+		if (isEnvProd()) {
+			rslt = "/client/dist/index-app-secure.jsp";
+		} else {
+			rslt = "/client/src/index-app-secure.jsp";
+		}
+		return rslt;
 	}
 	
 	public String getFbAppId() {
@@ -52,5 +75,13 @@ public class AppData {
 
 	public void setDomainUrl(String domainUrl) {
 		this.domainUrl = domainUrl;
+	}
+
+	public String getDisqusShortname() {
+		return disqusShortname;
+	}
+
+	public void setDisqusShortname(String disqusShortname) {
+		this.disqusShortname = disqusShortname;
 	}
 }

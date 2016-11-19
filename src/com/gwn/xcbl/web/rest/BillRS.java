@@ -134,7 +134,7 @@ public class BillRS extends BaseRS {
 	@GET
 	@Path("/list/page")
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response getBillsListPage(
+	public Response getBeListPage(
 			@QueryParam(ReqParams.PARAM0) String critrJson,
 			@QueryParam(ReqParams.PARAM1) Integer offset,
 			@QueryParam(ReqParams.PARAM2) Integer limit,
@@ -147,11 +147,14 @@ public class BillRS extends BaseRS {
 			Gson gson = gsonBldr.create();
 			BillSearchCritrDTO critr = gson.fromJson(critrJson, BillSearchCritrDTO.class);
 			
-			BeDAOImpl dao = new BeDAOImpl();
-			List<Bill> objs = dao.findBeBillsByCritr(accountId, critr, offset, limit);
-			int total = dao.countBeBillsByCritr(accountId, critr);
+			List<Bill> objs = DAOFactory.getInstance().getBeDAO().findBeBillsByCritr(accountId, critr, offset, limit);
+			int total = DAOFactory.getInstance().getBeDAO().countBeBillsByCritr(accountId, critr);
 			
 			List<BillDTO> dtos = (List<BillDTO>) CollectionUtils.collect(objs, getBillDtoTrnsfmr());
+			for (BillDTO dto : dtos) {
+				int cnt = DAOFactory.getInstance().getDsqBillCommentDAO().countByBill(dto.getId());
+				dto.setDsqCommentCount(cnt);
+			}
 			
 			ResponseDTO<PagingResultDTO<BillDTO>> response = new ResponseDTO<PagingResultDTO<BillDTO>>(new PagingResultDTO<>(offset, limit, total, dtos));
 			String json = new Gson().toJson(response);
@@ -234,6 +237,35 @@ public class BillRS extends BaseRS {
 			ResponseDTO<BillDTO> response = null;
 			
 			Bill obj = DAOFactory.getInstance().getBillDAO().findCurrentBill(accountId);
+			if (obj != null) {
+				BillDTO dto = getBillDtoTrnsfmr().transform(obj);
+				response = new ResponseDTO<BillDTO>(dto);
+			}
+			
+			if (response == null) {
+				response = new ResponseDTO<BillDTO>(ResponseDTO.RESULT_OK);
+			}
+			
+			String json = new Gson().toJson(response);
+			
+			return Response.ok(json, MediaType.APPLICATION_JSON).build();
+		} catch (AuthenticationException e) {
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		}
+	}
+	
+	@GET
+	@Path("/{billId}/detail")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response getBillDetail(
+			@PathParam("billId") Long billId,
+			@Context HttpServletRequest httpRequest) {
+		try {
+			getAuthAccountId(httpRequest);
+			
+			ResponseDTO<BillDTO> response = null;
+			
+			Bill obj = DAOFactory.getInstance().getBillDAO().findById(billId, true);
 			if (obj != null) {
 				BillDTO dto = getBillDtoTrnsfmr().transform(obj);
 				response = new ResponseDTO<BillDTO>(dto);
