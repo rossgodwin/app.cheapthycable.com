@@ -1,5 +1,5 @@
 define([
-	'app/utils/GeoZipCodeUtils'
+	'src/app/utils/GeoZipCodeUtils'
 ], function(GeoZipCodeUtils) {
 	return ['$stateParams', 'billCreateNavHlpr', 'billCreateModel', 'GeoZipCodeHttpService', ctrlr];
 	

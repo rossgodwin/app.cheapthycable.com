@@ -1,8 +1,8 @@
 define([
-	'assets/js/directives/dirDisqus',
-	'app/gu/AppCtrlr',
-	'app/gu/intro/IntroModule',
-	'app/gu/dashboard/DashboardModule'
+	'src/assets/js/directives/dirDisqus',
+	'src/app/gu/AppCtrlr',
+	'src/app/gu/intro/IntroModule',
+	'src/app/gu/dashboard/DashboardModule'
 ], function(
 	dirDisqus,
 	AppCtrlr,

@@ -1,4 +1,4 @@
-define(['app/res/AppUris'
+define(['src/app/res/AppUris'
 ], function(appUris) {
 	return ['$q', '$window', intrcptr];
 	

@@ -23,7 +23,7 @@
 	).ready("ALL", function() {
 		require.config({
 			appDir : '',
-			baseUrl : 'client/src',
+			baseUrl : 'client',
 			priority : 'angular',
 			shim : {
 				'angular' : {
@@ -44,7 +44,7 @@
 			}
 		});
 
-		require(["app/login-main"], function(app) {
+		require(["src/app/login-main"], function(app) {
 			// Application has bootstrapped and started...
 		});
 	});

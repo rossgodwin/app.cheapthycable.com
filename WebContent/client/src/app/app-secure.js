@@ -1,11 +1,11 @@
 define([
-	'app/res/AppUris',
-	'app/gu/AppSecureTemplates',
-	'app/core/CoreModule',
-	'app/security/SecurityInterceptor',
-	'app/gu/MainModule',
-	'app/admin/MainModule',
-	'app/social/SocialModule'
+	'src/app/res/AppUris',
+	'src/app/gu/AppSecureTemplates',
+	'src/app/core/CoreModule',
+	'src/app/security/SecurityInterceptor',
+	'src/app/gu/MainModule',
+	'src/app/admin/MainModule',
+	'src/app/social/SocialModule'
 ], function(
 	appUris,
 	Templates,

@@ -1,6 +1,6 @@
 define([
-	'app/social/FbHlprPrvdr',
-	'app/social/TwitterHlprPrvdr'
+	'src/app/social/FbHlprPrvdr',
+	'src/app/social/TwitterHlprPrvdr'
 ], function(
 	FbHlprPrvdr,
 	TwitterHlprPrvdr) {

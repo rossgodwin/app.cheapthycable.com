@@ -1,10 +1,10 @@
 define([
-	'app/net/AuthHttpService',
-	'app/net/BaAlertHttpService',
-	'app/net/BillHttpService',
-	'app/net/DsqBillCommentHttpService',
-	'app/net/GeoZipCodeHttpService',
-	'app/net/ProviderHttpService'
+	'src/app/net/AuthHttpService',
+	'src/app/net/BaAlertHttpService',
+	'src/app/net/BillHttpService',
+	'src/app/net/DsqBillCommentHttpService',
+	'src/app/net/GeoZipCodeHttpService',
+	'src/app/net/ProviderHttpService'
 ], function(
 	AuthHttpService,
 	BaAlertHttpService,

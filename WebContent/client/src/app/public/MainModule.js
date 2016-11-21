@@ -1,14 +1,14 @@
 define([
-	'common/ValuesEqualRqrdDrctv',
-	'app/widget/PwdValidChkDrctv',
-	'app/public/MainCtrlr',
-	'app/public/login/LoginCtrlr',
-	'app/public/forgot/PwdForgotCtrlr',
-	'app/public/forgot/PwdForgotSuccessCtrlr',
-	'app/public/reset/PwdResetCtrlr',
-	'app/public/reset/PwdResetSuccessCtrlr',
-	'app/public/ba/BaAlertUnsubscribeSuccessCtrlr',
-	'app/public/qsignup/SignupModule'
+	'src/common/ValuesEqualRqrdDrctv',
+	'src/app/widget/PwdValidChkDrctv',
+	'src/app/public/MainCtrlr',
+	'src/app/public/login/LoginCtrlr',
+	'src/app/public/forgot/PwdForgotCtrlr',
+	'src/app/public/forgot/PwdForgotSuccessCtrlr',
+	'src/app/public/reset/PwdResetCtrlr',
+	'src/app/public/reset/PwdResetSuccessCtrlr',
+	'src/app/public/ba/BaAlertUnsubscribeSuccessCtrlr',
+	'src/app/public/qsignup/SignupModule'
 ], function(
 	ValuesEqualRqrdDrctv,
 	PwdValidChkDrctv,

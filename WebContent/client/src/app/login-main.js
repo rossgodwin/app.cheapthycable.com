@@ -1,7 +1,7 @@
 define([
-	'app/public/AppPublicTemplates',
-	'app/core/CoreModule',
-	'app/public/MainModule'
+	'src/app/public/AppPublicTemplates',
+	'src/app/core/CoreModule',
+	'src/app/public/MainModule'
 ], function(
 	Templates,
 	CoreModule,

@@ -54,6 +54,13 @@ module.exports = function(grunt) {
 					dest : '<%= compile_dir %>/src/'
 				} ]
 			},
+			
+			compile_vendor_hashids : {
+				files : [ {
+					src : '../vendor/hashids/hashids.min.js',
+					dest : '<%= compile_dir %>/vendor/hashids/hashids.min.js'
+				} ]
+			},
 
 			dist_vendor_head : {
 				files : [ {
@@ -124,9 +131,9 @@ module.exports = function(grunt) {
 		requirejs : {
 			build_app_public : {
 				options : {
-					baseUrl : '<%= compile_dir %>/src',
+					baseUrl : '<%= compile_dir %>',
 					mainConfigFile : '<%= compile_dir %>/src/app/login-main.js',
-					name : 'app/login-main',
+					name : 'src/app/login-main',
 					out : '<%= compile_dir %>/app-public.js'
 				},
 				preserveLicenseComments : false
@@ -134,9 +141,9 @@ module.exports = function(grunt) {
 
 			build_app_secure : {
 				options : {
-					baseUrl : '<%= compile_dir %>/src',
+					baseUrl : '<%= compile_dir %>',
 					mainConfigFile : '<%= compile_dir %>/src/app/app-secure.js',
-					name : 'app/app-secure',
+					name : 'src/app/app-secure',
 					out : '<%= compile_dir %>/app-secure.js'
 				},
 				preserveLicenseComments : false
@@ -242,7 +249,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('prod-clean', [ 'clean:release' ]);
 
 	grunt.registerTask('build-common', [ 'clean:build', 'env:prod',
-			'preprocess:prod', 'copy:compile_appjs', 'copy:dist_vendor_head' ]);
+			'preprocess:prod', 'copy:compile_appjs', 'copy:compile_vendor_hashids', 'copy:dist_vendor_head' ]);
 
 	grunt.registerTask('build-app-public', [ 'copy:dist_prod_app_public',
 			'html2js:app_public_templates', 'requirejs:build_app_public',

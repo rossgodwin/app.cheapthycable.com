@@ -1,5 +1,5 @@
 define([
-	'app/res/AppUris'
+	'src/app/res/AppUris'
 ], function(appUris) {
 	return ['$window', '$state', 'principal', srvc];
 	

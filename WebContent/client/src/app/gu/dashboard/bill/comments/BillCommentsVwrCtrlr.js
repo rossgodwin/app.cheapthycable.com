@@ -1,7 +1,7 @@
-define(['app/res/AppConsts'], function(appConsts) {
-	return ['$window', '$timeout', '$filter', 'commentBill', 'spinnerService', 'DsqBillCommentHttpService', ctrlr];
+define(['src/app/res/AppConsts'], function(appConsts) {
+	return ['$window', '$stateParams', '$timeout', '$filter', 'commentBill', 'spinnerService', 'DsqBillCommentHttpService', ctrlr];
 	
-	function ctrlr($window, $timeout, $filter, commentBill, spinnerService, DsqBillCommentHttpService) {
+	function ctrlr($window, $stateParams, $timeout, $filter, commentBill, spinnerService, DsqBillCommentHttpService) {
 		var vm = this;
 		
 		// public variables
@@ -10,7 +10,7 @@ define(['app/res/AppConsts'], function(appConsts) {
 			    disqus_shortname : $window.disqusShortname,
 			    disqus_identifier : commentBill.id,
 //			    disqus_title : getDisqusTitle(),
-			    disqus_title : 'Bill (' + commentBill.id + ') Comments',
+			    disqus_title : 'Bill (' + $stateParams.encBillId + ') Comments',
 			    disqus_url : $window.location.href,
 			    disqus_onNewCommentCb : onNewCommentCbHndlr
 		};

@@ -35,7 +35,7 @@
 	).ready("ALL", function() {
 		require.config({
 			appDir : '',
-			baseUrl : 'client/src',
+			baseUrl : 'client',
 			priority : 'angular',
 			shim : {
 				'angular' : {
@@ -68,7 +68,7 @@
 			}
 		});
 
-		require(["app/app-secure"], function(app) {
+		require(["src/app/app-secure"], function(app) {
 			// Application has bootstrapped and started...
 		});
 	});

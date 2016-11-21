@@ -1,9 +1,9 @@
 define([
-	'app/public/signup/SignupUniqueEmailChkDrctv',
-	'app/public/signup/SignupModel',
-	'app/public/signup/SignupCtrlr',
-	'app/public/signup/SignupVerifyCtrlr',
-	'app/public/signup/SignupVerifiedCtrlr'
+	'src/app/public/signup/SignupUniqueEmailChkDrctv',
+	'src/app/public/signup/SignupModel',
+	'src/app/public/signup/SignupCtrlr',
+	'src/app/public/signup/SignupVerifyCtrlr',
+	'src/app/public/signup/SignupVerifiedCtrlr'
 ], function(
 	SignupUniqueEmailChkDrctv,
 	SignupModel,

@@ -1,10 +1,10 @@
 define([
-	'app/gu/bill/explorer/BillExplorerDrctv',
-	'app/gu/bill/explorer/BillExplorerListItemTileDrctv',
-	'app/gu/bill/explorer/BillExplorerDataFctry',
-	'app/gu/bill/explorer/BillExplorerSearchCtrlr',
-	'app/gu/bill/explorer/BillExplorerSearchFilterCtrlr',
-	'app/gu/bill/explorer/BillExplorerResultsCtrlr'
+	'src/app/gu/bill/explorer/BillExplorerDrctv',
+	'src/app/gu/bill/explorer/BillExplorerListItemTileDrctv',
+	'src/app/gu/bill/explorer/BillExplorerDataFctry',
+	'src/app/gu/bill/explorer/BillExplorerSearchCtrlr',
+	'src/app/gu/bill/explorer/BillExplorerSearchFilterCtrlr',
+	'src/app/gu/bill/explorer/BillExplorerResultsCtrlr'
 ], function(
 	BillExplorerDrctv,
 	BillExplorerListItemTileDrctv,

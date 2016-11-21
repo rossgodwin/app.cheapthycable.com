@@ -1,7 +1,7 @@
 define([
-	'app/res/AppConsts',
-	'app/gu/bill/create/BillCreateModule',
-	'app/gu/dashboard/bill/BillCreateCtrlr'
+	'src/app/res/AppConsts',
+	'src/app/gu/bill/create/BillCreateModule',
+	'src/app/gu/dashboard/bill/BillCreateCtrlr'
 ], function(
 	appConsts,
 	BillCreateModule,

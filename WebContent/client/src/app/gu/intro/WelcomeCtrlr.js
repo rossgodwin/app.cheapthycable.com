@@ -1,4 +1,4 @@
-define(['app/res/AppUris'], function(uris) {
+define(['src/app/res/AppUris'], function(uris) {
 	return ['$window', '$state', ctrlr];
 	
 	function ctrlr($window, $state) {

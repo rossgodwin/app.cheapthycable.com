@@ -1,4 +1,4 @@
-define(['app/res/AppConsts'], function(appConsts) {
+define(['src/app/res/AppConsts'], function(appConsts) {
 	return ['newBillStateName', '$state', 'BillHttpService', 'spinnerService', '$uibModal', ctrlr];
 	
 	function ctrlr(newBillStateName, $state, BillHttpService, spinnerService, $uibModal) {

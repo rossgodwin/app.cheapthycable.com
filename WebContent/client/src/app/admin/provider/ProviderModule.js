@@ -1,6 +1,6 @@
 define([
-	'app/security/auth/AuthService',
-	'app/admin/provider/ProviderMgtCtrlr'
+	'src/app/security/auth/AuthService',
+	'src/app/admin/provider/ProviderMgtCtrlr'
 ], function(
 	AuthService,
 	ProviderMgtCtrlr) {

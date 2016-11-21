@@ -1,4 +1,4 @@
-define(['app/res/AppUris'], function(appUris) {
+define(['src/app/res/AppUris'], function(appUris) {
 	return ['$http', srvc];
 	
 	function srvc($http) {

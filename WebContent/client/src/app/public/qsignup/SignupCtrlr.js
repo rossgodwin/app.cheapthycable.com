@@ -1,4 +1,4 @@
-define(['app/res/AppConsts', 'app/res/AppUris'], function(appConsts, appUris) {
+define(['src/app/res/AppConsts', 'src/app/res/AppUris'], function(appConsts, appUris) {
 	return ['$window', '$state', 'spinnerService', 'SignupModel', 'AuthHttpService', ctrlr];
 	
 	function ctrlr($window, $state, spinnerService, SignupModel, AuthHttpService) {

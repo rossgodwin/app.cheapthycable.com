@@ -2,11 +2,11 @@
  * http://stackoverflow.com/questions/30895140/nested-promises-in-ui-router-resolve
  */
 define([
-	'app/gu/bill/mgt/BillMgtListItemTileDrctv',
-	'app/gu/bill/mgt/BillMgtCtrlr',
-	'app/gu/dashboard/bill/BillCreateModule',
-	'app/gu/dashboard/bill/BillExplorerModule',
-	'app/gu/dashboard/bill/comments/BillCommentsModule'
+	'src/app/gu/bill/mgt/BillMgtListItemTileDrctv',
+	'src/app/gu/bill/mgt/BillMgtCtrlr',
+	'src/app/gu/dashboard/bill/BillCreateModule',
+	'src/app/gu/dashboard/bill/BillExplorerModule',
+	'src/app/gu/dashboard/bill/comments/BillCommentsModule'
 ], function(
 	BillMgtListItemTileDrctv,
 	BillMgtCtrlr,

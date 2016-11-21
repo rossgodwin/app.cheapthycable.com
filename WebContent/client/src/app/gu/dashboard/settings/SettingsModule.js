@@ -1,6 +1,6 @@
 define([
-	'app/gu/dashboard/settings/SettingsCtrlr',
-	'app/gu/dashboard/settings/ba/BaAlertModule'
+	'src/app/gu/dashboard/settings/SettingsCtrlr',
+	'src/app/gu/dashboard/settings/ba/BaAlertModule'
 ], function(
 	SettingsCtrlr,
 	BaAlertModule) {

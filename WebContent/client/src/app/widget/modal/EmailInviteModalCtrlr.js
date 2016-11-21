@@ -1,5 +1,5 @@
 define([
-	'app/utils/ArrayUtils'
+	'src/app/utils/ArrayUtils'
 ], function(ArrayUtils) {
 	return ['$uibModalInstance', ctrlr];
 	

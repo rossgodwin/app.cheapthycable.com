@@ -1,4 +1,4 @@
-define(['app/utils/BillUtils'], function(BillUtils) {
+define(['src/app/utils/BillUtils'], function(BillUtils) {
 	return ['$stateParams', 'billCreateNavHlpr', 'billCreateModel', ctrlr];
 	
 	function ctrlr($stateParams, navHlpr, model) {

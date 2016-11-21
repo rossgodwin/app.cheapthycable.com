@@ -1,6 +1,6 @@
 define([
-	'app/gu/bill/explorer/BillExplorerModule',
-	'app/gu/dashboard/bill/BillExplorerCtrlr'
+	'src/app/gu/bill/explorer/BillExplorerModule',
+	'src/app/gu/dashboard/bill/BillExplorerCtrlr'
 ], function(
 	BillExplorerModule,
 	BillExplorerCtrlr

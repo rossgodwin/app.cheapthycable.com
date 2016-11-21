@@ -1,4 +1,4 @@
-define(['app/res/AppConsts'], function(appConsts) {
+define(['src/app/res/AppConsts'], function(appConsts) {
 	return ['$state', '$stateParams', 'baAlertModel', 'spinnerService', 'BaAlertHttpService', ctrlr];
 	
 	function ctrlr($state, $stateParams, model, spinnerService, BaAlertHttpService) {

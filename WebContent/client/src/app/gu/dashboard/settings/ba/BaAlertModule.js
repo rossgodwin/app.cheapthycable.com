@@ -1,7 +1,7 @@
 define([
-	'app/gu/dashboard/settings/ba/BaAlertModelPrvdr',
-	'app/gu/dashboard/settings/ba/BaAlertMgtCtrlr',
-	'app/gu/dashboard/settings/ba/BaAlertEditCtrlr'
+	'src/app/gu/dashboard/settings/ba/BaAlertModelPrvdr',
+	'src/app/gu/dashboard/settings/ba/BaAlertMgtCtrlr',
+	'src/app/gu/dashboard/settings/ba/BaAlertEditCtrlr'
 ], function(
 	BaAlertModelPrvdr,
 	BaAlertMgtCtrlr,

@@ -1,6 +1,6 @@
 define([
-	'app/admin/AppCtrlr',
-	'app/admin/dashboard/DashboardModule'
+	'src/app/admin/AppCtrlr',
+	'src/app/admin/dashboard/DashboardModule'
 ], function(
 	AppCtrlr,
 	DashboardModule) {

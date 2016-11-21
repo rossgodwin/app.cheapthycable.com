@@ -1,4 +1,4 @@
-define(['app/res/AppUris'], function(appUris) {
+define(['src/app/res/AppUris'], function(appUris) {
 	return ['$window', '$uibModal', 'AuthHttpService', 'principal', srvc];
 	
 	function srvc($window, $uibModal, AuthHttpService, principal) {

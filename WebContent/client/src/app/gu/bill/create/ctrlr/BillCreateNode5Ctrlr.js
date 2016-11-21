@@ -1,4 +1,4 @@
-define(['app/utils/BillUtils', 'app/res/AppConsts'], function(BillUtils, appConsts) {
+define(['src/app/utils/BillUtils', 'src/app/res/AppConsts'], function(BillUtils, appConsts) {
 	return ['$state', '$stateParams', 'spinnerService', 'billCreateNavHlpr', 'billCreateModel', 'BillHttpService', ctrlr];
 	
 	function ctrlr($state, $stateParams, spinnerService, navHlpr, model, BillHttpService) {

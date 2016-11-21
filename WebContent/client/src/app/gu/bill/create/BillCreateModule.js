@@ -1,15 +1,15 @@
 define([
-	'app/gu/bill/create/BillCreateDrctv',
-	'app/gu/bill/create/BillCreateModelPrvdr',
-	'app/gu/bill/create/BillCreateNavHlprPrvdr',
-	'app/gu/bill/create/ctrlr/BillCreateNode0Ctrlr',
-	'app/gu/bill/create/ctrlr/BillCreateNode1Ctrlr',
-	'app/gu/bill/create/ctrlr/BillCreateNode2Ctrlr',
-	'app/gu/bill/create/ctrlr/BillCreateNode3Ctrlr',
-	'app/gu/bill/create/ctrlr/BillCreateNode4Ctrlr',
-	'app/gu/bill/create/ctrlr/BillCreateNode5Ctrlr',
-	'app/gu/bill/create/ctrlr/BillCreateNode6Ctrlr',
-	'app/gu/bill/create/ctrlr/BillCreateNode7Ctrlr'
+	'src/app/gu/bill/create/BillCreateDrctv',
+	'src/app/gu/bill/create/BillCreateModelPrvdr',
+	'src/app/gu/bill/create/BillCreateNavHlprPrvdr',
+	'src/app/gu/bill/create/ctrlr/BillCreateNode0Ctrlr',
+	'src/app/gu/bill/create/ctrlr/BillCreateNode1Ctrlr',
+	'src/app/gu/bill/create/ctrlr/BillCreateNode2Ctrlr',
+	'src/app/gu/bill/create/ctrlr/BillCreateNode3Ctrlr',
+	'src/app/gu/bill/create/ctrlr/BillCreateNode4Ctrlr',
+	'src/app/gu/bill/create/ctrlr/BillCreateNode5Ctrlr',
+	'src/app/gu/bill/create/ctrlr/BillCreateNode6Ctrlr',
+	'src/app/gu/bill/create/ctrlr/BillCreateNode7Ctrlr'
 ], function(
 	BillCreateDrctv,
 	BillCreateModelPrvdr,

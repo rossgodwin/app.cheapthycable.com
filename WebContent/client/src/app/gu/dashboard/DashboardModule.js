@@ -1,7 +1,7 @@
 define([
-	'app/gu/dashboard/DashboardCtrlr',
-	'app/gu/dashboard/bill/BillModule',
-	'app/gu/dashboard/settings/SettingsModule'
+	'src/app/gu/dashboard/DashboardCtrlr',
+	'src/app/gu/dashboard/bill/BillModule',
+	'src/app/gu/dashboard/settings/SettingsModule'
 ], function(
 	DashboardCtrlr,
 	BillModule,

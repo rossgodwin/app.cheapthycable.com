@@ -1,4 +1,4 @@
-define(['app/res/AppUris'], function(uris) {
+define(['src/app/res/AppUris'], function(uris) {
 	return ['$window', 'introBillCreateBaseState', 'billCreateNavHlpr', ctrlr];
 	
 	function ctrlr($window, introBillCreateBaseState, navHlpr) {

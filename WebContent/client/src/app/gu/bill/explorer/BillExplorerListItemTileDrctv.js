@@ -1,7 +1,9 @@
 define([
-	'app/res/AppUris',
-	'app/utils/BillUtils'
+	'vendor/hashids/hashids.min',
+	'src/app/res/AppUris',
+	'src/app/utils/BillUtils'
 ], function(
+	Hashids,
 	appUris,
 	BillUtils) {
 	return [function drctv() {
@@ -75,9 +77,8 @@ define([
 		}
 		
 		function goToBillComments(bill) {
-//			var encBillId = new Hashids().encode(bill.id);
-//			console.log('encoded bill id: ' + encBillId);
-			var url = appUris.getAppUrl() + '/bill/' + bill.id + '/comments';
+			var encBillId = new Hashids().encode(bill.id);
+			var url = appUris.getAppUrl() + '/bill/' + encBillId + '/comments';
 			$window.open(url, '_blank');
 		}
 	};

@@ -1,6 +1,6 @@
 define([
-	'app/res/AppConsts',
-	'common/pagination/PaginationCtrlr'
+	'src/app/res/AppConsts',
+	'src/common/pagination/PaginationCtrlr'
 ], function(
 	appConsts,
 	PaginationCtrlr) {

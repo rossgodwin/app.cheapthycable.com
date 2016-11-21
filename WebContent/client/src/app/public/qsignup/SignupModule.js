@@ -1,7 +1,7 @@
 define([
-	'app/public/signup/SignupUniqueEmailChkDrctv',
-	'app/public/signup/SignupModel',
-	'app/public/qsignup/SignupCtrlr'
+	'src/app/public/signup/SignupUniqueEmailChkDrctv',
+	'src/app/public/signup/SignupModel',
+	'src/app/public/qsignup/SignupCtrlr'
 ], function(
 	SignupUniqueEmailChkDrctv,
 	SignupModel,

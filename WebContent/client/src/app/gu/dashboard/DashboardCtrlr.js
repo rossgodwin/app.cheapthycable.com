@@ -1,4 +1,4 @@
-define(['app/res/AppUris'], function(appUris) {
+define(['src/app/res/AppUris'], function(appUris) {
 	return ['$window', '$state', 'BillHttpService', 'logoutSrvc', ctrlr];
 	
 	function ctrlr($window, $state, BillHttpService, logoutSrvc) {

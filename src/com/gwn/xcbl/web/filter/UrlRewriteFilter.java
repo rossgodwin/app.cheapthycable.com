@@ -23,8 +23,12 @@ public class UrlRewriteFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) arg0;
 		String reqUri = req.getRequestURI();
 
-		// https://regex101.com/
-		if (reqUri.matches("\\/[a-zA-Z]+\\/bill\\/\\d+\\/comments")) {
+		/**
+		 * https://regex101.com/
+		 * \\/[a-zA-Z]+\\/bill\\/\\d+\\/comments
+		 * 		i.e. /app/bill/1001/comments
+		 */
+		if (reqUri.matches("\\/[a-zA-Z]+\\/bill\\/[a-zA-Z0-9]+\\/comments")) {
 			String newUri = AppData.getInstance().getAppSecureEp();
 			req.getRequestDispatcher(newUri).forward(req, arg1);
 		}

@@ -1,4 +1,4 @@
-define(['app/res/AppConsts'], function(consts) {
+define(['src/app/res/AppConsts'], function(consts) {
 	var resource = {
 		getRelativeUrl : getRelativeUrl,
 		getRestUrl : getRestUrl,

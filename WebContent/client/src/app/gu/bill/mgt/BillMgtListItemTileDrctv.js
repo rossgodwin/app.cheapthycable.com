@@ -1,4 +1,4 @@
-define(['app/utils/BillUtils'], function(BillUtils) {
+define(['src/app/utils/BillUtils'], function(BillUtils) {
 	return [function drctv() {
 		return {
 			restrict : 'E',

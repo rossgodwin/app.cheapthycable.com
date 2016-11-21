@@ -1,14 +1,14 @@
 define([
-	'common/pagination/PaginationDrctv',
-	'app/core/AppNavbar0Drctv',
-	'app/core/AppTitlebar0Drctv',
-	'app/core/AppIconTextBtn0Drctv',
-	'app/security/auth/AuthService',
-	'app/security/auth/Principal',
-	'app/net/NetModule',
-	'app/core/LocationSrvc',
-	'app/core/LogoutSrvc',
-	'app/widget/modal/YesNoModalCtrlr'
+	'src/common/pagination/PaginationDrctv',
+	'src/app/core/AppNavbar0Drctv',
+	'src/app/core/AppTitlebar0Drctv',
+	'src/app/core/AppIconTextBtn0Drctv',
+	'src/app/security/auth/AuthService',
+	'src/app/security/auth/Principal',
+	'src/app/net/NetModule',
+	'src/app/core/LocationSrvc',
+	'src/app/core/LogoutSrvc',
+	'src/app/widget/modal/YesNoModalCtrlr'
 ], function(
 	PaginationDrctv,
 	AppNavbar0Drctv,

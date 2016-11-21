@@ -1,4 +1,4 @@
-define(['app/res/AppConsts'], function(appConsts) {
+define(['src/app/res/AppConsts'], function(appConsts) {
 	return ['receiveBillAlerts', '$state', 'fbHlprPrvdr', 'twitterHlprPrvdr', 'spinnerService', 'billCreateNavHlpr', 'principal', 'BaAlertHttpService', '$uibModal', ctrlr];
 	
 	function ctrlr(receiveBillAlerts, $state, fbHlprPrvdr, twitterHlprPrvdr, spinnerService, navHlpr, principal, BaAlertHttpService, $uibModal) {

@@ -1,6 +1,6 @@
 define([
-	'app/gu/intro/BillCreateModule',
-	'app/gu/intro/WelcomeCtrlr'
+	'src/app/gu/intro/BillCreateModule',
+	'src/app/gu/intro/WelcomeCtrlr'
 ], function(
 	BillCreateModule,
 	WelcomeCtrlr
