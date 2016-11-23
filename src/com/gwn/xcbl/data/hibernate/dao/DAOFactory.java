@@ -10,7 +10,7 @@ import com.gwn.xcbl.data.dao.ba.BaAlertSentLogDAO;
 import com.gwn.xcbl.data.hibernate.dao.ba.BaAlertDAOImpl;
 import com.gwn.xcbl.data.hibernate.dao.ba.BaAlertSentLogDAOImpl;
 import com.gwn.xcbl.data.hibernate.dao.be.BeDAOImpl;
-import com.gwn.xcbl.data.hibernate.dao.bill.dsq.DsqBillCommentDAOImpl;
+import com.gwn.xcbl.data.hibernate.dao.bill.dsq.DsqBillPostDAOImpl;
 
 public class DAOFactory {
 
@@ -32,7 +32,7 @@ public class DAOFactory {
 	
 	private BeDAOImpl beDAO;
 	
-	private DsqBillCommentDAOImpl dsqBillCommentDAO;
+	private DsqBillPostDAOImpl dsqBillPostDAO;
 	
 	public static DAOFactory getInstance() {
 		if (instance == null) {
@@ -97,10 +97,10 @@ public class DAOFactory {
 		return beDAO;
 	}
 	
-	public DsqBillCommentDAOImpl getDsqBillCommentDAO() {
-		if (dsqBillCommentDAO == null) {
-			dsqBillCommentDAO = new DsqBillCommentDAOImpl();
+	public DsqBillPostDAOImpl getDsqBillPostDAO() {
+		if (dsqBillPostDAO == null) {
+			dsqBillPostDAO = new DsqBillPostDAOImpl();
 		}
-		return dsqBillCommentDAO;
+		return dsqBillPostDAO;
 	}
 }

@@ -33,8 +33,8 @@ public class ForgotPwdHlpr {
 		String pwdResetUrl = ResetPwdHlpr.getResetUrl(httpRequest, user);
 		
 		Context ctx = new Context();
-		ctx.setVariable(EmailConstants.VARIABLE_PRODUCT_NAME, AppConstants.APP_NAME);
-		ctx.setVariable(EmailConstants.VARIABLE_LOGO_IMG_SRC, "cid:" + logoFileName);
+		TlfUtils.addVariableAppName(ctx);
+		TlfUtils.addVariableLogoImg(ctx, logoFileName);
 		ctx.setVariable(EmailConstants.VARIABLE_PWD_RESET_URL, pwdResetUrl);
 		
 		String htmlContent = engine.process("emails/forgot-pwd.html", ctx);

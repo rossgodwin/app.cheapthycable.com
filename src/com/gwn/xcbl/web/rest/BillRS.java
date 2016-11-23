@@ -152,8 +152,8 @@ public class BillRS extends BaseRS {
 			
 			List<BillDTO> dtos = (List<BillDTO>) CollectionUtils.collect(objs, getBillDtoTrnsfmr());
 			for (BillDTO dto : dtos) {
-				int cnt = DAOFactory.getInstance().getDsqBillCommentDAO().countByBill(dto.getId());
-				dto.setDsqCommentCount(cnt);
+				int cnt = DAOFactory.getInstance().getDsqBillPostDAO().countByBill(dto.getId());
+				dto.setDsqPostCount(cnt);
 			}
 			
 			ResponseDTO<PagingResultDTO<BillDTO>> response = new ResponseDTO<PagingResultDTO<BillDTO>>(new PagingResultDTO<>(offset, limit, total, dtos));

@@ -114,19 +114,18 @@ public class BillHelper {
 		String logoFileName = FilenameUtils.getName(logoRealPath);
 		
 		Context ctx = new Context();
-		ctx.setVariable(EmailConstants.VARIABLE_PRODUCT_NAME, AppConstants.APP_NAME);
-		ctx.setVariable(EmailConstants.VARIABLE_LOGO_IMG_SRC, "cid:" + logoFileName);
+		TlfUtils.addVariableAppName(ctx);
+		TlfUtils.addVariableLogoImg(ctx, logoFileName);
 		ctx.setVariable(EmailConstants.VARIABLE_PRODUCT_URL, baseUrl);
 		ctx.setVariable(EmailConstants.VARIABLE_CITY_STATE_CODE_ZIP, GeoZipCodeUtils.getCityStateCodeZip(bill.getGeoZipCode()));
-		ctx.setVariable(EmailConstants.VARIABLE_TWITTER_HOME_PAGE_URL, AppConstants.TWITTER_HOME_PAGE_URL);
-		ctx.setVariable(EmailConstants.VARIABLE_FB_HOME_PAGE_URL, AppConstants.FB_HOME_PAGE_URL);
+		TlfUtils.addVariableSocialMediaUrls(ctx);
 		
 		String htmlContent = engine.process("emails/bill-create.html", ctx);
 		
 		Email email = new Email();
 		email.setFrom(EmailFromAddressFactory.getNoReplyAddress());
 		email.getRecipients().add(new EmailRecipient(null, user.getEmail()));
-		email.setSubject("Bill Recorded In " + AppConstants.APP_NAME);
+		email.setSubject("Bill Recorded in " + AppConstants.APP_NAME);
 		email.setHtmlMsg(htmlContent);
 		email.setLogoBodyPart(new EmailBodyPart("inline", logoRealPath, MediaType.APPLICATION_OCTET_STREAM_TYPE));
 		

@@ -9,13 +9,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.gwn.xcbl.data.entity.BillCableOptionsTableMetadata;
 import com.gwn.xcbl.data.hibernate.entity.Account;
 import com.gwn.xcbl.data.hibernate.entity.bill.Bill;
 
 @Entity
-@Table(name = "dsq_bill_comment")
-public class DsqBillComment {
+@Table(name = "dsq_bill_post")
+public class DsqBillPost {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +28,10 @@ public class DsqBillComment {
 	@JoinColumn(name = "bill_id", nullable = false)
 	private Bill bill;
 	
-	@Column(name = "dsq_comment_id", nullable = false)
-	private Long dsqCommentId;
+	@Column(name = "dsq_post_id", nullable = false)
+	private Long dsqPostId;
 	
-	public DsqBillComment() {
+	public DsqBillPost() {
 	}
 
 	public Long getId() {
@@ -59,11 +58,11 @@ public class DsqBillComment {
 		this.bill = bill;
 	}
 
-	public Long getDsqCommentId() {
-		return dsqCommentId;
+	public Long getDsqPostId() {
+		return dsqPostId;
 	}
 
-	public void setDsqCommentId(Long dsqCommentId) {
-		this.dsqCommentId = dsqCommentId;
+	public void setDsqPostId(Long dsqPostId) {
+		this.dsqPostId = dsqPostId;
 	}
 }

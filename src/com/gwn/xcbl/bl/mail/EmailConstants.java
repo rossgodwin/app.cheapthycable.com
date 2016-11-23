@@ -34,6 +34,9 @@ public interface EmailConstants {
 	
 	public static final String VARIABLE_BILL_COUNT = "billCount";
 	public static final String VARIABLE_BILLS = "bills";
+	public static final String VARIABLE_BILL_COMMENT_RESPOND_URL = "billCommentRespondUrl";
 	
 	public static final String VARIABLE_BA_ALERT_UNSUBSCRIBE_URL = "unsubscribeUrl";
+	
+	public static final String VARIABLE_DSQ_POST_TEXT = "dsqPostText";
 }

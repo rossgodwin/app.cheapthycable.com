@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import com.gwn.xcbl.bl.bill.BillCommentsUrlIntf;
 import com.gwn.xcbl.data.model.AppData;
 
 public class UrlRewriteFilter implements Filter {
@@ -22,13 +23,8 @@ public class UrlRewriteFilter implements Filter {
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) arg0;
 		String reqUri = req.getRequestURI();
-
-		/**
-		 * https://regex101.com/
-		 * \\/[a-zA-Z]+\\/bill\\/\\d+\\/comments
-		 * 		i.e. /app/bill/1001/comments
-		 */
-		if (reqUri.matches("\\/[a-zA-Z]+\\/bill\\/[a-zA-Z0-9]+\\/comments")) {
+		
+		if (reqUri.matches(BillCommentsUrlIntf.URL_REGEX_PATTERN)) {
 			String newUri = AppData.getInstance().getAppSecureEp();
 			req.getRequestDispatcher(newUri).forward(req, arg1);
 		}

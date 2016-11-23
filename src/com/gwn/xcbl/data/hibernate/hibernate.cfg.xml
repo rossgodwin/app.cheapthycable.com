@@ -39,6 +39,6 @@
         <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.BillCableOptions" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.BillInternetOptions" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.CurrentBill" />
-        <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.dsq.DsqBillComment" />
+        <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.dsq.DsqBillPost" />
     </session-factory>
 </hibernate-configuration>

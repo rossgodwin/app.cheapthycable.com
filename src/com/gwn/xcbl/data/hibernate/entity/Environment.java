@@ -26,6 +26,15 @@ public class Environment {
 	
 	@Column(name = "disqus_shortname", nullable = false)
 	private String disqusShortname;
+	
+	@Column(name = "disqus_api_url")
+	private String disqusApiUrl;
+	
+	@Column(name = "disqus_api_key")
+	private String disqusApiKey;
+	
+	@Column(name = "disqus_api_secret")
+	private String disqusApiSecret;
 
 	public EnvironmentType getType() {
 		return type;
@@ -57,5 +66,29 @@ public class Environment {
 
 	public void setDisqusShortname(String disqusShortname) {
 		this.disqusShortname = disqusShortname;
+	}
+
+	public String getDisqusApiUrl() {
+		return disqusApiUrl;
+	}
+
+	public void setDisqusApiUrl(String disqusApiUrl) {
+		this.disqusApiUrl = disqusApiUrl;
+	}
+
+	public String getDisqusApiKey() {
+		return disqusApiKey;
+	}
+
+	public void setDisqusApiKey(String disqusApiKey) {
+		this.disqusApiKey = disqusApiKey;
+	}
+
+	public String getDisqusApiSecret() {
+		return disqusApiSecret;
+	}
+
+	public void setDisqusApiSecret(String disqusApiSecret) {
+		this.disqusApiSecret = disqusApiSecret;
 	}
 }

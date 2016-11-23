@@ -19,11 +19,17 @@ public class AppData {
 	private String domainUrl;
 	
 	private String disqusShortname;
+	private String disqusApiUrl;
+	private String disqusApiKey;
+	private String disqusApiSecret;
 
 	public void load(Environment environment) {
 		setEnvironmentType(environment.getType());
 		setDomainUrl(environment.getDomainUrl());
 		setDisqusShortname(environment.getDisqusShortname());
+		setDisqusApiUrl(environment.getDisqusApiUrl());
+		setDisqusApiKey(environment.getDisqusApiKey());
+		setDisqusApiSecret(environment.getDisqusApiSecret());
 	}
 	
 	public String getAppPublicEp() {
@@ -83,5 +89,29 @@ public class AppData {
 
 	public void setDisqusShortname(String disqusShortname) {
 		this.disqusShortname = disqusShortname;
+	}
+
+	public String getDisqusApiUrl() {
+		return disqusApiUrl;
+	}
+
+	public void setDisqusApiUrl(String disqusApiUrl) {
+		this.disqusApiUrl = disqusApiUrl;
+	}
+
+	public String getDisqusApiKey() {
+		return disqusApiKey;
+	}
+
+	public void setDisqusApiKey(String disqusApiKey) {
+		this.disqusApiKey = disqusApiKey;
+	}
+
+	public String getDisqusApiSecret() {
+		return disqusApiSecret;
+	}
+
+	public void setDisqusApiSecret(String disqusApiSecret) {
+		this.disqusApiSecret = disqusApiSecret;
 	}
 }

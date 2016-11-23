@@ -3,13 +3,13 @@ define(['src/app/res/AppUris'], function(appUris) {
 	
 	function srvc($http) {
 		return {
-			createComment : createComment
+			createPost : createPost
 		};
 		
-		function createComment(billId, dsqCommentId) {
+		function createPost(billId, dsqPostId) {
 			return $http({
 			    method : 'POST',
-			    url : appUris.getRestUrl('/dsqBillComment/create'),
+			    url : appUris.getRestUrl('/dsqBillPost/create'),
 			    headers : {'Content-Type': 'application/x-www-form-urlencoded'},
 			    transformRequest : function(obj) {
 			        var str = [];
@@ -20,7 +20,7 @@ define(['src/app/res/AppUris'], function(appUris) {
 			    },
 			    data : {
 			    	p0 : billId,
-			    	p1 : dsqCommentId
+			    	p1 : dsqPostId
 			    }
 			})
 		}

@@ -1,7 +1,7 @@
 define(['src/app/res/AppConsts'], function(appConsts) {
-	return ['$window', '$stateParams', '$timeout', '$filter', 'commentBill', 'spinnerService', 'DsqBillCommentHttpService', ctrlr];
+	return ['$window', '$stateParams', '$timeout', '$filter', 'commentBill', 'spinnerService', 'DsqBillPostHttpService', ctrlr];
 	
-	function ctrlr($window, $stateParams, $timeout, $filter, commentBill, spinnerService, DsqBillCommentHttpService) {
+	function ctrlr($window, $stateParams, $timeout, $filter, commentBill, spinnerService, DsqBillPostHttpService) {
 		var vm = this;
 		
 		// public variables
@@ -12,7 +12,7 @@ define(['src/app/res/AppConsts'], function(appConsts) {
 //			    disqus_title : getDisqusTitle(),
 			    disqus_title : 'Bill (' + $stateParams.encBillId + ') Comments',
 			    disqus_url : $window.location.href,
-			    disqus_onNewCommentCb : onNewCommentCbHndlr
+			    disqus_onNewCommentCb : onNewPostCbHndlr
 		};
 		vm.bill = commentBill;
 		vm.newCommentSuccessVisible = false;
@@ -41,19 +41,19 @@ define(['src/app/res/AppConsts'], function(appConsts) {
 		/**
 		 * https://help.disqus.com/customer/portal/articles/466258-capturing-disqus-commenting-activity-via-callbacks
 		 */
-		function onNewCommentCbHndlr(comment) {
+		function onNewPostCbHndlr(post) {
 			spinnerService.show(appConsts.screenLoadingSpinner);
 			
-			DsqBillCommentHttpService.createComment(vm.bill.id, comment.id).then(function(response) {
+			DsqBillPostHttpService.createPost(vm.bill.id, post.id).then(function(response) {
 				spinnerService.hide(appConsts.screenLoadingSpinner);
 				
-				showNewCommentSuccessAlert();
+				showNewPostSuccessAlert();
 			}).catch(function(error) {
 				// TODO
 			});
 		}
 		
-		function showNewCommentSuccessAlert() {
+		function showNewPostSuccessAlert() {
 			vm.newCommentSuccessVisible = true;
 			
 			$timeout(function() {

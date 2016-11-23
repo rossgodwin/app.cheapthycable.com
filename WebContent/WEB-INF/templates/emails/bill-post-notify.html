@@ -1,0 +1,50 @@
+<!-- 
+	Variables:
+	productName
+	logoImgSrc
+	dsqPostText
+	billCommentRespondUrl
+	productUrl
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style type="text/css">
+			table {
+			    border-collapse: collapse;
+			    width: 100%;
+			}
+			
+			table, th, td {
+			    border: 1px solid #d6d6d8;
+			    padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td style="background-color: #f0f0f0;"><img th:alt="@{${productName}}" th:src="@{${logoImgSrc}}">
+			</tr>
+			<tr><td>
+				<p>There has been a comment added to a discussion you are involved in.</p>
+				<p>
+					<div style="background-color: #eeeeee; color: #777777; border: 1px solid #d6d6d8; padding: 10px;">
+						<b>Comment:</b>
+						<br /><br />
+						<span style="font-family: Courier New; font-style: italic">[[${dsqPostText}]]</span>
+					</div>
+				</p>
+				<p>
+					<a th:href="@{${billCommentRespondUrl}}">Response or just checkout the comments</a>
+				</p>
+				<p>
+					Thank you,
+					<br/>
+					<a th:href="@{${productUrl}}">[[${productName}]]</a>
+				</p>
+			</td></tr>
+		</table>
+	</body>
+</html>

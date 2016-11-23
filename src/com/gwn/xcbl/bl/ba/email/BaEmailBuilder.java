@@ -47,12 +47,11 @@ public class BaEmailBuilder {
 		User user = DAOFactory.getInstance().getUserDAO().findByAccountId(account.getId());
 		
 		Context ctx = new Context();
-		ctx.setVariable(EmailConstants.VARIABLE_PRODUCT_NAME, AppConstants.APP_NAME);
-		ctx.setVariable(EmailConstants.VARIABLE_LOGO_IMG_SRC, "cid:" + logoFileName);
+		TlfUtils.addVariableAppName(ctx);
+		TlfUtils.addVariableLogoImg(ctx, logoFileName);
 		ctx.setVariable(EmailConstants.VARIABLE_BILL_COUNT, emailBills.size());
 		ctx.setVariable(EmailConstants.VARIABLE_BILLS, emailBills);
-		ctx.setVariable(EmailConstants.VARIABLE_TWITTER_HOME_PAGE_URL, AppConstants.TWITTER_HOME_PAGE_URL);
-		ctx.setVariable(EmailConstants.VARIABLE_FB_HOME_PAGE_URL, AppConstants.FB_HOME_PAGE_URL);
+		TlfUtils.addVariableSocialMediaUrls(ctx);
 		ctx.setVariable(EmailConstants.VARIABLE_PRODUCT_URL, AppData.getInstance().getDomainUrl());
 		ctx.setVariable(EmailConstants.VARIABLE_BA_ALERT_UNSUBSCRIBE_URL, getUnsubscribeUrl(alert));
 		

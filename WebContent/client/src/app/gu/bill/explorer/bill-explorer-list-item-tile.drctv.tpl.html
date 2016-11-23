@@ -43,11 +43,11 @@
 					</div>
 				</div>-->
 				<div style="margin-top: 5px;">
-					<span class="app-bill-comment-cnt" style="margin-bottom: 5px;">{{ctrlr.bill.dsqCommentCount}} Comment{{ctrlr.bill.dsqCommentCount == 0 || ctrlr.bill.dsqCommentCount > 1 ? 's' : ''}}</span>
+					<span class="app-bill-comment-cnt" style="margin-bottom: 5px;">{{ctrlr.bill.dsqPostCount}} Comment{{ctrlr.bill.dsqPostCount == 0 || ctrlr.bill.dsqPostCount > 1 ? 's' : ''}}</span>
 					<br />
 					<button class="btn btn-xs btn-brand-primary" ng-click="ctrlr.goToBillComments(ctrlr.bill)">
-						<span ng-show="ctrlr.bill.dsqCommentCount == 0">Ask / Comment / Discuss</span>
-						<span ng-show="ctrlr.bill.dsqCommentCount > 0">Join the Discussion</span>
+						<span ng-show="ctrlr.bill.dsqPostCount == 0">Ask / Comment / Discuss</span>
+						<span ng-show="ctrlr.bill.dsqPostCount > 0">Join the Discussion</span>
 					</button>
 				</div>
 			</div>

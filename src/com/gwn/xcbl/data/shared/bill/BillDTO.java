@@ -54,7 +54,7 @@ public class BillDTO implements Serializable, ILongId {
 	/**
 	 * Derived value - may be null
 	 */
-	private Integer dsqCommentCount;
+	private Integer dsqPostCount;
 	
 	public BillDTO() {
 	}
@@ -187,11 +187,11 @@ public class BillDTO implements Serializable, ILongId {
 		this.stats = stats;
 	}
 
-	public Integer getDsqCommentCount() {
-		return dsqCommentCount;
+	public Integer getDsqPostCount() {
+		return dsqPostCount;
 	}
 
-	public void setDsqCommentCount(Integer dsqCommentCount) {
-		this.dsqCommentCount = dsqCommentCount;
+	public void setDsqPostCount(Integer dsqPostCount) {
+		this.dsqPostCount = dsqPostCount;
 	}
 }

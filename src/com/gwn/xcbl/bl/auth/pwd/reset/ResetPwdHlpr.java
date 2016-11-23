@@ -11,13 +11,11 @@ import org.apache.http.client.utils.URIBuilder;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import com.gwn.xcbl.bl.mail.EmailConstants;
 import com.gwn.xcbl.bl.mail.EmailFromAddressFactory;
 import com.gwn.xcbl.bl.mail.data.model.Email;
 import com.gwn.xcbl.bl.mail.data.model.EmailBodyPart;
 import com.gwn.xcbl.bl.mail.data.model.EmailRecipient;
 import com.gwn.xcbl.bl.thymeleaf.TlfUtils;
-import com.gwn.xcbl.common.AppConstants;
 import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.web.AppServletContextUtils;
 import com.gwn.xcbl.web.HttpServletRequestHelper;
@@ -41,8 +39,8 @@ public class ResetPwdHlpr {
 		String logoFileName = FilenameUtils.getName(logoRealPath);
 		
 		Context ctx = new Context();
-		ctx.setVariable(EmailConstants.VARIABLE_PRODUCT_NAME, AppConstants.APP_NAME);
-		ctx.setVariable(EmailConstants.VARIABLE_LOGO_IMG_SRC, "cid:" + logoFileName);
+		TlfUtils.addVariableAppName(ctx);
+		TlfUtils.addVariableLogoImg(ctx, logoFileName);
 		
 		String htmlContent = engine.process("emails/pwd-reset-notify.html", ctx);
 		

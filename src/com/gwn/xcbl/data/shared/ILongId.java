@@ -19,6 +19,15 @@ public interface ILongId {
 			}
 			return r;
 		}
+		
+		public static <M extends ILongId> boolean doesExists(Collection<M> objs, M obj) {
+			for (M o : objs) {
+				if (o.getId().equals(obj.getId())) {
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 	
 	public Long getId();

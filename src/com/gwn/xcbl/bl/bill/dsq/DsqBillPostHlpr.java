@@ -4,18 +4,18 @@ import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.entity.Account;
 import com.gwn.xcbl.data.hibernate.entity.bill.Bill;
-import com.gwn.xcbl.data.hibernate.entity.bill.dsq.DsqBillComment;
+import com.gwn.xcbl.data.hibernate.entity.bill.dsq.DsqBillPost;
 
-public class DsqBillCommentHlpr {
+public class DsqBillPostHlpr {
 
-	public static DsqBillComment create(long accountId, long billId, long dsqCommentId) {
+	public static DsqBillPost create(long accountId, long billId, long dsqPostId) {
 		Account account = DAOFactory.getInstance().getAccountDAO().findById(accountId, true);
 		Bill bill = DAOFactory.getInstance().getBillDAO().findById(billId, true);
 		
-		DsqBillComment dbo = new DsqBillComment();
+		DsqBillPost dbo = new DsqBillPost();
 		dbo.setAccount(account);
 		dbo.setBill(bill);
-		dbo.setDsqCommentId(dsqCommentId);
+		dbo.setDsqPostId(dsqPostId);
 		
 		HibernateUtil.getSessionFactory().getCurrentSession().save(dbo);
 		
