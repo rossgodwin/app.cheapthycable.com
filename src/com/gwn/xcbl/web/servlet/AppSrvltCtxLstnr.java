@@ -33,6 +33,8 @@ public class AppSrvltCtxLstnr implements ServletContextListener {
 			scheduler.scheduleAtFixedRate(new BaEmailRun(arg0.getServletContext()), 0, 4, TimeUnit.HOURS);
 			scheduler.scheduleAtFixedRate(new DsqBillSyncRun(), 0, 3, TimeUnit.HOURS);
 		}
+		scheduler = Executors.newSingleThreadScheduledExecutor();
+		scheduler.scheduleAtFixedRate(new DsqBillSyncRun(), 0, 3, TimeUnit.HOURS);
 		
 		HibernateUtil.closeSession();
 	}

@@ -3,15 +3,17 @@ define(['src/app/res/AppConsts'], function(appConsts) {
 	
 	function ctrlr($window, $stateParams, $timeout, $filter, commentBill, spinnerService, DsqBillPostHttpService) {
 		var vm = this;
+		var encBillId = $stateParams.encBillId;
+		var disqusTitle = 'Bill Comments (id: ' + encBillId + ')';
+		var disqusUrl = $window.location.href;
 		
 		// public variables
 		vm.titlebarText = 'Bill Comments';
 		vm.disqusConfig = {
 			    disqus_shortname : $window.disqusShortname,
 			    disqus_identifier : commentBill.id,
-//			    disqus_title : getDisqusTitle(),
-			    disqus_title : 'Bill (' + $stateParams.encBillId + ') Comments',
-			    disqus_url : $window.location.href,
+			    disqus_title : disqusTitle,
+			    disqus_url : disqusUrl,
 			    disqus_onNewCommentCb : onNewPostCbHndlr
 		};
 		vm.bill = commentBill;

@@ -12,6 +12,12 @@ import java.util.List;
  */
 public class DsqApiThread implements Serializable {
 
+	public static DsqApiThread idInstance(long id) {
+		DsqApiThread r = new DsqApiThread();
+		r.setId(id);
+		return r;
+	}
+	
 	private static final long serialVersionUID = 1L;
 
 	/**

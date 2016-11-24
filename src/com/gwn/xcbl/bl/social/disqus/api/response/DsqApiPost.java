@@ -4,6 +4,12 @@ import java.io.Serializable;
 
 public class DsqApiPost implements Serializable {
 
+	public static DsqApiPost idInstance(long id) {
+		DsqApiPost r = new DsqApiPost();
+		r.setId(id);
+		return r;
+	}
+	
 	private static final long serialVersionUID = 1L;
 
 	/**

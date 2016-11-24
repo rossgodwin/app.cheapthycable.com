@@ -8,6 +8,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.gwn.xcbl.bl.social.disqus.api.response.DsqApiResponse;
 import com.gwn.xcbl.bl.social.disqus.api.response.DsqApiThread;
@@ -44,6 +46,26 @@ public class DsqApiResourceThreads {
 	public DsqApiResponse<DsqApiThread> callThreadsDetails(long threadId) {
 		final String url = getThreadDetailsUrl(threadId);
 		DsqApiResponse<DsqApiThread> obj = api.call(url, new TypeToken<DsqApiResponse<DsqApiThread>>(){}.getType());
+		return obj;
+	}
+	
+	/**
+	 * 
+	 * @param threadId
+	 * @return if {@link DsqApiThread#getId()} == -1L then thread was deleted
+	 */
+	public DsqApiThread callThreadsDetails2(long threadId) {
+		final String url = getThreadDetailsUrl(threadId);
+		DsqApiResponse<JsonElement> apiResponse = api.call(url, new TypeToken<DsqApiResponse<JsonElement>>(){}.getType());
+		
+		DsqApiThread obj = null;
+		if (apiResponse.getCode() == 0) {
+			obj = new Gson().fromJson(apiResponse.getResponse(), DsqApiThread.class);
+		} else if (apiResponse.getCode() == 2) {
+			if (apiResponse.getResponse().toString().contains("Invalid argument, 'thread'")) {
+				obj = DsqApiThread.idInstance(-1L);
+			}
+		}
 		return obj;
 	}
 }

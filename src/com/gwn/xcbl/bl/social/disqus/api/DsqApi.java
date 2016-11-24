@@ -60,7 +60,7 @@ public class DsqApi {
 			CloseableHttpResponse httpResponse = client.execute(get);
 			
 			int status = httpResponse.getStatusLine().getStatusCode();
-			if (status >= HttpStatus.SC_OK && status < HttpStatus.SC_MULTIPLE_CHOICES) {
+			if ((status >= HttpStatus.SC_OK && status < HttpStatus.SC_MULTIPLE_CHOICES) || status == HttpStatus.SC_BAD_REQUEST) {
 				HttpEntity entity = httpResponse.getEntity();
 				String json = EntityUtils.toString(entity);
 				M response = new Gson().fromJson(json, type);

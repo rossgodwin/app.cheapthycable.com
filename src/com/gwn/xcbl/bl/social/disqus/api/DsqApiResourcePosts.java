@@ -8,6 +8,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.gwn.xcbl.bl.social.disqus.api.response.DsqApiPost;
 import com.gwn.xcbl.bl.social.disqus.api.response.DsqApiResponse;
@@ -45,6 +47,26 @@ public class DsqApiResourcePosts {
 	public DsqApiResponse<DsqApiPost> callPostsDetails(long postId) {
 		final String url = getPostDetailsUrl(postId);
 		DsqApiResponse<DsqApiPost> obj = api.call(url, new TypeToken<DsqApiResponse<DsqApiPost>>(){}.getType());
+		return obj;
+	}
+	
+	/**
+	 * 
+	 * @param postId
+	 * @return if {@link DsqApiPost#getId()} == -1L then post was deleted
+	 */
+	public DsqApiPost callPostsDetails2(long postId) {
+		final String url = getPostDetailsUrl(postId);
+		DsqApiResponse<JsonElement> apiResponse = api.call(url, new TypeToken<DsqApiResponse<JsonElement>>(){}.getType());
+		
+		DsqApiPost obj = null;
+		if (apiResponse.getCode() == 0) {
+			obj = new Gson().fromJson(apiResponse.getResponse(), DsqApiPost.class);
+		} else if (apiResponse.getCode() == 2) {
+			if (apiResponse.getResponse().toString().contains("Invalid argument, 'post'")) {
+				obj = DsqApiPost.idInstance(-1L);
+			}
+		}
 		return obj;
 	}
 }
