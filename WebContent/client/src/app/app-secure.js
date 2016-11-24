@@ -2,7 +2,7 @@ define([
 	'src/app/res/AppUris',
 	'src/app/gu/AppSecureTemplates',
 	'src/app/core/CoreModule',
-	'src/app/security/SecurityInterceptor',
+//	'src/app/security/SecurityInterceptor',
 	'src/app/gu/MainModule',
 	'src/app/admin/MainModule',
 	'src/app/social/SocialModule'
@@ -10,7 +10,7 @@ define([
 	appUris,
 	Templates,
 	CoreModule,
-	SecurityInterceptor,
+//	SecurityInterceptor,
 	UserMainModule,
 	AdminMainModule,
 	SocialModule) {
@@ -18,19 +18,19 @@ define([
 
 	var module = angular.module(moduleName, ['app.templates', 'app.core', 'app.social', 'app.gu', 'app.admin']);
 	
-	module.factory('SecurityInterceptor', SecurityInterceptor);
-	
-//	module.factory('$exceptionHandler', function($log, spinnerService) {
-//		return function(err, cause) {
-//			// TODO perhaps redirect to error state here
-//			spinnerService.hideAll();
-//			$log.error.apply($log, arguments);
-//		};
-//	});
-	
-	module.config(['$httpProvider', function($httpProvider) {
-		$httpProvider.interceptors.push('SecurityInterceptor');
+	module.factory('$exceptionHandler', ['$log', 'spinnerService', function($log, spinnerService) {
+		return function(err, cause) {
+			// TODO perhaps redirect to error state here
+			spinnerService.hideAll();
+			$log.error.apply($log, arguments);
+		};
 	}]);
+	
+//	module.factory('SecurityInterceptor', SecurityInterceptor);
+	
+//	module.config(['$httpProvider', function($httpProvider) {
+//		$httpProvider.interceptors.push('SecurityInterceptor');
+//	}]);
 	
 	module.config(['$stateProvider', function($stateProvider) {
 		$stateProvider

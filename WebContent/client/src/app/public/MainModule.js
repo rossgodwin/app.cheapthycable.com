@@ -42,7 +42,7 @@ define([
 			controllerAs : 'ctrlr'
 		})
 		.state('app.login', {
-			url : '/login',
+			url : '/login?go',
 			templateUrl : 'client/src/app/public/login/login.tpl.html',
 			controller : 'LoginCtrlr',
 			controllerAs : 'ctrlr'

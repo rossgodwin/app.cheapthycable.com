@@ -13,7 +13,8 @@ define([
 						if (isAuthenticated) {
 							$state.go('app.accessDenied');
 						} else {
-							$window.location.href = appUris.getLoginUrl();
+							var requestedUrl = $window.location.href;
+							$window.location.href = appUris.getLoginUrl() + '?go=' + requestedUrl;
 						}
 					}
 				});

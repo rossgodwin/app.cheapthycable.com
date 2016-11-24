@@ -1,8 +1,9 @@
 define(['src/app/res/AppUris'], function(appUris) {
-	return ['$window', '$state', 'AuthHttpService', ctrlr];
+	return ['$window', '$state', '$stateParams', 'AuthHttpService', ctrlr];
 	
-	function ctrlr($window, $state, AuthHttpService) {
+	function ctrlr($window, $state, $stateParams, AuthHttpService) {
 		var vm = this;
+		var onLoginGo = $stateParams.go;
 		
 		// public variables
 		vm.serverErrs = [];
@@ -31,7 +32,11 @@ define(['src/app/res/AppUris'], function(appUris) {
 		    
 		    AuthHttpService.login(vm.user.email, vm.user.password).then(function(result) {
 		    	if (result.data.resultCode === 1) {
-		    		$window.location.href = appUris.getAppUrl();
+		    		if (angular.isDefined(onLoginGo)) {
+		    			$window.location.href = onLoginGo;
+		    		} else {
+		    			$window.location.href = appUris.getAppUrl();
+		    		}
 		    	} else {
 		    		var errs = result.data.errs;
 					for (var i = 0; i < errs.length; i++) {
