@@ -10,17 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.gwn.xcbl.bl.ba.BaAlertUnsubscribeSrvltIntf;
-import com.gwn.xcbl.bl.ba.BaAlertUnsubscribeSuccessfulUrlIntf;
+import com.gwn.xcbl.bl.bill.dsq.post.DsqBillPostNotifyUnsubscribeSrvltIntf;
+import com.gwn.xcbl.bl.bill.dsq.post.DsqBillPostNotifyUnsubscribeSuccessfulUrlIntf;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
-import com.gwn.xcbl.data.hibernate.entity.ba.BaAlert;
+import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.web.HttpServletRequestHelper;
 
-public class BaAlertUnsubscribeSrvlt extends HttpServlet implements BaAlertUnsubscribeSrvltIntf {
+public class DsqBillPostNotifyUnsubscribeSrvlt extends HttpServlet implements DsqBillPostNotifyUnsubscribeSrvltIntf {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -33,21 +36,21 @@ public class BaAlertUnsubscribeSrvlt extends HttpServlet implements BaAlertUnsub
 			throw new InvalidParameterException("Parameter {" + PARAM_TOKEN + "} missing");
 		}
 		
-		Long alertId = Util.decrypt(token);
-		if (alertId == null) {
+		Long userId = Util.decrypt(token);
+		if (userId == null) {
 			throw new InvalidParameterException("Parameter {" + PARAM_TOKEN + "} is invalid");
 		}
 		
-		BaAlert alert = DAOFactory.getInstance().getBaAlertDAO().findById(alertId, false);
-		if (alert == null) {
+		User user = DAOFactory.getInstance().getUserDAO().findById(userId, false);
+		if (user == null) {
 			throw new InvalidParameterException("Parameter {" + PARAM_TOKEN + "} is invalid");
 		}
 		
-		alert.setUnsubscribed(true);
-		HibernateUtil.getSessionFactory().getCurrentSession().update(alert);
+		user.getAccount().setDsqBillPostNotify(false);
+		HibernateUtil.getSessionFactory().getCurrentSession().update(user.getAccount());
 		
 		String baseUrl = HttpServletRequestHelper.getServerContextPath(request).toString();
-		String url = baseUrl + "/" + BaAlertUnsubscribeSuccessfulUrlIntf.API_URL;
+		String url = baseUrl + "/" + DsqBillPostNotifyUnsubscribeSuccessfulUrlIntf.API_URL;
 		response.sendRedirect(url);
 	}
 }

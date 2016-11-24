@@ -30,6 +30,10 @@ public class Account implements ILongId {
 	@Column(name = "create_date", nullable = false)
 	@Type(type = "com.gwn.xcbl.data.hibernate.ut.LocalDateTimeUserType")
 	private LocalDateTime createDate;
+	
+	@Column(name = "dsq_bill_post_notify", nullable = false)
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean dsqBillPostNotify;
 
 	public Long getId() {
 		return id;
@@ -45,5 +49,13 @@ public class Account implements ILongId {
 
 	public void setCreateDate(LocalDateTime createDate) {
 		this.createDate = createDate;
+	}
+
+	public boolean isDsqBillPostNotify() {
+		return dsqBillPostNotify;
+	}
+
+	public void setDsqBillPostNotify(boolean dsqBillPostNotify) {
+		this.dsqBillPostNotify = dsqBillPostNotify;
 	}
 }

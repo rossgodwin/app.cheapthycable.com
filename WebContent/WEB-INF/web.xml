@@ -85,6 +85,14 @@
     <url-pattern>/srv/BaAlertUnsubscribe</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DsqBillPostNotifyUnsubscribe</servlet-name>
+    <servlet-class>com.gwn.xcbl.web.servlet.DsqBillPostNotifyUnsubscribeSrvlt</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DsqBillPostNotifyUnsubscribe</servlet-name>
+    <url-pattern>/srv/DsqBillPostNotifyUnsubscribe</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>SignupVerify</servlet-name>
     <servlet-class>com.gwn.xcbl.web.servlet.SignupVerifySrvlt</servlet-class>
   </servlet>

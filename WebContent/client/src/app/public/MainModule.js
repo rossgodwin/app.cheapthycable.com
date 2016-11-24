@@ -8,6 +8,7 @@ define([
 	'src/app/public/reset/PwdResetCtrlr',
 	'src/app/public/reset/PwdResetSuccessCtrlr',
 	'src/app/public/ba/BaAlertUnsubscribeSuccessCtrlr',
+	'src/app/public/bill/BillPostNotifyUnsubscribeSuccessCtrlr',
 	'src/app/public/qsignup/SignupModule'
 ], function(
 	ValuesEqualRqrdDrctv,
@@ -19,6 +20,7 @@ define([
 	PwdResetCtrlr,
 	PwdResetSuccessCtrlr,
 	BaAlertUnsubscribeSuccessCtrlr,
+	BillPostNotifyUnsubscribeSuccessCtrlr,
 	SignupModule) {
 	var module = angular.module('app.login', ['ngMessages', 'app.signup']);
 	
@@ -32,6 +34,7 @@ define([
 	module.controller('PwdResetCtrlr', PwdResetCtrlr);
 	module.controller('PwdResetSuccessCtrlr', PwdResetSuccessCtrlr);
 	module.controller('BaAlertUnsubscribeSuccessCtrlr', BaAlertUnsubscribeSuccessCtrlr);
+	module.controller('BillPostNotifyUnsubscribeSuccessCtrlr', BillPostNotifyUnsubscribeSuccessCtrlr);
 	
 	module.config(['$stateProvider', function($stateProvider) {
 		$stateProvider
@@ -77,6 +80,12 @@ define([
 			url : '/alert-unsubscribe-success',
 			templateUrl : 'client/src/app/public/ba/ba-alert-unsubscribe-success.tpl.html',
 			controller : 'BaAlertUnsubscribeSuccessCtrlr',
+			controllerAs : 'ctrlr'
+		})
+		.state('app.bill-post-notify-unsubscribe-success', {
+			url : '/bill-post-notify-unsubscribe-success',
+			templateUrl : 'client/src/app/public/bill/bill-post-notify-unsubscribe-success.tpl.html',
+			controller : 'BillPostNotifyUnsubscribeSuccessCtrlr',
 			controllerAs : 'ctrlr'
 		});
 	}]);

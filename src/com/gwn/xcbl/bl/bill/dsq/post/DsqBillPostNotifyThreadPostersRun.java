@@ -54,7 +54,9 @@ public class DsqBillPostNotifyThreadPostersRun implements Runnable {
 				if (!p.getId().equals(billPost.getId())) {
 					User user = DAOFactory.getInstance().getUserDAO().findByAccountId(p.getAccount().getId());
 					if (!user.getId().equals(ignoreUserId) && !ILongId.Utils.doesExists(users, user)) {
-						users.add(user);
+						if (user.getAccount().isDsqBillPostNotify()) {
+							users.add(user);
+						}
 					}
 				}
 			}

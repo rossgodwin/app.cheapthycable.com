@@ -16,6 +16,7 @@ import org.ocpsoft.rewrite.servlet.config.Path;
 import com.gwn.xcbl.bl.auth.pwd.reset.ResetPwdUrlIntf;
 import com.gwn.xcbl.bl.auth.signup.SignupVerifiedUrlIntf;
 import com.gwn.xcbl.bl.ba.BaAlertUnsubscribeSuccessfulUrlIntf;
+import com.gwn.xcbl.bl.bill.dsq.post.DsqBillPostNotifyUnsubscribeSuccessfulUrlIntf;
 import com.gwn.xcbl.data.model.AppData;
 
 /**
@@ -42,6 +43,7 @@ public class PushStateCfgProvider extends HttpConfigurationProvider {
 		publicUrls.add("/" + ResetPwdUrlIntf.API_URL);
 		publicUrls.add("/" + SignupVerifiedUrlIntf.API_URL);
 		publicUrls.add("/" + BaAlertUnsubscribeSuccessfulUrlIntf.API_URL);
+		publicUrls.add("/" + DsqBillPostNotifyUnsubscribeSuccessfulUrlIntf.API_URL);
 		
 		final List<String> secureUrls = new ArrayList<String>();
 		secureUrls.add("/app");

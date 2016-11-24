@@ -53,7 +53,7 @@ public class BaEmailBuilder {
 		ctx.setVariable(EmailConstants.VARIABLE_BILLS, emailBills);
 		TlfUtils.addVariableSocialMediaUrls(ctx);
 		ctx.setVariable(EmailConstants.VARIABLE_PRODUCT_URL, AppData.getInstance().getDomainUrl());
-		ctx.setVariable(EmailConstants.VARIABLE_BA_ALERT_UNSUBSCRIBE_URL, getUnsubscribeUrl(alert));
+		ctx.setVariable(EmailConstants.VARIABLE_UNSUBSCRIBE_URL, getUnsubscribeUrl(alert));
 		
 		String htmlContent = engine.process("emails/bill-alert.html", ctx);
 		

@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.http.client.utils.URIBuilder;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
@@ -44,6 +45,7 @@ public class DsqBillPostEmailNotifyBuilder {
 		ctx.setVariable(EmailConstants.VARIABLE_DSQ_POST_TEXT, apiPost.getRaw_message());
 		ctx.setVariable(EmailConstants.VARIABLE_BILL_COMMENT_RESPOND_URL, respondUrl);
 		ctx.setVariable(EmailConstants.VARIABLE_PRODUCT_URL, AppData.getInstance().getDomainUrl());
+		ctx.setVariable(EmailConstants.VARIABLE_UNSUBSCRIBE_URL, getUnsubscribeUrl(user.getId()));
 		
 		String htmlContent = engine.process("emails/bill-post-notify.html", ctx);
 		
@@ -55,5 +57,12 @@ public class DsqBillPostEmailNotifyBuilder {
 		email.setLogoBodyPart(new EmailBodyPart("inline", logoRealPath, MediaType.APPLICATION_OCTET_STREAM_TYPE));
 		
 		return email;
+	}
+	
+	private static String getUnsubscribeUrl(long userId) throws URISyntaxException {
+		URIBuilder bldr = new URIBuilder(AppData.getInstance().getDomainUrl() + "/" + DsqBillPostNotifyUnsubscribeSrvltIntf.URL);
+		bldr.setParameters(DsqBillPostNotifyUnsubscribeSrvltIntf.Util.getParams(userId));
+		String rslt = bldr.toString();
+		return rslt;
 	}
 }
