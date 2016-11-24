@@ -19,7 +19,7 @@ public class DsqApiPost implements Serializable {
 	/**
 	 * The Disqus thread ID number that the comment belongs to. Typically this is expandable by using related=thread.
 	 */
-	private Object thread; // Related.thread
+	private Long thread; // Related.thread
 
 	/**
 	 * The Disqus shortname of the forum which the comment was posted under.
@@ -165,11 +165,11 @@ public class DsqApiPost implements Serializable {
 		this.parent = parent;
 	}
 
-	public Object getThread() {
+	public Long getThread() {
 		return this.thread;
 	}
 
-	public void setThread(Object thread) {
+	public void setThread(Long thread) {
 		this.thread = thread;
 	}
 

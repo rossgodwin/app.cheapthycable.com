@@ -1,9 +1,12 @@
-package com.gwn.xcbl.bl.bill.dsq;
+package com.gwn.xcbl.bl.bill.dsq.post;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gwn.xcbl.bl.mail.Emailer;
 import com.gwn.xcbl.bl.mail.data.model.Email;
@@ -19,15 +22,17 @@ import com.gwn.xcbl.data.hibernate.entity.bill.dsq.DsqBillPost;
 import com.gwn.xcbl.data.model.AppData;
 import com.gwn.xcbl.data.shared.ILongId;
 
-public class DsqBillPostNotifyRun implements Runnable {
+public class DsqBillPostNotifyThreadPostersRun implements Runnable {
 
+	private static Log log = LogFactory.getLog(DsqBillPostNotifyThreadPostersRun.class);
+	
 	private ServletContext servletCtx;
 	
 	private long ignoreUserId;
 	
 	private DsqBillPost billPost;
 	
-	public DsqBillPostNotifyRun(ServletContext servletCtx, long ignoreUserId, DsqBillPost billPost) {
+	public DsqBillPostNotifyThreadPostersRun(ServletContext servletCtx, long ignoreUserId, DsqBillPost billPost) {
 		this.servletCtx = servletCtx;
 		this.ignoreUserId = ignoreUserId;
 		this.billPost = billPost;
@@ -54,11 +59,21 @@ public class DsqBillPostNotifyRun implements Runnable {
 				}
 			}
 			
-			for (User user : users) {
-				DsqApiResponse<DsqApiPost> apiPost = postsResource.callPostsDetails(billPost.getDsqPostId());
-				if (apiPost.getResponse() != null) {
-					Email email = emailBuilder.buildEmail(user, billPost, apiPost.getResponse());
-					Emailer.sendEmail(email);
+			if (users.size() > 0) {
+				DsqApiPost apiPost = null;
+				
+				DsqApiResponse<DsqApiPost> postDetailsResponse = postsResource.callPostsDetails(billPost.getDsqPostId());
+				if (postDetailsResponse.getResponse() != null) {
+					apiPost = postDetailsResponse.getResponse();
+				}
+				
+				if (apiPost != null) {
+					for (User user : users) {
+						Email email = emailBuilder.buildEmail(user, billPost, apiPost);
+						Emailer.sendEmail(email);
+					}
+				} else {
+					log.warn("Did not notify thread posters of bill post (id: " + billPost.getId() + ") because could not get DISQUS post details (DISQUS post id: " + billPost.getDsqPostId() + ").");
 				}
 			}
 		} catch (Exception e) {

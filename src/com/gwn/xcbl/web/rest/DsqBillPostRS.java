@@ -10,8 +10,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
-import com.gwn.xcbl.bl.bill.dsq.DsqBillPostHlpr;
-import com.gwn.xcbl.bl.bill.dsq.DsqBillPostNotifyRun;
+import com.gwn.xcbl.bl.bill.dsq.post.DsqBillPostHlpr;
+import com.gwn.xcbl.bl.bill.dsq.post.DsqBillPostNotifyThreadPostersRun;
 import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.data.hibernate.entity.bill.dsq.DsqBillPost;
 import com.gwn.xcbl.data.model.AuthenticationException;
@@ -33,7 +33,7 @@ public class DsqBillPostRS extends BaseRS {
 			
 			DsqBillPost billPost = DsqBillPostHlpr.create(user.getAccount().getId(), billId, dsqPostId);
 			
-			DsqBillPostNotifyRun run = new DsqBillPostNotifyRun(httpRequest.getServletContext(), user.getId(), billPost);
+			DsqBillPostNotifyThreadPostersRun run = new DsqBillPostNotifyThreadPostersRun(httpRequest.getServletContext(), user.getId(), billPost);
 			Thread t = new Thread(run);
 			t.start();
 			

@@ -11,6 +11,7 @@ import com.gwn.xcbl.data.hibernate.dao.ba.BaAlertDAOImpl;
 import com.gwn.xcbl.data.hibernate.dao.ba.BaAlertSentLogDAOImpl;
 import com.gwn.xcbl.data.hibernate.dao.be.BeDAOImpl;
 import com.gwn.xcbl.data.hibernate.dao.bill.dsq.DsqBillPostDAOImpl;
+import com.gwn.xcbl.data.hibernate.dao.bill.dsq.DsqBillThreadDAOImpl;
 
 public class DAOFactory {
 
@@ -33,6 +34,8 @@ public class DAOFactory {
 	private BeDAOImpl beDAO;
 	
 	private DsqBillPostDAOImpl dsqBillPostDAO;
+	
+	private DsqBillThreadDAOImpl dsqbillThreadDAO;
 	
 	public static DAOFactory getInstance() {
 		if (instance == null) {
@@ -102,5 +105,12 @@ public class DAOFactory {
 			dsqBillPostDAO = new DsqBillPostDAOImpl();
 		}
 		return dsqBillPostDAO;
+	}
+
+	public DsqBillThreadDAOImpl getDsqbillThreadDAO() {
+		if (dsqbillThreadDAO == null) {
+			dsqbillThreadDAO = new DsqBillThreadDAOImpl();
+		}
+		return dsqbillThreadDAO;
 	}
 }

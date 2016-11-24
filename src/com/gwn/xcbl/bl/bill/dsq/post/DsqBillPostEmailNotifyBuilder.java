@@ -1,4 +1,4 @@
-package com.gwn.xcbl.bl.bill.dsq;
+package com.gwn.xcbl.bl.bill.dsq.post;
 
 import java.net.URISyntaxException;
 

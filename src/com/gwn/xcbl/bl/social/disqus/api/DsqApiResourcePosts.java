@@ -22,10 +22,10 @@ public class DsqApiResourcePosts {
 	
 	/**
 	 * https://hc.apache.org/httpcomponents-client-ga/httpclient/examples/org/apache/http/examples/client/ClientFormLogin.java
+	 * https://disqus.com/api/docs/posts/details/
 	 * 
 	 * @param postId
 	 * @return
-	 * @throws URISyntaxException
 	 */
 	public String getPostDetailsUrl(long postId) {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();

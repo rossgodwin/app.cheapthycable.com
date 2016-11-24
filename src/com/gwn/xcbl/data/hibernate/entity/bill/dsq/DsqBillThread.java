@@ -9,33 +9,28 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.gwn.xcbl.data.hibernate.entity.Account;
 import com.gwn.xcbl.data.hibernate.entity.bill.Bill;
 
 @Entity
-@Table(name = "dsq_bill_post")
-public class DsqBillPost {
+@Table(name = "dsq_bill_thread")
+public class DsqBillThread {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id = -1L;
 	
 	@ManyToOne()
-	@JoinColumn(name = "account_id", nullable = false)
-	private Account account;
-	
-	@ManyToOne()
 	@JoinColumn(name = "bill_id", nullable = false)
 	private Bill bill;
 	
-	@Column(name = "dsq_post_id", nullable = false)
-	private Long dsqPostId;
-	
-	@Column(name = "dsq_thread_id")
+	@Column(name = "dsq_thread_id", nullable = false)
 	private Long dsqThreadId;
 	
-	public DsqBillPost() {
-	}
+	@Column(name = "dsq_posts")
+	private Integer dsqPosts;
+	
+	@Column(name = "dsq_likes")
+	private Integer dsqLikes;
 
 	public Long getId() {
 		return id;
@@ -43,14 +38,6 @@ public class DsqBillPost {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
 	}
 
 	public Bill getBill() {
@@ -61,19 +48,27 @@ public class DsqBillPost {
 		this.bill = bill;
 	}
 
-	public Long getDsqPostId() {
-		return dsqPostId;
-	}
-
-	public void setDsqPostId(Long dsqPostId) {
-		this.dsqPostId = dsqPostId;
-	}
-
 	public Long getDsqThreadId() {
 		return dsqThreadId;
 	}
 
 	public void setDsqThreadId(Long dsqThreadId) {
 		this.dsqThreadId = dsqThreadId;
+	}
+
+	public Integer getDsqPosts() {
+		return dsqPosts;
+	}
+
+	public void setDsqPosts(Integer dsqPosts) {
+		this.dsqPosts = dsqPosts;
+	}
+
+	public Integer getDsqLikes() {
+		return dsqLikes;
+	}
+
+	public void setDsqLikes(Integer dsqLikes) {
+		this.dsqLikes = dsqLikes;
 	}
 }

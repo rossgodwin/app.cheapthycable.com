@@ -1,4 +1,4 @@
-package com.gwn.xcbl.bl.bill.dsq;
+package com.gwn.xcbl.bl.bill.dsq.post;
 
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;

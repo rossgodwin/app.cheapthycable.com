@@ -40,5 +40,6 @@
         <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.BillInternetOptions" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.CurrentBill" />
         <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.dsq.DsqBillPost" />
+        <mapping class="com.gwn.xcbl.data.hibernate.entity.bill.dsq.DsqBillThread" />
     </session-factory>
 </hibernate-configuration>
