@@ -10,6 +10,7 @@ public class AccountHelper {
 	public static Account createAccount() {
 		Account account = new Account();
 		account.setCreateDate(LocalDateTime.now());
+		account.setDsqBillPostNotify(true);
 		HibernateUtil.getSessionFactory().getCurrentSession().save(account);
 		return account;
 	}
