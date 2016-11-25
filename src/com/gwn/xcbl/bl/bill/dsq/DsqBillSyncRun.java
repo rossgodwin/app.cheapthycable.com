@@ -68,21 +68,6 @@ public class DsqBillSyncRun implements Runnable {
 	private int updBillPosts(List<DsqBillPost> billPosts) {
 		int deleteCount = 0;
 		for (DsqBillPost billPost : billPosts) {
-//			DsqApiResponse<DsqApiPost> postDetailsResponse = postsResource.callPostsDetails(billPost.getDsqPostId());
-//			if (postDetailsResponse.getResponse() != null) {
-//				DsqApiPost apiPost = postDetailsResponse.getResponse();
-//				if (apiPost.getIsDeleted()) {
-//					HibernateUtil.getSessionFactory().getCurrentSession().delete(billPost);
-//					deleteCount++;
-//				} else {
-//					billPost.setDsqThreadId(apiPost.getThread());
-//					HibernateUtil.getSessionFactory().getCurrentSession().update(billPost);
-//					ensureBillThread(billPost);
-//				}
-//			} else {
-//				HibernateUtil.getSessionFactory().getCurrentSession().delete(billPost);
-//				deleteCount++;
-//			}
 			DsqApiPost apiPost = postsResource.callPostsDetails2(billPost.getDsqPostId());
 			if (apiPost != null) {
 				if (apiPost.getId().equals(-1L) || apiPost.getIsDeleted()) {
@@ -127,20 +112,6 @@ public class DsqBillSyncRun implements Runnable {
 	private int updBillThreads(List<DsqBillThread> billThreads) {
 		int deleteCount = 0;
 		for (DsqBillThread billThread : billThreads) {
-//			DsqApiResponse<DsqApiThread> threadDetailsResponse = threadsResource.callThreadsDetails(billThread.getDsqThreadId());
-//			if (threadDetailsResponse.getResponse() != null) {
-//				DsqApiThread apiThread = threadDetailsResponse.getResponse();
-//				if (apiThread.getIsDeleted()) {
-//					HibernateUtil.getSessionFactory().getCurrentSession().delete(billThread);
-//					deleteCount++;
-//				} else {
-//					DsqBillThreadHlpr.update(billThread, apiThread);
-//					HibernateUtil.getSessionFactory().getCurrentSession().update(billThread);
-//				}
-//			} else {
-//				HibernateUtil.getSessionFactory().getCurrentSession().delete(billThread);
-//				deleteCount++;
-//			}
 			DsqApiThread apiThread = threadsResource.callThreadsDetails2(billThread.getDsqThreadId());
 			if (apiThread != null) {
 				if (apiThread.getId().equals(-1L) || apiThread.getIsDeleted()) {

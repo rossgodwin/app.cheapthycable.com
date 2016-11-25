@@ -53,7 +53,8 @@ define([], function() {
 				if (vm.internetService || vm.cableService) {
 					navHlpr.goToNextState(navHlpr.getBaseState() + '.create.node3');
 				} else {
-					navHlpr.goToNextState(navHlpr.getBaseState() + '.create.node4');
+//					navHlpr.goToNextState(navHlpr.getBaseState() + '.create.node4');
+					navHlpr.goToNextState(navHlpr.getBaseState() + '.create.node5');
 				}
 			}
 		}

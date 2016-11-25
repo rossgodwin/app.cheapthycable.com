@@ -41,7 +41,8 @@ define(['src/app/utils/BillUtils'], function(BillUtils) {
 		
 		function next() {
 			updateModel();
-			navHlpr.goToNextState(navHlpr.getBaseState() + '.create.node4');
+//			navHlpr.goToNextState(navHlpr.getBaseState() + '.create.node4');
+			navHlpr.goToNextState(navHlpr.getBaseState() + '.create.node5');
 		}
 		
 		function finish() {

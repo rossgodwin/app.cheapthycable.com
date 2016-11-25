@@ -9,7 +9,8 @@ define([], function() {
 		function hlpr($state) {
 			var baseState;
 			var onFinishState;
-			var progressMax = 7;
+//			var progressMax = 7;
+			var progressMax = 6;
 			var progressValue = 0;
 			
 			var srvc = {
@@ -61,6 +62,36 @@ define([], function() {
 				return progressValue;
 			}
 			
+//			function updateProgress(stateName) {
+//				switch (stateName) {
+//				case baseState + '.create.node0':
+//					progressValue = 0;
+//					break;
+//				case baseState + '.create.node1':
+//					progressValue = 1;
+//					break;
+//				case baseState + '.create.node2':
+//					progressValue = 2;
+//					break;
+//				case baseState + '.create.node3':
+//					progressValue = 3;
+//					break;
+//				case baseState + '.create.node4':
+//					progressValue = 4;
+//					break;
+//				case baseState + '.create.node5':
+//					progressValue = 5;
+//					break;
+//				case baseState + '.create.node6':
+//					progressValue = 6;
+//					break;
+//				case baseState + '.create.node7':
+//					progressValue = 7;
+//					break;
+//				default:
+//					break;
+//				}
+//			}
 			function updateProgress(stateName) {
 				switch (stateName) {
 				case baseState + '.create.node0':
@@ -75,17 +106,14 @@ define([], function() {
 				case baseState + '.create.node3':
 					progressValue = 3;
 					break;
-				case baseState + '.create.node4':
+				case baseState + '.create.node5':
 					progressValue = 4;
 					break;
-				case baseState + '.create.node5':
+				case baseState + '.create.node6':
 					progressValue = 5;
 					break;
-				case baseState + '.create.node6':
-					progressValue = 6;
-					break;
 				case baseState + '.create.node7':
-					progressValue = 7;
+					progressValue = 6;
 					break;
 				default:
 					break;
