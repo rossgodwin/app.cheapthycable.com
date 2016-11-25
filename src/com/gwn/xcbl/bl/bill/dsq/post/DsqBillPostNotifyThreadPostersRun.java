@@ -41,12 +41,22 @@ public class DsqBillPostNotifyThreadPostersRun implements Runnable {
 	public void run() {
 		HibernateUtil.beginTransaction();
 		
+		log.info(DsqBillPostNotifyThreadPostersRun.class.getSimpleName() + " Started");
+		
 		DsqApiKeys keys = new DsqApiKeys(AppData.getInstance().getDisqusApiKey(), AppData.getInstance().getDisqusApiSecret());
 		DsqApiResourcePosts postsResource = new DsqApiResourcePosts(new DsqApi(AppData.getInstance().getDisqusApiUrl(), keys));
 		DsqBillPostEmailNotifyBuilder emailBuilder = new DsqBillPostEmailNotifyBuilder(servletCtx);
 		
 		try {
 			List<User> users = new ArrayList<User>();
+			
+			long billOwnerAccountId = billPost.getBill().getAccount().getId();
+			User billOwnerUser = DAOFactory.getInstance().getUserDAO().findByAccountId(billOwnerAccountId);
+			if (!billOwnerUser.getId().equals(ignoreUserId)) {
+				if (billOwnerUser.getAccount().isDsqBillPostNotify()) {
+					users.add(billOwnerUser);
+				}
+			}
 			
 			List<DsqBillPost> billPosts = DAOFactory.getInstance().getDsqBillPostDAO().findByBill(billPost.getBill().getId());
 			for (DsqBillPost p : billPosts) {
@@ -75,6 +85,7 @@ public class DsqBillPostNotifyThreadPostersRun implements Runnable {
 		} catch (Exception e) {
 		} finally {
 			HibernateUtil.closeSession();
+			log.info(DsqBillPostNotifyThreadPostersRun.class.getSimpleName() + " Finished");
 		}
 	}
 }
