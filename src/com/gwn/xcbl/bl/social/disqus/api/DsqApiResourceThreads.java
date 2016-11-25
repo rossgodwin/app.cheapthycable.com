@@ -43,18 +43,12 @@ public class DsqApiResourceThreads {
 		}
 	}
 	
-	public DsqApiResponse<DsqApiThread> callThreadsDetails(long threadId) {
-		final String url = getThreadDetailsUrl(threadId);
-		DsqApiResponse<DsqApiThread> obj = api.call(url, new TypeToken<DsqApiResponse<DsqApiThread>>(){}.getType());
-		return obj;
-	}
-	
 	/**
 	 * 
 	 * @param threadId
 	 * @return if {@link DsqApiThread#getId()} == -1L then thread was deleted
 	 */
-	public DsqApiThread callThreadsDetails2(long threadId) {
+	public DsqApiThread callThreadsDetails(long threadId) {
 		final String url = getThreadDetailsUrl(threadId);
 		DsqApiResponse<JsonElement> apiResponse = api.call(url, new TypeToken<DsqApiResponse<JsonElement>>(){}.getType());
 		

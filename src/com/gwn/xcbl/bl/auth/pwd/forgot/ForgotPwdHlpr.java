@@ -20,6 +20,7 @@ import com.gwn.xcbl.bl.thymeleaf.TlfUtils;
 import com.gwn.xcbl.common.AppConstants;
 import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.web.AppServletContextUtils;
+import com.gwn.xcbl.web.HttpServletRequestHelper;
 
 public class ForgotPwdHlpr {
 
@@ -28,11 +29,13 @@ public class ForgotPwdHlpr {
 		
 		TemplateEngine engine = TlfUtils.getTemplateEngine(servletCtx);
 		
+		String baseUrl = HttpServletRequestHelper.getServerContextPath(httpRequest).toString();
 		String logoRealPath = AppServletContextUtils.getLogoRealPath(servletCtx);
 		String logoFileName = FilenameUtils.getName(logoRealPath);
 		String pwdResetUrl = ResetPwdHlpr.getResetUrl(httpRequest, user);
 		
 		Context ctx = new Context();
+		ctx.setVariable(EmailConstants.VARIABLE_PRODUCT_URL, baseUrl);
 		TlfUtils.addVariableAppName(ctx);
 		TlfUtils.addVariableLogoImg(ctx, logoFileName);
 		ctx.setVariable(EmailConstants.VARIABLE_PWD_RESET_URL, pwdResetUrl);

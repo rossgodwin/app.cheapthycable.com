@@ -68,7 +68,7 @@ public class DsqBillSyncRun implements Runnable {
 	private int updBillPosts(List<DsqBillPost> billPosts) {
 		int deleteCount = 0;
 		for (DsqBillPost billPost : billPosts) {
-			DsqApiPost apiPost = postsResource.callPostsDetails2(billPost.getDsqPostId());
+			DsqApiPost apiPost = postsResource.callPostsDetails(billPost.getDsqPostId());
 			if (apiPost != null) {
 				if (apiPost.getId().equals(-1L) || apiPost.getIsDeleted()) {
 					HibernateUtil.getSessionFactory().getCurrentSession().delete(billPost);
@@ -112,7 +112,7 @@ public class DsqBillSyncRun implements Runnable {
 	private int updBillThreads(List<DsqBillThread> billThreads) {
 		int deleteCount = 0;
 		for (DsqBillThread billThread : billThreads) {
-			DsqApiThread apiThread = threadsResource.callThreadsDetails2(billThread.getDsqThreadId());
+			DsqApiThread apiThread = threadsResource.callThreadsDetails(billThread.getDsqThreadId());
 			if (apiThread != null) {
 				if (apiThread.getId().equals(-1L) || apiThread.getIsDeleted()) {
 					HibernateUtil.getSessionFactory().getCurrentSession().delete(billThread);

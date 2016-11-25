@@ -11,6 +11,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import com.gwn.xcbl.bl.mail.EmailConstants;
 import com.gwn.xcbl.bl.mail.EmailFromAddressFactory;
 import com.gwn.xcbl.bl.mail.data.model.Email;
 import com.gwn.xcbl.bl.mail.data.model.EmailBodyPart;
@@ -35,10 +36,12 @@ public class ResetPwdHlpr {
 		
 		TemplateEngine engine = TlfUtils.getTemplateEngine(servletCtx);
 		
+		String baseUrl = HttpServletRequestHelper.getServerContextPath(httpRequest).toString();
 		String logoRealPath = AppServletContextUtils.getLogoRealPath(servletCtx);
 		String logoFileName = FilenameUtils.getName(logoRealPath);
 		
 		Context ctx = new Context();
+		ctx.setVariable(EmailConstants.VARIABLE_PRODUCT_URL, baseUrl);
 		TlfUtils.addVariableAppName(ctx);
 		TlfUtils.addVariableLogoImg(ctx, logoFileName);
 		

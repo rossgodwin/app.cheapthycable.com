@@ -44,18 +44,12 @@ public class DsqApiResourcePosts {
 		}
 	}
 	
-	public DsqApiResponse<DsqApiPost> callPostsDetails(long postId) {
-		final String url = getPostDetailsUrl(postId);
-		DsqApiResponse<DsqApiPost> obj = api.call(url, new TypeToken<DsqApiResponse<DsqApiPost>>(){}.getType());
-		return obj;
-	}
-	
 	/**
 	 * 
 	 * @param postId
 	 * @return if {@link DsqApiPost#getId()} == -1L then post was deleted
 	 */
-	public DsqApiPost callPostsDetails2(long postId) {
+	public DsqApiPost callPostsDetails(long postId) {
 		final String url = getPostDetailsUrl(postId);
 		DsqApiResponse<JsonElement> apiResponse = api.call(url, new TypeToken<DsqApiResponse<JsonElement>>(){}.getType());
 		

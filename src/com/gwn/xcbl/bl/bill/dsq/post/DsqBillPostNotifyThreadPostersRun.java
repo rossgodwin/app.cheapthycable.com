@@ -14,7 +14,6 @@ import com.gwn.xcbl.bl.social.disqus.api.DsqApi;
 import com.gwn.xcbl.bl.social.disqus.api.DsqApiKeys;
 import com.gwn.xcbl.bl.social.disqus.api.DsqApiResourcePosts;
 import com.gwn.xcbl.bl.social.disqus.api.response.DsqApiPost;
-import com.gwn.xcbl.bl.social.disqus.api.response.DsqApiResponse;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.entity.User;
@@ -62,14 +61,9 @@ public class DsqBillPostNotifyThreadPostersRun implements Runnable {
 			}
 			
 			if (users.size() > 0) {
-				DsqApiPost apiPost = null;
+				DsqApiPost apiPost = postsResource.callPostsDetails(billPost.getDsqPostId());
 				
-				DsqApiResponse<DsqApiPost> postDetailsResponse = postsResource.callPostsDetails(billPost.getDsqPostId());
-				if (postDetailsResponse.getResponse() != null) {
-					apiPost = postDetailsResponse.getResponse();
-				}
-				
-				if (apiPost != null) {
+				if (apiPost != null && !apiPost.getId().equals(-1L)) {
 					for (User user : users) {
 						Email email = emailBuilder.buildEmail(user, billPost, apiPost);
 						Emailer.sendEmail(email);
