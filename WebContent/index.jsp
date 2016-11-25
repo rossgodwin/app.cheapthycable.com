@@ -69,7 +69,7 @@
 			<img src="assets/images/logo_big.png" class="img-responsive"
 				style="display: block; margin-left: auto; margin-right: auto;">
 
-			<div style="color: <%= brandColorHex %>; font-size: 1.25em; font-weight: bold;">"Hey...how much is your cable bill?"</div>
+			<div style="color: <%= brandColorHex %>; font-size: 1.25em; font-weight: bold;">A community to help negotiate lower cable bills</div>
 
 			<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
 				<a href="signup" class="btn btn-lg btn-success" role="button">Get Started for Free!</a>
@@ -83,7 +83,7 @@
 			<div class="col-md-8">
 				<span class="pg-lead-text">What</span><span style="font-size: 1.25em;">&nbsp;is this?</span>
 				<p style="padding: 20px;">This is a place to gain information to
-					allow you to negotiate a better rate from your cable/satellite
+					allow you to negotiate a better rate from your cable/dish
 					company. You will be able to see what people in your area are
 					paying.</p>
 				<hr>
@@ -109,7 +109,7 @@
 			<div class="col-md-8">
 				<span class="pg-lead-text">Why</span><span style="font-size: 1.25em;">&nbsp;do I need this?</span>
 				<p style="padding: 20px;">We have built this site because we
-					dislike spending money we don't have to. We also dislike the way
+					dislike spending money we don't have to. We also value transparency and dislike the way
 					cable companies treat their customers. They are constantly raising
 					rates and making you call them to lower it. We want to make this
 					process easier for you.</p>

@@ -28,12 +28,10 @@ public class AppSrvltCtxLstnr implements ServletContextListener {
 		
 		AppData.getInstance().load(new EnvironmentDAOImpl().getEnvironment());
 		
-		if (AppData.getInstance().isEnvProd()) {
-			scheduler = Executors.newSingleThreadScheduledExecutor();
-			scheduler.scheduleAtFixedRate(new BaEmailRun(arg0.getServletContext()), 0, 4, TimeUnit.HOURS);
-			scheduler.scheduleAtFixedRate(new DsqBillSyncRun(), 0, 3, TimeUnit.HOURS);
-		}
 		scheduler = Executors.newSingleThreadScheduledExecutor();
+		if (AppData.getInstance().isEnvProd()) {
+			scheduler.scheduleAtFixedRate(new BaEmailRun(arg0.getServletContext()), 0, 4, TimeUnit.HOURS);
+		}
 		scheduler.scheduleAtFixedRate(new DsqBillSyncRun(), 0, 3, TimeUnit.HOURS);
 		
 		HibernateUtil.closeSession();

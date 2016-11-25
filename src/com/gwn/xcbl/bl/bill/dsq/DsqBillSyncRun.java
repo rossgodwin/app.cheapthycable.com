@@ -37,8 +37,9 @@ public class DsqBillSyncRun implements Runnable {
 		postsResource = new DsqApiResourcePosts(new DsqApi(AppData.getInstance().getDisqusApiUrl(), keys));
 		threadsResource = new DsqApiResourceThreads(new DsqApi(AppData.getInstance().getDisqusApiUrl(), keys));
 		
+		final int lmt = 20;
 		try {
-			runBillPostsUpd(0, 2);
+			runBillPostsUpd(0, lmt);
 		} catch (Exception e) {
 		} finally {
 			HibernateUtil.closeSession();
