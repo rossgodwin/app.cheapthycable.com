@@ -39,6 +39,13 @@
 					Options:&nbsp;&nbsp;{{ctrlr.getAllOptionsStr()}}
 				</div>
 			</div>
+			<div style="margin-top: 5px;" ng-show="ctrlr.bill.dsqPostCount > 0">
+				<span class="app-bill-comment-cnt" style="margin-bottom: 5px;">{{ctrlr.bill.dsqPostCount}} Comment{{ctrlr.bill.dsqPostCount == 0 || ctrlr.bill.dsqPostCount > 1 ? 's' : ''}}</span>
+				<br />
+				<button class="btn btn-xs btn-brand-primary" ng-click="ctrlr.goToBillComments(ctrlr.bill)">
+					<span>Join the Discussion</span>
+				</button>
+			</div>
 		</div>
 
 		<div class="col-xs-12">

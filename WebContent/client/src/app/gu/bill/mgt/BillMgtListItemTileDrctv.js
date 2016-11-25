@@ -1,4 +1,11 @@
-define(['src/app/utils/BillUtils'], function(BillUtils) {
+define([
+	'vendor/hashids/hashids.min',
+	'src/app/res/AppUris',
+	'src/app/utils/BillUtils'
+], function(
+	Hashids,
+	appUris,
+	BillUtils) {
 	return [function drctv() {
 		return {
 			restrict : 'E',
@@ -8,13 +15,13 @@ define(['src/app/utils/BillUtils'], function(BillUtils) {
 				deleteBill : '&'
 			},
 			templateUrl : "client/src/app/gu/bill/mgt/bill-mgt-list-item-tile.drctv.tpl.html",
-			controller : ['$filter', 'fbHlprPrvdr', 'twitterHlprPrvdr', ctrlr],
+			controller : ['$window', '$filter', 'fbHlprPrvdr', 'twitterHlprPrvdr', ctrlr],
 			controllerAs : 'ctrlr',
 			bindToController : true
 		};
 	}];
 
-	function ctrlr($filter, fbHlprPrvdr, twitterHlprPrvdr) {
+	function ctrlr($window, $filter, fbHlprPrvdr, twitterHlprPrvdr) {
 		var vm = this;
 		
 		// public variables
@@ -30,6 +37,7 @@ define(['src/app/utils/BillUtils'], function(BillUtils) {
 		vm.getServicesStr = getServicesStr;
 		vm.getAllOptionsStr = getAllOptionsStr;
 		vm.amountRelativeToAvg = amountRelativeToAvg;
+		vm.goToBillComments = goToBillComments;
 		
 		init();
 		
@@ -119,6 +127,12 @@ define(['src/app/utils/BillUtils'], function(BillUtils) {
 		function getAllOptionsStr() {
 			var r = BillUtils.getAllOptionsStr(vm.bill, ', ');
 			return r;
+		}
+		
+		function goToBillComments(bill) {
+			var encBillId = new Hashids().encode(bill.id);
+			var url = appUris.getAppUrl() + '/bill/' + encBillId + '/comments';
+			$window.open(url, '_blank');
 		}
 	};
 });

@@ -71,6 +71,10 @@ public class BillRS extends BaseRS {
 			List<Bill> objs = DAOFactory.getInstance().getBillDAO().findAccountBills(user.getAccount().getId(), null, null);
 			
 			List<BillDTO> dtos = transform(objs);
+			for (BillDTO dto : dtos) {
+				int cnt = DAOFactory.getInstance().getDsqBillPostDAO().countByBill(dto.getId());
+				dto.setDsqPostCount(cnt);
+			}
 			
 			ResponseDTO<List<BillDTO>> response = new ResponseDTO<List<BillDTO>>(dtos);
 			String json = new Gson().toJson(response);
