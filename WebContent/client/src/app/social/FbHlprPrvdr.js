@@ -13,7 +13,7 @@ define(['src/app/res/AppUris'], function(appUris) {
 		};
 		
 		function getPictureUrl() {
-			var url = locationSrvc.getBaseUrl() + appUris.getImgsUrl() + '/splash.png';
+			var url = locationSrvc.getBaseUrl() + appUris.getImgUrl() + '/client_logo_facebook.png';
 			return url;
 		}
 		

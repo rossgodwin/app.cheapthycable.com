@@ -9,12 +9,12 @@ module.exports = {
 
 	app_public_files : {
 		templates : [ '../src/app/public/**/*.tpl.html' ],
-		less : '../src/less/main.less'
+		less : '../src/less/app-main.less'
 	},
 
 	app_secure_files : {
 		templates : [ '../src/app/**/*.tpl.html', '!../src/app/public/**', '../src/common/**/*.tpl.html' ],
-		less : '../src/less/main.less'
+		less : '../src/less/app-main.less'
 	},
 
 	app_public_vendor_files : {

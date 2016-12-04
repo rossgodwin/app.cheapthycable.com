@@ -3,7 +3,7 @@ define(['src/app/res/AppConsts'], function(consts) {
 		getRelativeUrl : getRelativeUrl,
 		getRestUrl : getRestUrl,
 		getSrvUrl : getSrvUrl,
-		getImgsUrl : getImgsUrl,
+		getImgUrl : getImgUrl,
 		getLogoUrl : getLogoUrl,
 		getHomeUrl : getHomeUrl,
 		getLoginUrl : getLoginUrl,
@@ -24,12 +24,12 @@ define(['src/app/res/AppConsts'], function(consts) {
 		return consts.contextPath + '/srv' + url;
 	}
 	
-	function getImgsUrl() {
-		return consts.contextPath + '/assets/images';
+	function getImgUrl() {
+		return consts.contextPath + '/assets/img';
 	}
 	
 	function getLogoUrl() {
-		return getImgsUrl() + '/logo.png';
+		return getImgUrl() + '/client_logo_rectangle_xs.png';
 	}
 	
 	function getHomeUrl() {

@@ -27,7 +27,7 @@
 			text-align: center;
 			padding: 0px;
 			margin: 0px;
-			background-image: url("assets/images/jumbotron_background1.png");
+			background-image: url("assets/img/web_jumbotron_background.png");
 		}
 		
 		.pg-lead-text {
@@ -66,7 +66,7 @@
 
 	<div class="jumbotron pg-cstm-jumbotron" style="border-top: solid 1px <%= brandColorHex %>; border-bottom: solid 1px <%= brandColorHex %>">
 		<div class="container">
-			<img src="assets/images/logo_big.png" class="img-responsive"
+			<img src="assets/img/web_logo_rectangle_lg.png" class="img-responsive"
 				style="display: block; margin-left: auto; margin-right: auto;">
 
 			<div style="color: <%= brandColorHex %>; font-size: 1.25em; font-weight: bold;">A community to help negotiate lower cable bills</div>

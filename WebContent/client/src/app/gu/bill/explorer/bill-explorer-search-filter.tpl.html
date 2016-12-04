@@ -1,25 +1,25 @@
 <div ng-controller="BillExplorerSearchFilterCtrlr as ctrlr">
-	<span style="font-size: 1.25em; font-weight: bold;">Filters: </span>
-	<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
+	<span class="font-bold font-size-1_25x">Filters: </span>
+	<span class="badge-primary font-bold" style="margin-bottom: 10px; margin-right: 5px;">
 		Distance: {{ctrlr.data.critrMileRadius}} miles
 	</span>
 	<span ng-show="ctrlr.data.critrExactTotalAmount != ''">
 		&nbsp;&nbsp;
-		<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
+		<span class="badge-primary font-bold" style="margin-bottom: 10px; margin-right: 5px;">
 			Amount: ${{ctrlr.data.critrExactTotalAmount}}&nbsp;&nbsp;
 			<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeTotalAmount()"></span>
 		</span>
 	</span>
 	<span ng-show="ctrlr.data.critrProvider">
 		&nbsp;&nbsp;
-		<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
+		<span class="badge-primary font-bold" style="margin-bottom: 10px; margin-right: 5px;">
 			Provider: {{ctrlr.data.critrProvider.name}}&nbsp;&nbsp;
 			<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeProvider()"></span>
 		</span>
 	</span>
 	<span ng-show="ctrlr.data.critrProviderName">
 		&nbsp;&nbsp;
-		<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
+		<span class="badge-primary font-bold" style="margin-bottom: 10px; margin-right: 5px;">
 			Provider: {{ctrlr.data.critrProviderName}}&nbsp;&nbsp;
 			<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeProviderName()"></span>
 		</span>
@@ -27,7 +27,7 @@
 	
 	<span ng-show="ctrlr.data.critrInternetService || ctrlr.data.critrCableService || ctrlr.data.critrPhoneService">
 		&nbsp;&nbsp;
-		<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
+		<span class="badge-primary font-bold" style="margin-bottom: 10px; margin-right: 5px;">
 			Services: {{ctrlr.getServices()}}&nbsp;&nbsp;
 			<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeServices()"></span>
 		</span>
@@ -35,7 +35,7 @@
 	
 	<span ng-show="ctrlr.showCableOptionsBoxCount()">
 		&nbsp;&nbsp;
-		<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
+		<span class="badge-primary font-bold" style="margin-bottom: 10px; margin-right: 5px;">
 			Cable Boxes: {{ctrlr.data.critrCableOptionsBoxCount}}&nbsp;&nbsp;
 			<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeCableOptionsBoxCount()"></span>
 		</span>
@@ -43,7 +43,7 @@
 	
 	<span ng-show="ctrlr.showCableOptionsDvrCount()">
 		&nbsp;&nbsp;
-		<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
+		<span class="badge-primary font-bold" style="margin-bottom: 10px; margin-right: 5px;">
 			DVRs: {{ctrlr.data.critrCableOptionsDvrCount}}&nbsp;&nbsp;
 			<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeCableOptionsDvrCount()"></span>
 		</span>
@@ -51,7 +51,7 @@
 	
 	<span ng-show="ctrlr.showCableOptionsSpecialChannels()">
 		&nbsp;&nbsp;
-		<span class="app-rounded-primary-btn" style="margin-bottom: 10px; margin-right: 10px;">
+		<span class="badge-primary font-bold" style="margin-bottom: 10px; margin-right: 5px;">
 			Special Channels: Yes&nbsp;&nbsp;
 			<span class="glyphicon glyphicon-remove cursor-pointer" ng-click="ctrlr.removeCableOptionsSpecialChannels()"></span>
 		</span>

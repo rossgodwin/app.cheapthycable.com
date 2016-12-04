@@ -1,0 +1,81 @@
+@import "variables.less";
+
+.font-bold {
+	font-weight: bold;
+}
+
+.font-size-0_85x {
+	font-size: 0.85em;
+}
+
+.font-size-1_25x {
+	font-size: 1.25em;
+}
+
+.font-size-1_5x {
+	font-size: 1.5em;
+}
+
+.font-size-2x {
+	font-size: 2em;
+}
+
+.font-size-2_5x {
+	font-size: 2.5em;
+}
+
+.font-size-3x {
+	font-size: 3em;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.color-white {
+	color: @color-white;
+}
+
+.color-primary {
+	color: @color-primary;
+}
+
+.color-blue-dark {
+	color: @color-blue-dark;
+}
+
+a.link-primary:link, a.link-primary:visited {
+	color: @color-primary;
+}
+
+a.link-none:link, a.link-none:visited, a.link-none:hover, a.link-none:active {
+	color: inherit;
+	text-decoration: none;
+}
+
+.image-center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.badge-primary {
+	display: inline-block;
+	background-color: @color-primary;
+	color: white;
+	border: 1px solid transparent;
+	border-radius: 30px;
+	padding: 6px 12px;
+}
+
+.panel-raised-default {
+	box-shadow: 1px 1px 4px #888888;
+	
+	&.active {
+		background-color: @color-panel-raised-default-hover;
+	}
+	
+	&:hover {
+		background-color: @color-panel-raised-default-hover;
+	}
+}

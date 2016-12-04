@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	
 	<!-- @if NODE_ENV == 'DEVELOPMENT' -->
-	<link rel="stylesheet/less" type="text/css" href="client/src/less/main.less" />
+	<link rel="stylesheet/less" type="text/css" href="client/src/less/app-main.less" />
 	<link rel="stylesheet/less" type="text/css" href="client/vendor/jumplink/angular-toggle-switch-bootstrap-3.css" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
 	<!-- @endif -->
@@ -53,7 +53,7 @@
 				right: 0;
 			}
 		</style>
-		<img src="assets/images/splash.png" class="img-responsive" style="display: block; margin-left: auto; margin-right: auto;">
+		<img src="assets/img/client_logo_splash.png" class="img-responsive" style="display: block; margin-left: auto; margin-right: auto;">
 	</div>
 	
 	<div ui-view></div>

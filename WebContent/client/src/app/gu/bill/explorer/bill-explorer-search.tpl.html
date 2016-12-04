@@ -1,6 +1,6 @@
 <div ng-controller="BillExplorerSearchCtrlr as ctrlr">
 	<div class="panel panel-default">
-		<div class="panel-heading" style="font-size: 1.25em; font-weight: bold;">Search</div>
+		<div class="panel-heading font-bold font-size-1_25x">Search</div>
 		<div class="panel-body">
 			<div class="form-group">
 				<label>Distance:</label>
@@ -96,7 +96,7 @@
 					
 					<div class="form-group">
 						<label>Lowest Bill:</label>
-						<span class="app-rounded-primary-btn cursor-pointer" ng-click="ctrlr.onAmountSelect(ctrlr.data.lowestTotalAmount)">
+						<span class="badge-primary font-bold cursor-pointer" ng-click="ctrlr.onAmountSelect(ctrlr.data.lowestTotalAmount)">
 							${{ctrlr.data.lowestTotalAmount}}
 							<span class="glyphicon glyphicon-ok" style="padding-left: 5px;" ng-show="ctrlr.data.critrExactTotalAmount == ctrlr.data.lowestTotalAmount"></span>
 						</span>
@@ -104,7 +104,7 @@
 					
 					<div class="form-group">
 						<label>Highest Bill:</label>
-						<span class="app-rounded-primary-btn cursor-pointer" ng-click="ctrlr.onAmountSelect(ctrlr.data.highestTotalAmount)">
+						<span class="badge-primary font-bold cursor-pointer" ng-click="ctrlr.onAmountSelect(ctrlr.data.highestTotalAmount)">
 							${{ctrlr.data.highestTotalAmount}}
 							<span class="glyphicon glyphicon-ok" style="padding-left: 5px;" ng-show="ctrlr.data.critrExactTotalAmount == ctrlr.data.highestTotalAmount"></span>
 						</span>
