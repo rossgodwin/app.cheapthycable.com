@@ -1,0 +1,51 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<div th:fragment="footer">
+			<div id="push"></div>
+			
+		    <div id="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+							<ul class="list-inline text-center">
+								<li>
+									<a href="#">
+										<span class="fa-stack fa-2x">
+											<i class="fa fa-circle fa-stack-2x color-primary"></i>
+											<i class="fa fa-twitter fa-stack-1x color-white"></i>
+										</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<span class="fa-stack fa-2x">
+											<i class="fa fa-circle fa-stack-2x color-primary"></i>
+											<i class="fa fa-facebook fa-stack-1x color-white"></i>
+										</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<span class="fa-stack fa-2x">
+											<i class="fa fa-circle fa-stack-2x color-primary"></i>
+											<i class="fa fa-youtube fa-stack-1x color-white"></i>
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		    <!-- Le javascript
+		    ================================================== -->
+		    <!-- Placed at the end of the document so the pages load faster -->
+		    <script th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')" th:src="${rootpath} + 'assets/jbake/js/jquery-1.11.1.min.js'"></script>
+		    <script th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')" th:src="${rootpath} + 'assets/jbake/js/bootstrap.min.js'"></script>
+		    <script th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')" th:src="${rootpath} + 'assets/jbake/js/prettify.js'"></script>
+    	</div>
+  	</body>
+</html>
