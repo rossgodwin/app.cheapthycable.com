@@ -15,7 +15,7 @@
 			<div class="container">
 				<ol class="breadcrumb">
 					<li><a class="link-primary" th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')" th:href="${rootpath}+'index.html'">Home</a></li>
-					<li><a class="link-primary" th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')" th:href="${rootpath}+'blog'">Blog</a></li>
+					<li><a class="link-primary" th:with="rootpath=(${content.rootpath != null} ? ${content.rootpath} : '')" th:href="${rootpath}+'blog/index.html'">Blog</a></li>
 					<li class="active"><span th:text='${content.title}'>title</span></li>
 				</ol>
 				
