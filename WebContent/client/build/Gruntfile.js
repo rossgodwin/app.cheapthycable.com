@@ -61,6 +61,13 @@ module.exports = function(grunt) {
 					dest : '<%= compile_dir %>/vendor/hashids/hashids.min.js'
 				} ]
 			},
+			
+			dist_assets_fonts : {
+				files : [ {
+					src : '../assets/fonts/*',
+					dest : '<%= dist_dir %>/assets/'
+				} ]
+			},
 
 			dist_vendor_head : {
 				files : [ {
@@ -195,7 +202,7 @@ module.exports = function(grunt) {
 		less : {
 			app_public : {
 				files : {
-					'<%= compile_dir %>/assets/app-public.css' : '<%= app_public_files.less %>'
+					'<%= compile_dir %>/assets/css/app-public.css' : '<%= app_public_files.less %>'
 				},
 				options : {
 					cleancss : true,
@@ -205,7 +212,7 @@ module.exports = function(grunt) {
 
 			app_secure : {
 				files : {
-					'<%= compile_dir %>/assets/app-secure.css' : '<%= app_secure_files.less %>'
+					'<%= compile_dir %>/assets/css/app-secure.css' : '<%= app_secure_files.less %>'
 				},
 				options : {
 					cleancss : true,
@@ -221,10 +228,10 @@ module.exports = function(grunt) {
 			},
 			target : {
 				files : {
-					'<%= dist_dir %>/assets/app-secure.min.css' : [
+					'<%= dist_dir %>/assets/css/app-secure.min.css' : [
 							'<%= app_secure_vendor_files.css %>',
-							'<%= compile_dir %>/assets/app-secure.css' ],
-					'<%= dist_dir %>/assets/app-public.min.css' : [ '<%= compile_dir %>/assets/app-public.css' ]
+							'<%= compile_dir %>/assets/css/app-secure.css' ],
+					'<%= dist_dir %>/assets/css/app-public.min.css' : [ '<%= compile_dir %>/assets/css/app-public.css' ]
 				}
 			}
 		}
@@ -249,7 +256,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('prod-clean', [ 'clean:release' ]);
 
 	grunt.registerTask('build-common', [ 'clean:build', 'env:prod',
-			'preprocess:prod', 'copy:compile_appjs', 'copy:compile_vendor_hashids', 'copy:dist_vendor_head' ]);
+			'preprocess:prod', 'copy:compile_appjs', 'copy:compile_vendor_hashids', 'copy:dist_assets_fonts', 'copy:dist_vendor_head' ]);
 
 	grunt.registerTask('build-app-public', [ 'copy:dist_prod_app_public',
 			'html2js:app_public_templates', 'requirejs:build_app_public',

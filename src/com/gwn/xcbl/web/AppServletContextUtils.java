@@ -5,7 +5,7 @@ import javax.servlet.ServletContext;
 public class AppServletContextUtils {
 
 	public static String getLogoRealPath(ServletContext ctx) {
-		String result = ctx.getRealPath("/assets/images/logo.png");
+		String result = ctx.getRealPath("/assets/img/web_logo_rectangle_xs.png");
 		return result;
 	}
 }

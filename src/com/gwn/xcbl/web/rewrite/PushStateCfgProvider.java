@@ -48,41 +48,8 @@ public class PushStateCfgProvider extends HttpConfigurationProvider {
 		final List<String> secureUrls = new ArrayList<String>();
 		secureUrls.add("/app");
 		
-//		String appPublicEp = null;
-//		String appSecureEp = null;
-//		if (AppData.getInstance().isEnvProd()) {
-//			appPublicEp = "/client/dist/index-app-public.jsp";
-//			appSecureEp = "/client/dist/index-app-secure.jsp";
-//		} else {
-//			appPublicEp = "/client/src/index-app-public.jsp";
-//			appSecureEp = "/client/src/index-app-secure.jsp";
-//		}
 		String appPublicEp = AppData.getInstance().getAppPublicEp();
 		String appSecureEp = AppData.getInstance().getAppSecureEp();
-		
-		// logs the domain used for testing
-//		return ConfigurationBuilder.begin()
-//	               .addRule()
-//	               .when(Direction.isInbound().and(Domain.matches("{domain}")))
-//	               .perform(Log.message(Level.INFO, "Client requested path: {domain}"))
-//	               .where("domain").matches(".*");
-		
-//		ConfigurationBuilder prodCfgBldr = ConfigurationBuilder.begin();
-//		for (String publicUrl : publicUrls) {
-//			prodCfgBldr.addRule().when(Direction.isInbound().and(Path.matches(publicUrl))).perform(Forward.to(prodAppPublicEp));
-//		}
-//		for (String secureUrl : secureUrls) {
-//			prodCfgBldr.addRule().when(Direction.isInbound().and(Path.matches(secureUrl))).perform(Forward.to(prodAppSecureEp));
-//		}
-//		
-//		ConfigurationBuilder cfgBldr = ConfigurationBuilder.begin();
-//		cfgBldr.addRule().when(Domain.matches(prodDomain)).perform(Subset.evaluate(prodCfgBldr));
-//		for (String publicUrl : publicUrls) {
-//			cfgBldr.addRule().when(Direction.isInbound().and(Path.matches(publicUrl))).perform((Forward.to(devAppPublicEp)));
-//		}
-//		for (String secureUrl : secureUrls) {
-//			cfgBldr.addRule().when(Direction.isInbound().and(Path.matches(secureUrl))).perform((Forward.to(devAppSecureEp)));
-//		}
 		
 		ConfigurationBuilder cfgBldr = ConfigurationBuilder.begin();
 		for (String publicUrl : publicUrls) {
@@ -93,21 +60,6 @@ public class PushStateCfgProvider extends HttpConfigurationProvider {
 		}
 		
 		return cfgBldr;
-		
-//		final String loginUrl = "/login";
-//		final String signUpUrl = "/signup";
-//		final String appUrl = "/app";
-//		
-//		return ConfigurationBuilder.begin()
-//				.addRule().when(Domain.matches(prodDomain))
-//				.perform(Subset.evaluate(ConfigurationBuilder.begin()
-//						.addRule().when(Direction.isInbound().and(Path.matches(loginUrl))).perform((Forward.to(prodAppPublicEp)))
-//						.addRule().when(Direction.isInbound().and(Path.matches(signUpUrl))).perform((Forward.to(prodAppPublicEp)))
-//						.addRule().when(Direction.isInbound().and(Path.matches(appUrl))).perform((Forward.to(prodAppSecureEp)))
-//				))
-//				.addRule().when(Direction.isInbound().and(Path.matches(loginUrl))).perform((Forward.to(devAppPublicEp)))
-//				.addRule().when(Direction.isInbound().and(Path.matches(signUpUrl))).perform((Forward.to(devAppPublicEp)))
-//				.addRule().when(Direction.isInbound().and(Path.matches(appUrl))).perform((Forward.to(devAppSecureEp)));
 	}
 
 	@Override

@@ -12,10 +12,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	
 	<!-- @if NODE_ENV == 'DEVELOPMENT' -->
-	<link rel="stylesheet/less" type="text/css" href="client/src/less/app-main.less" />
+	<link rel="stylesheet/less" type="text/css" href="client/assets/less/app-main.less" />
 	<!-- @endif -->
 	<!-- @if NODE_ENV == 'PRODUCTION' -->
-	<link rel="stylesheet" type="text/css" href="client/dist/assets/app-public.min.css" />
+	<link rel="stylesheet" type="text/css" href="client/dist/assets/css/app-public.min.css" />
 	<!-- @endif -->
 </head>
 <body>

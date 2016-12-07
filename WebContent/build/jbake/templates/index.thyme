@@ -18,7 +18,7 @@
 					<div class="col-xl-10 col-xl-offset-1">
 						
 						<div class="col-xl-5 col-sm-6">
-							<a class="link-none" th:href='${content.rootpath+"app.html"}' href='href'>
+							<a class="link-none" th:href='${content.rootpath+"about-the-app.html"}' href='href'>
 								<div class="panel-raised-default" style="margin-bottom: 15px; padding: 10px;">
 									<img src="assets/jbake/img/web_logo_app_square.png" class="image-center" style="margin-bottom: 5px;">
 									A free crowd sourcing community application that informs you what others in your area are paying for internet and cable so that you can negotiate a better cable deal to save money.

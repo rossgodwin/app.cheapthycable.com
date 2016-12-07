@@ -25,7 +25,7 @@ define(['src/app/res/AppConsts'], function(consts) {
 	}
 	
 	function getImgUrl() {
-		return consts.contextPath + '/assets/img';
+		return consts.contextPath + 'client/assets/img';
 	}
 	
 	function getLogoUrl() {
