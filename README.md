@@ -1,4 +1,12 @@
 
+## Deploy
+
+npm install
+grunt build-app
+grunt prod-clean
+jbake -b C:\dev\CodeRepository\eclipse\Sandbox452\Xcbl\WebContent\build\jbake
+lessc C:\dev\CodeRepository\eclipse\Sandbox452\Xcbl\WebContent\build\jbake\assets\assets\jbake\less\stylesheet.less C:\dev\CodeRepository\eclipse\Sandbox452\Xcbl\WebContent\static\assets\jbake\css\stylesheet.css
+
 ## DNS Provider
 
 Namecheap.com
@@ -47,20 +55,6 @@ https://github.com/pc035860/angular-easyfb
 
 #### AngularPlus
 https://github.com/AngularPlus/AngularPlus
-
-### Grunt
-
-#### Install project dependencies
-
-npm install
-
-#### Build
-
-grunt build-app
-
-#### Clean for release
-
-grunt prod-clean
 
 ## Helpful Angular Resources
 

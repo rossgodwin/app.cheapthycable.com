@@ -11,7 +11,7 @@
 						<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 							<ul class="list-inline text-center">
 								<li>
-									<a href="#">
+									<a href="https://twitter.com/CheapThyCable" target="_blank">
 										<span class="fa-stack fa-2x">
 											<i class="fa fa-circle fa-stack-2x color-primary"></i>
 											<i class="fa fa-twitter fa-stack-1x color-white"></i>
@@ -19,21 +19,21 @@
 									</a>
 								</li>
 								<li>
-									<a href="#">
+									<a href="https://www.facebook.com/CheapThyCable" target="_blank">
 										<span class="fa-stack fa-2x">
 											<i class="fa fa-circle fa-stack-2x color-primary"></i>
 											<i class="fa fa-facebook fa-stack-1x color-white"></i>
 										</span>
 									</a>
 								</li>
-								<li>
+								<!--<li>
 									<a href="#">
 										<span class="fa-stack fa-2x">
 											<i class="fa fa-circle fa-stack-2x color-primary"></i>
 											<i class="fa fa-youtube fa-stack-1x color-white"></i>
 										</span>
 									</a>
-								</li>
+								</li>-->
 							</ul>
 						</div>
 					</div>
