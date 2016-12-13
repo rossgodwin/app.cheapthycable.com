@@ -23,7 +23,9 @@
 					<h1 class="color-primary" th:text='${content.title}'>title</h1>
 				</div>
 				
-				<p><span class="badge-primary font-bold" th:text='${#dates.format(content.date,"dd MMMM yyyy")}'>date</span></p>
+				<p>
+					Posted by <b><a th:href="@{'mailto:' + ${content.authorEmail}}" class="link-primary"><span th:utext='${content.authorName}'>authorName</span></a></b> on <span class="badge-primary font-bold" th:text='${#dates.format(content.date,"dd MMMM yyyy")}'>date</span>
+				</p>
 				
 				<p th:utext='${content.body}'>body</p>
 			</div>
