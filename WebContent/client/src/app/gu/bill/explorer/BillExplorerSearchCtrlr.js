@@ -6,7 +6,7 @@ define([], function() {
 		
 		// public variables
 		vm.providerOptionNone = new Object();
-		vm.mileRadiusOptions = [10, 25, 50, 75, 100, 150, 200];
+		vm.mileRadiusOptions = [10, 25, 50, 75, 100, 150, 200, 500, 1500, 3000];
 		vm.servicesSetOperatorOptions = [{
 			label : 'Matches',
 			option : 'MATCHES'

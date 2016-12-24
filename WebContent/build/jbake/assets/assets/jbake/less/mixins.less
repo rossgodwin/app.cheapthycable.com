@@ -62,8 +62,17 @@ a.link-none:link, a.link-none:visited, a.link-none:hover, a.link-none:active {
 .badge-primary {
 	display: inline-block;
 	background-color: @color-primary;
-	color: white;
+	color: @color-white;
 	border: 1px solid transparent;
+	border-radius: 30px;
+	padding: 6px 12px;
+}
+
+.badge-secondary {
+	display: inline-block;
+	background-color: @color-white;
+	color: @color-primary;
+	border: 1.5px solid @color-primary;
 	border-radius: 30px;
 	padding: 6px 12px;
 }
