@@ -1,7 +1,7 @@
 define(['src/app/res/AppUris'], function(appUris) {
-	return ['$http', srvc];
+	return ['$window', '$http', srvc];
 	
-	function srvc($http) {
+	function srvc($window, $http) {
 		return {
 			hasAlert : hasAlert,
 			addDefaultAlert : addDefaultAlert,
@@ -11,7 +11,7 @@ define(['src/app/res/AppUris'], function(appUris) {
 		};
 		
 		function hasAlert() {
-			return $http.get(appUris.getRestUrl('/baAlert/hasAlert'), null);
+			return $http.get(appUris.getRestUrl('/baAlert/hasAlert'), null).catch(errorCallback);
 		}
 		
 		function addDefaultAlert(email) {
@@ -29,7 +29,7 @@ define(['src/app/res/AppUris'], function(appUris) {
 			    data : {
 			    	email : email
 			    }
-			});
+			}).catch(errorCallback);
 		}
 		
 		function getMyAlertListPage(offset, limit) {
@@ -38,7 +38,7 @@ define(['src/app/res/AppUris'], function(appUris) {
 					p0 : offset,
 					p1 : limit
 				}
-			})
+			}).catch(errorCallback);
 		}
 		
 		function alertUnsubscribe(alertId) {
@@ -53,7 +53,7 @@ define(['src/app/res/AppUris'], function(appUris) {
 			        }
 			        return str.join("&");
 			    }
-			});
+			}).catch(errorCallback);
 		}
 		
 		function saveOrUpdateAlert(obj) {
@@ -71,7 +71,13 @@ define(['src/app/res/AppUris'], function(appUris) {
 			    data : {
 			    	p0 : JSON.stringify(obj)
 			    }
-			});
+			}).catch(errorCallback);
+		}
+		
+		function errorCallback(response) {
+			if (response.status == 401) {
+				$window.location.href = appUris.getLoginUrl();
+			}
 		}
 	}
 });

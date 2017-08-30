@@ -1,7 +1,7 @@
 define(['src/app/res/AppUris'], function(appUris) {
-	return ['$http', srvc];
+	return ['$window', '$http', srvc];
 	
-	function srvc($http) {
+	function srvc($window, $http) {
 		return {
 			getMyBillsList : getMyBillsList,
 			getBillsListPage : getBillsListPage,
@@ -16,16 +16,9 @@ define(['src/app/res/AppUris'], function(appUris) {
 			return $http.get(appUris.getRestUrl('/bill/my/list'), {
 				params : {
 				}
-			}).then(c)
-			.catch(f);
-			
-			function c(response) {
+			}).then(function successCallback(response) {
 				return response.data.result;
-			}
-			
-			function f(error) {
-//					$location.url(relativeUrl(''));
-			}
+			}, errorCallback);
 		}
 		
 		function getBillsListPage(criteria, offset, limit) {
@@ -35,7 +28,7 @@ define(['src/app/res/AppUris'], function(appUris) {
 					p1 : offset,
 					p2 : limit
 				}
-			})
+			}).catch(errorCallback);
 		}
 		
 		function saveBill(obj) {
@@ -53,21 +46,21 @@ define(['src/app/res/AppUris'], function(appUris) {
 			    data : {
 			    	p0 : JSON.stringify(obj)
 			    }
-			});
+			}).catch(errorCallback);
 		}
 		
 		function getLatestBill() {
 			return $http.get(appUris.getRestUrl('/bill/current'), {
 				params : {
 				}
-			});
+			}).catch(errorCallback);
 		}
 		
 		function getBillDetail(billId) {
 			return $http.get(appUris.getRestUrl('/bill/' + billId + '/detail'), {
 				params : {
 				}
-			});
+			}).catch(errorCallback);
 		}
 		
 		function deleteBill(billId) {
@@ -82,32 +75,23 @@ define(['src/app/res/AppUris'], function(appUris) {
 			        }
 			        return str.join("&");
 			    }
-			}).then(c)
-			.catch(f);
-			
-			function c(response) {
+			}).then(function successCallback(response) {
 				return response.data;
-			}
-			
-			function f(error) {
-				// TODO
-			}
+			}, errorCallback);
 		}
 		
-//		function getBillExplorerResults(zipCode, radius) {
-//			return $http.get(appUris.getRestUrl('/bill/explorer/results'), {
-//				params : {
-//					p0 : zipCode,
-//			    	p1 : radius
-//				}
-//			});
-//		}
 		function getBillExplorerStats(criteria) {
 			return $http.get(appUris.getRestUrl('/bill/explorer/stats'), {
 				params : {
 					p0 : JSON.stringify(criteria)
 				}
-			})
+			}).catch(errorCallback);
+		}
+		
+		function errorCallback(response) {
+			if (response.status == 401) {
+				$window.location.href = appUris.getLoginUrl();
+			}
 		}
 	};
 });

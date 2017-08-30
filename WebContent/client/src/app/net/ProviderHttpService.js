@@ -1,7 +1,7 @@
 define(['src/app/res/AppUris'], function(appUris) {
-	return ['$http', srvc];
+	return ['$window', '$http', srvc];
 	
-	function srvc($http) {
+	function srvc($window, $http) {
 		var service = {
 			getProviderList : getProviderList,
 			getProviderListPage : getProviderListPage
@@ -14,7 +14,7 @@ define(['src/app/res/AppUris'], function(appUris) {
 				params : {
 					p0 : searchCritr
 				}
-			});
+			}).catch(errorCallback);
 		}
 		
 		function getProviderListPage(searchCritr, offset, limit) {
@@ -24,7 +24,13 @@ define(['src/app/res/AppUris'], function(appUris) {
 					p1 : offset,
 					p2 : limit
 				}
-			});
+			}).catch(errorCallback);
+		}
+		
+		function errorCallback(response) {
+			if (response.status == 401) {
+				$window.location.href = appUris.getLoginUrl();
+			}
 		}
 	};
 });

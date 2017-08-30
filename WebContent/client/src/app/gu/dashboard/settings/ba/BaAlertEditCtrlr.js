@@ -44,13 +44,12 @@ define(['src/app/res/AppConsts'], function(appConsts) {
 				spinnerService.show(appConsts.screenLoadingSpinner);
 				
 				BaAlertHttpService.saveOrUpdateAlert(vm.model).then(function(response) {
-					spinnerService.hide(appConsts.screenLoadingSpinner);
-					
-					if (response.data.resultCode === 1) {
-						back();
+					if (!angular.isUndefined(response)) {
+						if (response.data.resultCode === 1) {
+							back();
+						}
 					}
-				}).catch(function(error) {
-					// TODO
+					spinnerService.hide(appConsts.screenLoadingSpinner);
 				});
 			});
 		}

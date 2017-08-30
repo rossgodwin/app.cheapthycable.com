@@ -1,7 +1,7 @@
 define(['src/app/res/AppUris'], function(appUris) {
-	return ['$http', srvc];
+	return ['$window', '$http', srvc];
 	
-	function srvc($http) {
+	function srvc($window, $http) {
 		return {
 			createPost : createPost
 		};
@@ -22,7 +22,13 @@ define(['src/app/res/AppUris'], function(appUris) {
 			    	p0 : billId,
 			    	p1 : dsqPostId
 			    }
-			})
+			}).catch(errorCallback);
+		}
+		
+		function errorCallback(response) {
+			if (response.status == 401) {
+				$window.location.href = appUris.getLoginUrl();
+			}
 		}
 	};
 });

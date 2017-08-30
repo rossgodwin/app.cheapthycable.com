@@ -46,17 +46,16 @@ define([
 			spinnerService.show(appConsts.screenLoadingSpinner);
 			
 			BaAlertHttpService.getMyAlertListPage(paginationCtrlr.startPage, pageSize).then(function(response) {
-				var page = response.data.result;
-				vm.objs = page.records;
-				paginationCtrlr.update(page.total, pageNumber, pageSize);
-				
-				vm.objsCurrentPage = paginationCtrlr.currentPage;
-				vm.objsPageNumbers = paginationCtrlr.pages;
-				vm.objsTotalPages = paginationCtrlr.totalPages;
-				
+				if (!angular.isUndefined(response)) {
+					var page = response.data.result;
+					vm.objs = page.records;
+					paginationCtrlr.update(page.total, pageNumber, pageSize);
+					
+					vm.objsCurrentPage = paginationCtrlr.currentPage;
+					vm.objsPageNumbers = paginationCtrlr.pages;
+					vm.objsTotalPages = paginationCtrlr.totalPages;
+				}
 				spinnerService.hide(appConsts.screenLoadingSpinner);
-			}).catch(function(error) {
-				// TODO
 			});
 		}
 		

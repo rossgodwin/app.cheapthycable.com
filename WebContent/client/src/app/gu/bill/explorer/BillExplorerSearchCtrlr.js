@@ -86,13 +86,13 @@ define([], function() {
 		function getProviders(value) {
 			return ProviderHttpService.getProviderList(value).then(function(response) {
 				var r = [];
-				var providers = response.data.result;
-				for (var i = 0; i < providers.length; i++) {
-					r.push(providers[i].name);
+				if (!angular.isUndefined(response)) {
+					var providers = response.data.result;
+					for (var i = 0; i < providers.length; i++) {
+						r.push(providers[i].name);
+					}
 				}
 				return r;
-			}).catch(function(error) {
-				// TODO
 			});
 		}
 		
