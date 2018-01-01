@@ -17,11 +17,11 @@ define(['src/app/res/AppConsts'], function(consts) {
 	}
 	
 	function getRestUrl(url) {
-		return consts.contextPath + '/rest' + url;
+		return consts.contextPath + '/app/rest' + url;
 	}
 	
 	function getSrvUrl(url) {
-		return consts.contextPath + '/srv' + url;
+		return consts.contextPath + '/app/srv' + url;
 	}
 	
 	function getImgUrl() {

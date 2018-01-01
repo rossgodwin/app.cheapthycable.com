@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 	<display-name>CheapThyCable</display-name>
 	<welcome-file-list>
-		<welcome-file>about-the-app.html</welcome-file>
+		<welcome-file>/login</welcome-file>
 	</welcome-file-list>
 	<login-config>
 		<auth-method>FORM</auth-method>
@@ -21,8 +21,8 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>HibernateFilter</filter-name>
-		<url-pattern>/rest/*</url-pattern>
-		<url-pattern>/srv/*</url-pattern>
+		<url-pattern>/app/rest/*</url-pattern>
+		<url-pattern>/app/srv/*</url-pattern>
 	</filter-mapping>
   
 	<filter>
@@ -68,19 +68,6 @@
 	</filter-mapping>
 
 	<filter>
-		<filter-name>UrlRewriteFilter</filter-name>
-		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-		<init-param>
-			<param-name>logLevel</param-name>
-			<param-value>ERROR</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>UrlRewriteFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<filter>
 		<filter-name>AppUrlRewriteFilter</filter-name>
 		<filter-class>com.gwn.xcbl.web.filter.UrlRewriteFilter</filter-class>
 	</filter>
@@ -88,29 +75,4 @@
 		<filter-name>AppUrlRewriteFilter</filter-name>
 		<url-pattern>/app/*</url-pattern>
 	</filter-mapping>
-
-	<servlet>
-		<servlet-name>BaAlertUnsubscribe</servlet-name>
-		<servlet-class>com.gwn.xcbl.web.servlet.BaAlertUnsubscribeSrvlt</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>BaAlertUnsubscribe</servlet-name>
-		<url-pattern>/srv/BaAlertUnsubscribe</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>DsqBillPostNotifyUnsubscribe</servlet-name>
-		<servlet-class>com.gwn.xcbl.web.servlet.DsqBillPostNotifyUnsubscribeSrvlt</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>DsqBillPostNotifyUnsubscribe</servlet-name>
-		<url-pattern>/srv/DsqBillPostNotifyUnsubscribe</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>SignupVerify</servlet-name>
-		<servlet-class>com.gwn.xcbl.web.servlet.SignupVerifySrvlt</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SignupVerify</servlet-name>
-		<url-pattern>/srv/SignupVerify</url-pattern>
-	</servlet-mapping>
 </web-app>

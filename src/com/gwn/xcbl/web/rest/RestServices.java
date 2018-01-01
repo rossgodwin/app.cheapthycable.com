@@ -6,7 +6,9 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@ApplicationPath("rest")
+import com.gwn.xcbl.common.AppUris;
+
+@ApplicationPath(AppUris.ROOT_PATH_NAME + "/rest")
 public class RestServices extends Application {
 
 	private Set<Object> singletons = new HashSet<Object>();

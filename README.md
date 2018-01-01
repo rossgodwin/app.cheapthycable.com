@@ -4,8 +4,6 @@
 npm install
 grunt build-app
 grunt prod-clean
-jbake -b C:\dev\CodeRepository\eclipse\Sandbox452\Xcbl\WebContent\build\jbake
-lessc C:\dev\CodeRepository\eclipse\Sandbox452\Xcbl\WebContent\build\jbake\assets\assets\jbake\less\stylesheet.less C:\dev\CodeRepository\eclipse\Sandbox452\Xcbl\WebContent\static\assets\jbake\css\stylesheet.css
 
 ## DNS Provider
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.InvalidParameterException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,14 +13,16 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gwn.xcbl.bl.ba.BaAlertUnsubscribeSrvltIntf;
 import com.gwn.xcbl.bl.ba.BaAlertUnsubscribeSuccessfulUrlIntf;
+import com.gwn.xcbl.common.AppUris;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.entity.ba.BaAlert;
 import com.gwn.xcbl.web.HttpServletRequestHelper;
 
+@WebServlet(name="BaAlertUnsubscribe", urlPatterns={"/" + AppUris.ROOT_PATH_NAME + "/srv/BaAlertUnsubscribe"})
 public class BaAlertUnsubscribeSrvlt extends HttpServlet implements BaAlertUnsubscribeSrvltIntf {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1342788316543687163L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

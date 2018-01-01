@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.security.InvalidParameterException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,16 +18,15 @@ import com.gwn.xcbl.bl.auth.signup.SignupVerifiedUrlIntf;
 import com.gwn.xcbl.bl.auth.signup.SignupVerifySrvltIntf;
 import com.gwn.xcbl.bl.mail.Emailer;
 import com.gwn.xcbl.bl.mail.data.model.Email;
+import com.gwn.xcbl.common.AppUris;
 import com.gwn.xcbl.data.hibernate.HibernateUtil;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.entity.User;
 import com.gwn.xcbl.web.HttpServletRequestHelper;
 
+@WebServlet(name="SignupVerify", urlPatterns={"/" + AppUris.ROOT_PATH_NAME + "/srv/SignupVerify"})
 public class SignupVerifySrvlt extends HttpServlet implements SignupVerifySrvltIntf {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -91525155276141486L;
 	
 	private static Log log = LogFactory.getLog(SignupVerifySrvlt.class);
