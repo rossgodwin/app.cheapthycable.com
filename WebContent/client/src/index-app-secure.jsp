@@ -54,7 +54,7 @@
 	<div ui-view></div>
 	
 	<script src="client/vendor/headjs/head-1.0.2.js" type="text/javascript"></script>
-	<script src="client/src/assets/js/boot-app.js" type="text/javascript"></script>
+	<script src="client/src/assets/js/boot-secure.js" type="text/javascript"></script>
 	<script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
 </body>
 </html>

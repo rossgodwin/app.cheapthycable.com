@@ -29,6 +29,6 @@
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
 	<script src="client/vendor/headjs/head-1.0.2.js" type="text/javascript"></script>
-	<script src="client/src/assets/js/boot-login.js" type="text/javascript"></script>
+	<script src="client/src/assets/js/boot-public.js" type="text/javascript"></script>
 </body>
 </html>

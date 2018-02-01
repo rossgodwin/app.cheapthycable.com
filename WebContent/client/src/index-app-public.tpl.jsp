@@ -24,11 +24,11 @@
 	<!-- @if NODE_ENV == 'DEVELOPMENT' -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"></script>
 	<script src="client/vendor/headjs/head-1.0.2.js" type="text/javascript"></script>
-	<script src="client/src/assets/js/boot-login.js" type="text/javascript"></script>
+	<script src="client/src/assets/js/boot-public.js" type="text/javascript"></script>
 	<!-- @endif -->
 	<!-- @if NODE_ENV == 'PRODUCTION' -->
 	<script src="client/dist/assets/js/head.js" type="text/javascript"></script>
-	<script src="client/dist/assets/js/boot-app-public.js" type="text/javascript"></script>
+	<script src="client/dist/assets/js/boot-public.js" type="text/javascript"></script>
 	<!-- @endif -->
 	
 	<script type="text/javascript">

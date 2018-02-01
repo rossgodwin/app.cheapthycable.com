@@ -10,7 +10,7 @@ module.exports = function(grunt) {
 				force : true
 			},
 			build : [ '<%= compile_dir %>', '<%= dist_dir %>' ],
-			release : [ './node_modules', '<%= compile_dir %>' ]
+			release : [ './node_modules', './package-lock.json', '<%= compile_dir %>' ]
 		},
 
 		env : {
@@ -78,15 +78,15 @@ module.exports = function(grunt) {
 
 			dist_prod_app_public : {
 				files : [ {
-					src : '<%= compile_dir %>/src/assets/js/boot-prod-app-public.js',
-					dest : '<%= dist_dir %>/assets/js/boot-app-public.js'
+					src : '<%= compile_dir %>/src/assets/js/prod-boot-public.js',
+					dest : '<%= dist_dir %>/assets/js/boot-public.js'
 				} ]
 			},
 
 			dist_prod_app_secure : {
 				files : [ {
-					src : '<%= compile_dir %>/src/assets/js/boot-prod-app-secure.js',
-					dest : '<%= dist_dir %>/assets/js/boot-app-secure.js'
+					src : '<%= compile_dir %>/src/assets/js/prod-boot-secure.js',
+					dest : '<%= dist_dir %>/assets/js/boot-secure.js'
 				} ]
 			}
 		},
@@ -139,8 +139,8 @@ module.exports = function(grunt) {
 			build_app_public : {
 				options : {
 					baseUrl : '<%= compile_dir %>',
-					mainConfigFile : '<%= compile_dir %>/src/app/login-main.js',
-					name : 'src/app/login-main',
+					mainConfigFile : '<%= compile_dir %>/src/app/app-public.js',
+					name : 'src/app/app-public',
 					out : '<%= compile_dir %>/app-public.js'
 				},
 				preserveLicenseComments : false

@@ -60,11 +60,11 @@
 	
 	<!-- @if NODE_ENV == 'DEVELOPMENT' -->
 	<script src="client/vendor/headjs/head-1.0.2.js" type="text/javascript"></script>
-	<script src="client/src/assets/js/boot-app.js" type="text/javascript"></script>
+	<script src="client/src/assets/js/boot-secure.js" type="text/javascript"></script>
 	<!-- @endif -->
 	<!-- @if NODE_ENV == 'PRODUCTION' -->
 	<script src="client/dist/assets/js/head.js" type="text/javascript"></script>
-	<script src="client/dist/assets/js/boot-app-secure.js" type="text/javascript"></script>
+	<script src="client/dist/assets/js/boot-secure.js" type="text/javascript"></script>
 	<!-- @endif -->
 	<script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
 </body>

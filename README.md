@@ -1,6 +1,7 @@
 
 ## Deploy
 
+Change to WebContent\client\build directory
 npm install
 grunt build-app
 grunt prod-clean
