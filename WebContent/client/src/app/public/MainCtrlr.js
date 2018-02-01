@@ -1,5 +1,7 @@
 define(['src/app/res/AppUris'], function(appUris) {
-	var ctrlr = function($window) {
+	return ['$window', ctrlr];
+	
+	function ctrlr($window) {
 		var vm = this;
 		
 		vm.goToHome = goToHome;
@@ -10,6 +12,4 @@ define(['src/app/res/AppUris'], function(appUris) {
 			$window.location.href = appUris.getHomeUrl();
 		}
 	};
-	
-	return ['$window', ctrlr];
 });
