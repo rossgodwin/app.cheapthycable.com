@@ -7,18 +7,13 @@ import com.gwn.xcbl.data.model.AppData;
 public class EmailFromAddressFactory {
 	
 	public static EmailRecipient getNoReplyAddress() {
-		return getAddress(AppConstants.APP_NAME + " No-Reply", EmailConstants.PROPERTY_ADDRESS_NO_REPLY);
-	}
-	
-	public static EmailRecipient getHelpAddress() {
-		return getAddress(AppConstants.APP_NAME + " Help", EmailConstants.PROPERTY_ADDRESS_HELP);
-	}
-	
-	public static EmailRecipient getAddress(String name, String address) {
+		String name = AppConstants.APP_NAME + " No-Reply";
 		if (AppData.getInstance().isEnvProd()) {
+			String address = AppData.getInstance().getEmailUsernameNoReply() + "@" + AppData.getInstance().getEmailServiceDomain();
 			return new EmailRecipient(name, address);
 		} else {
-			return new EmailRecipient(null, EmailConstants.PROPERTY_ADDRESS_TEST);
+			String address = "mailgun@" + AppData.getInstance().getEmailServiceDomain();
+			return new EmailRecipient(name, address);
 		}
 	}
 }

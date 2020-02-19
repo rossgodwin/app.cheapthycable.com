@@ -22,14 +22,27 @@ public class AppData {
 	private String disqusApiUrl;
 	private String disqusApiKey;
 	private String disqusApiSecret;
+	
+	private String emailServiceDomain;
+	private String emailServiceApiUrl;
+	private String emailServiceApiKey;
+	
+	private String emailUsernameNoReply;
 
 	public void load(Environment environment) {
 		setEnvironmentType(environment.getType());
 		setDomainUrl(environment.getDomainUrl());
+		
 		setDisqusShortname(environment.getDisqusShortname());
 		setDisqusApiUrl(environment.getDisqusApiUrl());
 		setDisqusApiKey(environment.getDisqusApiKey());
 		setDisqusApiSecret(environment.getDisqusApiSecret());
+		
+		setEmailServiceDomain(environment.getEmailServiceDomain());
+		setEmailServiceApiUrl(environment.getEmailServiceApiUrl());
+		setEmailServiceApiKey(environment.getEmailServiceApiKey());
+		
+		setEmailUsernameNoReply(environment.getEmailUsernameNoReply());
 	}
 	
 	public String getAppPublicEp() {
@@ -113,5 +126,37 @@ public class AppData {
 
 	public void setDisqusApiSecret(String disqusApiSecret) {
 		this.disqusApiSecret = disqusApiSecret;
+	}
+
+	public String getEmailServiceDomain() {
+		return emailServiceDomain;
+	}
+
+	public void setEmailServiceDomain(String emailServiceDomain) {
+		this.emailServiceDomain = emailServiceDomain;
+	}
+
+	public String getEmailServiceApiUrl() {
+		return emailServiceApiUrl;
+	}
+
+	public void setEmailServiceApiUrl(String emailServiceApiUrl) {
+		this.emailServiceApiUrl = emailServiceApiUrl;
+	}
+
+	public String getEmailServiceApiKey() {
+		return emailServiceApiKey;
+	}
+
+	public void setEmailServiceApiKey(String emailServiceApiKey) {
+		this.emailServiceApiKey = emailServiceApiKey;
+	}
+
+	public String getEmailUsernameNoReply() {
+		return emailUsernameNoReply;
+	}
+
+	public void setEmailUsernameNoReply(String emailUsernameNoReply) {
+		this.emailUsernameNoReply = emailUsernameNoReply;
 	}
 }

@@ -3,8 +3,6 @@ package com.gwn.xcbl.bl.mail.sjm;
 import org.simplejavamail.mailer.Mailer;
 import org.simplejavamail.mailer.config.TransportStrategy;
 
-import com.gwn.xcbl.bl.mail.EmailConstants;
-
 public class SjmMailerFactory {
 
 	/**
@@ -14,8 +12,8 @@ public class SjmMailerFactory {
 	 * @return
 	 */
 	public static Mailer getMailer() {
-		final String user = EmailConstants.PROPERTY_FROM_ADDRESS;
-		final String pwd = EmailConstants.PROPERTY_FROM_PWD;
+		final String user = "<put email address here>";
+		final String pwd = "<put from email address password here>";
 		
 		Mailer m = new Mailer("smtp.gmail.com", 25, user, pwd, TransportStrategy.SMTP_TLS);
 //		Mailer m = new Mailer("smtp.gmail.com", 587, user, pwd, TransportStrategy.SMTP_TLS);

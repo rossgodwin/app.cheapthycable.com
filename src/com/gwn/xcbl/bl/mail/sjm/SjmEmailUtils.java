@@ -6,13 +6,12 @@ import javax.servlet.ServletContext;
 import org.simplejavamail.email.Email;
 
 import com.gwn.xcbl.bl.mail.EmailConstants;
-import com.gwn.xcbl.common.AppConstants;
 import com.gwn.xcbl.web.AppServletContextUtils;
 
 public class SjmEmailUtils {
 
 	public static void setDefaultFromAddress(Email email) {
-		email.setFromAddress(AppConstants.APP_NAME, EmailConstants.PROPERTY_FROM_ADDRESS);
+//		email.setFromAddress(AppConstants.APP_NAME, "<put email address here>");
 	}
 	
 	public static void embedLogo(Email email, ServletContext servletCtx) {
