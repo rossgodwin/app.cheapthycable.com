@@ -45,7 +45,7 @@ define([
 		})
 	}]);
 	
-	module.run(['$location', '$templateCache', '$compile', '$rootScope', '$state', 'AuthService', 'principal', 'BillHttpService', function($location, $templateCache, $compile, $rootScope, $state, AuthService, principal, BillHttpService) {
+	module.run(['$window', '$location', '$templateCache', '$compile', '$rootScope', '$state', 'AuthService', 'principal', 'BillHttpService', function($window, $location, $templateCache, $compile, $rootScope, $state, AuthService, principal, BillHttpService) {
 		var templatesHTML = $templateCache.get('app.templates');
 		$compile(templatesHTML)($rootScope);
 		
@@ -62,11 +62,11 @@ define([
 						if (angular.isUndefined(latestBill)) {
 							$state.go('app.gu.intro.welcome', {}, {location : false});
 						} else {
-							var url = $location.path();
-							if (url == appUris.getAppUrl()) {
+							var path = $window.location.pathname;
+							if (path == appUris.getAppUrl()) {
 								$state.go('app.gu.dashboard', {}, {location : false});
 							} else {
-								$location.path($location.path());
+								$location.path(path);
 							}
 						}
 						

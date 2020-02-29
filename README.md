@@ -6,6 +6,13 @@ npm install
 grunt build-app
 grunt prod-clean
 
+## Change Context Path
+
+### No Context Path
+
+Update \WebContent\client\src\app\res\AppConsts.js - change contextPath variable to empty string - ''
+Update \WebContent\WEB-INF\jboss-web.xml - change context-root variable to just forward slash - <context-root>/</context-root>
+
 ## DNS Provider
 
 Namecheap.com
