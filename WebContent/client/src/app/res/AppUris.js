@@ -17,15 +17,20 @@ define(['src/app/res/AppConsts'], function(consts) {
 	}
 	
 	function getRestUrl(url) {
-		return consts.contextPath + '/app/rest' + url;
+		return getRelativeUrl('/app/rest' + url);
 	}
 	
 	function getSrvUrl(url) {
-		return consts.contextPath + '/app/srv' + url;
+		return getRelativeUrl('/app/srv' + url);
 	}
 	
 	function getImgUrl() {
-		return consts.contextPath + 'client/assets/img';
+		var url = '';
+		if (consts.contextPath) {
+			url += consts.contextPath + '/';
+		}
+		url += 'client/assets/img';
+		return url;
 	}
 	
 	function getLogoUrl() {
