@@ -19,6 +19,9 @@
 		},
 		{
 			angularSanitize : "client/vendor/angular/extras/angular-sanitize.js"
+		},
+		{
+			angularRecaptcha : "client/vendor/angular/extras/angularjs-google-recaptcha-v3.min.js"
 		}
 	).ready("ALL", function() {
 		require.config({
@@ -39,6 +42,9 @@
 					deps : ['angular']
 				},
 				'angularSanitize' : {
+					deps : ['angular']
+				},
+				'angularRecaptcha' : {
 					deps : ['angular']
 				}
 			}

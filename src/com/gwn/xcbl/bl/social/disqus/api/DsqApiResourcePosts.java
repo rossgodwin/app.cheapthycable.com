@@ -11,6 +11,7 @@ import org.apache.http.message.BasicNameValuePair;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
+import com.gwn.xcbl.bl.http.HttpUtils;
 import com.gwn.xcbl.bl.social.disqus.api.response.DsqApiPost;
 import com.gwn.xcbl.bl.social.disqus.api.response.DsqApiResponse;
 
@@ -51,7 +52,8 @@ public class DsqApiResourcePosts {
 	 */
 	public DsqApiPost callPostsDetails(long postId) {
 		final String url = getPostDetailsUrl(postId);
-		DsqApiResponse<JsonElement> apiResponse = api.call(url, new TypeToken<DsqApiResponse<JsonElement>>(){}.getType());
+		String json = HttpUtils.callGet(url);
+		DsqApiResponse<JsonElement> apiResponse = new Gson().fromJson(json, new TypeToken<DsqApiResponse<JsonElement>>(){}.getType());
 		
 		DsqApiPost obj = null;
 		if (apiResponse.getCode() == 0) {

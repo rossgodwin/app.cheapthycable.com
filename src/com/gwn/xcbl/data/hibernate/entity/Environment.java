@@ -47,7 +47,13 @@ public class Environment {
 	
 	@Column(name = "email_username_no_reply")
 	private String emailUsernameNoReply;
-
+	
+	@Column(name = "recaptcha_site_key")
+	private String recaptchaSiteKey;
+	
+	@Column(name = "recaptcha_secret_key")
+	private String recaptchaSecretKey;
+	
 	public EnvironmentType getType() {
 		return type;
 	}
@@ -134,5 +140,21 @@ public class Environment {
 
 	public void setEmailUsernameNoReply(String emailUsernameNoReply) {
 		this.emailUsernameNoReply = emailUsernameNoReply;
+	}
+
+	public String getRecaptchaSiteKey() {
+		return recaptchaSiteKey;
+	}
+
+	public void setRecaptchaSiteKey(String recaptchaSiteKey) {
+		this.recaptchaSiteKey = recaptchaSiteKey;
+	}
+
+	public String getRecaptchaSecretKey() {
+		return recaptchaSecretKey;
+	}
+
+	public void setRecaptchaSecretKey(String recaptchaSecretKey) {
+		this.recaptchaSecretKey = recaptchaSecretKey;
 	}
 }

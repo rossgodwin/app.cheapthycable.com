@@ -11,6 +11,7 @@ import org.apache.http.message.BasicNameValuePair;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
+import com.gwn.xcbl.bl.http.HttpUtils;
 import com.gwn.xcbl.bl.social.disqus.api.response.DsqApiResponse;
 import com.gwn.xcbl.bl.social.disqus.api.response.DsqApiThread;
 
@@ -50,7 +51,8 @@ public class DsqApiResourceThreads {
 	 */
 	public DsqApiThread callThreadsDetails(long threadId) {
 		final String url = getThreadDetailsUrl(threadId);
-		DsqApiResponse<JsonElement> apiResponse = api.call(url, new TypeToken<DsqApiResponse<JsonElement>>(){}.getType());
+		String json = HttpUtils.callGet(url);
+		DsqApiResponse<JsonElement> apiResponse = new Gson().fromJson(json, new TypeToken<DsqApiResponse<JsonElement>>(){}.getType());
 		
 		DsqApiThread obj = null;
 		if (apiResponse.getCode() == 0) {

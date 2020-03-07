@@ -1,4 +1,5 @@
 <%@ page import="com.gwn.xcbl.common.AppConstants" %>
+<%@ page import="com.gwn.xcbl.data.model.AppData" %>
 <%@ page import="com.gwn.xcbl.data.shared.UserConstants" %>
 <!DOCTYPE html>
 <html>
@@ -18,10 +19,12 @@
 			int pwdMinLength = UserConstants.PWD_MIN_LENGTH;
 			String appName = AppConstants.APP_NAME;
 			String appUrl = AppConstants.APP_DOMAIN;
+			String recaptchaSiteKey = AppData.getInstance().getRecaptchaSiteKey();
 		%>
 		var pwdMinLength = <%= pwdMinLength %>;
 		var appName = '<%= appName %>';
 		var appUrl = '<%= appUrl %>';
+		var recaptchaSiteKey = '<%= recaptchaSiteKey %>';
 	</script>
 </head>
 <body>

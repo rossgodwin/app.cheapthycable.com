@@ -4,14 +4,16 @@ define([
 	'src/app/net/BillHttpService',
 	'src/app/net/DsqBillPostHttpService',
 	'src/app/net/GeoZipCodeHttpService',
-	'src/app/net/ProviderHttpService'
+	'src/app/net/ProviderHttpService',
+	'src/app/net/RecaptchaHttpService'
 ], function(
 	AuthHttpService,
 	BaAlertHttpService,
 	BillHttpService,
 	DsqBillPostHttpService,
 	GeoZipCodeHttpService,
-	ProviderHttpService) {
+	ProviderHttpService,
+	RecaptchaHttpService) {
 	var module = angular.module('app.net', []);
 	
 	module.factory('AuthHttpService', AuthHttpService);
@@ -20,6 +22,7 @@ define([
 	module.factory('DsqBillPostHttpService', DsqBillPostHttpService);
 	module.factory('GeoZipCodeHttpService', GeoZipCodeHttpService);
 	module.factory('ProviderHttpService', ProviderHttpService);
+	module.factory('RecaptchaHttpService', RecaptchaHttpService);
 	
 	return module;
 });

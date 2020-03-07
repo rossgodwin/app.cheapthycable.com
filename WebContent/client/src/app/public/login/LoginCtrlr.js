@@ -1,15 +1,13 @@
 define(['src/app/res/AppUris'], function(appUris) {
-	return ['$window', '$state', '$stateParams', 'AuthHttpService', ctrlr];
+	return ['$window', '$state', '$stateParams', 'gRecaptcha', 'AuthHttpService', 'RecaptchaHttpService', ctrlr];
 	
-	function ctrlr($window, $state, $stateParams, AuthHttpService) {
+	function ctrlr($window, $state, $stateParams, gRecaptcha, AuthHttpService, RecaptchaHttpService) {
 		var vm = this;
 		var onLoginGo = $stateParams.go;
 		
 		// public variables
 		vm.serverErrs = [];
 		vm.user = {
-//			email : 'tm.anonymous.1+xcbluser-34050@gmail.com',
-//			password : 'asdfasdf4@'
 			email : '',
 			password : ''
 		};
@@ -19,6 +17,26 @@ define(['src/app/res/AppUris'], function(appUris) {
 		vm.login = login;
 		vm.goToForgot = goToForgot;
 		vm.goToCreateAccount = goToCreateAccount;
+		
+		vm.serverErrs.length = 0;
+		vm.loginBtnDisabled = true;
+		
+		var recaptchaSiteKey = $window.recaptchaSiteKey;
+		var recaptchaAction = 'loginPage';
+		var recaptchaToken = '';
+		
+		gRecaptcha.initialize({key: recaptchaSiteKey}).then(function() {
+			gRecaptcha.execute({action: recaptchaAction}).then(function (token) {
+				recaptchaToken = token;
+				RecaptchaHttpService.verify(token, recaptchaAction).then(function(result) {
+					if (!result.safe) {
+						vm.serverErrs.push(result.message);
+					} else {
+						vm.loginBtnDisabled = false;
+					}
+				});
+			});
+		});
 		
 		function getCssClasses(formCtrlr, modelCtrlr) {
 			return {

@@ -23,7 +23,8 @@ module.exports = {
 				'../vendor/angular/extras/angular-ui-router-0.3.1.min.js',
 				'../vendor/angular/extras/angular-messages-1.5.9.min.js',
 				'../vendor/angular/extras/angular-spinners.min.js',
-				'../vendor/angular/extras/angular-sanitize.js'
+				'../vendor/angular/extras/angular-sanitize.js',
+				'../vendor/angular/extras/angularjs-google-recaptcha-v3.min.js'
 				 ],
 		css : [],
 		assets : []

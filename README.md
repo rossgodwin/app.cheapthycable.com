@@ -3,8 +3,8 @@
 
 Change to WebContent\client\build directory
 npm install
-grunt build-app
-grunt prod-clean
+node_modules/grunt/bin/grunt build-app
+node_modules/grunt/bin/grunt prod-clean
 
 ## Change Context Path
 

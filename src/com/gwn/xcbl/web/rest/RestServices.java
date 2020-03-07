@@ -20,6 +20,7 @@ public class RestServices extends Application {
 		singletons.add(new DsqBillPostRS());
 		singletons.add(new GeoZipCodeRS());
 		singletons.add(new ProviderRS());
+		singletons.add(new RecaptchaRS());
 	}
 	
 	@Override

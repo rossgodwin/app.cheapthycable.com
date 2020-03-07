@@ -1,7 +1,7 @@
 define(['src/app/res/AppConsts', 'src/app/res/AppUris'], function(appConsts, appUris) {
-	return ['$window', '$state', 'spinnerService', 'SignupModel', 'AuthHttpService', ctrlr];
+	return ['$window', '$state', 'gRecaptcha', 'spinnerService', 'SignupModel', 'AuthHttpService', 'RecaptchaHttpService', ctrlr];
 	
-	function ctrlr($window, $state, spinnerService, SignupModel, AuthHttpService) {
+	function ctrlr($window, $state, gRecaptcha, spinnerService, SignupModel, AuthHttpService, RecaptchaHttpService) {
 		var vm = this;
 		
 		// public variables
@@ -13,6 +13,26 @@ define(['src/app/res/AppConsts', 'src/app/res/AppUris'], function(appConsts, app
 		vm.getCssClasses = getCssClasses;
 		vm.submit = submit;
 		vm.goToLogin = goToLogin;
+		
+		vm.serverErrs.length = 0;
+		vm.signupBtnDisabled = true;
+		
+		var recaptchaSiteKey = $window.recaptchaSiteKey;
+		var recaptchaAction = 'signupPage';
+		var recaptchaToken = '';
+		
+		gRecaptcha.initialize({key: recaptchaSiteKey}).then(function() {
+			gRecaptcha.execute({action: recaptchaAction}).then(function (token) {
+				recaptchaToken = token;
+				RecaptchaHttpService.verify(token, recaptchaAction).then(function(result) {
+					if (!result.safe) {
+						vm.serverErrs.push(result.message);
+					} else {
+						vm.signupBtnDisabled = false;
+					}
+				});
+			});
+		});
 		
 		function getCssClasses(formCtrlr, modelCtrlr) {
 			return {

@@ -28,6 +28,9 @@ public class AppData {
 	private String emailServiceApiKey;
 	
 	private String emailUsernameNoReply;
+	
+	private String recaptchaSiteKey;
+	private String recaptchaSecretKey;
 
 	public void load(Environment environment) {
 		setEnvironmentType(environment.getType());
@@ -43,6 +46,9 @@ public class AppData {
 		setEmailServiceApiKey(environment.getEmailServiceApiKey());
 		
 		setEmailUsernameNoReply(environment.getEmailUsernameNoReply());
+		
+		setRecaptchaSiteKey(environment.getRecaptchaSiteKey());
+		setRecaptchaSecretKey(environment.getRecaptchaSecretKey());
 	}
 	
 	public String getAppPublicEp() {
@@ -158,5 +164,21 @@ public class AppData {
 
 	public void setEmailUsernameNoReply(String emailUsernameNoReply) {
 		this.emailUsernameNoReply = emailUsernameNoReply;
+	}
+
+	public String getRecaptchaSiteKey() {
+		return recaptchaSiteKey;
+	}
+
+	public void setRecaptchaSiteKey(String recaptchaSiteKey) {
+		this.recaptchaSiteKey = recaptchaSiteKey;
+	}
+
+	public String getRecaptchaSecretKey() {
+		return recaptchaSecretKey;
+	}
+
+	public void setRecaptchaSecretKey(String recaptchaSecretKey) {
+		this.recaptchaSecretKey = recaptchaSecretKey;
 	}
 }

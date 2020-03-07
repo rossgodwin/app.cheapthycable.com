@@ -1,7 +1,7 @@
 define(['src/app/res/AppConsts'], function(appConsts) {
-	return ['$window', '$state', 'spinnerService', 'AuthHttpService', ctrlr];
+	return ['$window', '$state', 'gRecaptcha', 'spinnerService', 'AuthHttpService', 'RecaptchaHttpService', ctrlr];
 	
-	function ctrlr($window, $state, spinnerService, AuthHttpService) {
+	function ctrlr($window, $state, gRecaptcha, spinnerService, AuthHttpService, RecaptchaHttpService) {
 		var vm = this;
 		
 		// public variables
@@ -13,6 +13,26 @@ define(['src/app/res/AppConsts'], function(appConsts) {
 		vm.getCssClasses = getCssClasses;
 		vm.pwdForgot = pwdForgot;
 		vm.goToLogin = goToLogin;
+		
+		vm.serverErrs.length = 0;
+		vm.forgotBtnDisabled = true;
+		
+		var recaptchaSiteKey = $window.recaptchaSiteKey;
+		var recaptchaAction = 'forgotPasswordPage';
+		var recaptchaToken = '';
+		
+		gRecaptcha.initialize({key: recaptchaSiteKey}).then(function() {
+			gRecaptcha.execute({action: recaptchaAction}).then(function (token) {
+				recaptchaToken = token;
+				RecaptchaHttpService.verify(token, recaptchaAction).then(function(result) {
+					if (!result.safe) {
+						vm.serverErrs.push(result.message);
+					} else {
+						vm.forgotBtnDisabled = false;
+					}
+				});
+			});
+		});
 		
 		function getProdName() {
 			return $window.appName;

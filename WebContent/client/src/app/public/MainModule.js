@@ -22,7 +22,7 @@ define([
 	BaAlertUnsubscribeSuccessCtrlr,
 	BillPostNotifyUnsubscribeSuccessCtrlr,
 	SignupModule) {
-	var module = angular.module('app.login', ['ngMessages', 'app.signup']);
+	var module = angular.module('app.login', ['fayzaan.gRecaptcha.v3', 'ngMessages', 'app.signup']);
 	
 	module.directive('valuesEqualRqrd', ValuesEqualRqrdDrctv);
 	module.directive('pwdValidChk', PwdValidChkDrctv);
