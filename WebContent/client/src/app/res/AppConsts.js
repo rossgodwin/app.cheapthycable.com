@@ -1,6 +1,6 @@
 define([], function() {
 	var consts = {
-		contextPath : '/cheapthycable',
+		contextPath : '',
 		screenLoadingSpinner : 'pageLoading'
 	};
 	
