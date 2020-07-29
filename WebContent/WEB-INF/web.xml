@@ -15,6 +15,16 @@
 		<session-timeout>30</session-timeout>
 	</session-config>
 
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Viewpoint Secure URLs</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+    
 	<filter>
 		<filter-name>HibernateFilter</filter-name>
 		<filter-class>com.gwn.xcbl.web.filter.HibernateTxRequestFilter</filter-class>

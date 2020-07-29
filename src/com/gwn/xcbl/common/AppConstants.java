@@ -1,13 +1,6 @@
 package com.gwn.xcbl.common;
 
-import com.gwn.xcbl.data.hibernate.entity.Environment;
-
 public interface AppConstants {
-
-	/**
-	 * @deprecated use {@link Environment#getDomainUrl()}
-	 */
-	public static final String APP_DOMAIN = "http://www.cheapthycable.com";
 	
 	public static final String APP_NAME = "CheapThyCable";
 	

@@ -23,7 +23,7 @@
 	<script type="text/javascript">
 		<%
 			String appName = AppConstants.APP_NAME;
-			String appUrl = AppConstants.APP_DOMAIN;
+			String appUrl = AppData.getInstance().getDomainUrl();
 			String fbAppId = AppData.getInstance().getFbAppId();
 			String fbHomePageUrl = AppConstants.FB_HOME_PAGE_URL;
 			String twitterHomePageUrl = AppConstants.TWITTER_HOME_PAGE_URL;

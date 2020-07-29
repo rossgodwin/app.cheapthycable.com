@@ -2,6 +2,10 @@ package com.gwn.xcbl.bl.mail.jrsy;
 
 import javax.ws.rs.core.MediaType;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpStatus;
+
 import com.gwn.xcbl.bl.mail.data.model.Email;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -19,6 +23,8 @@ import com.sun.jersey.multipart.FormDataMultiPart;
  */
 public class JrsyEmailer {
 
+	private static Log log = LogFactory.getLog(JrsyEmailer.class);
+	
 	private JrsyEmailConfiguration config;
 	
 	public JrsyEmailer(JrsyEmailConfiguration config) {
@@ -31,6 +37,10 @@ public class JrsyEmailer {
 		WebResource webResource = client.resource(config.getApiBaseUrl() + "/" + config.getDomain() + "/messages");
 		FormDataMultiPart formData = new JrsyEmailTransformer().transform(email);
 		ClientResponse response = webResource.type(MediaType.MULTIPART_FORM_DATA_TYPE).post(ClientResponse.class, formData);
+		if (HttpStatus.SC_OK != response.getStatus()) {
+			log.info("Response code: " + response.getStatusInfo().getStatusCode());
+			log.info("Reason: " + response.getStatusInfo().getReasonPhrase());
+		}
 		return response;
 	}
 	

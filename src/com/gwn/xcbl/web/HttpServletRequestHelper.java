@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
-import com.gwn.xcbl.common.AppConstants;
 import com.gwn.xcbl.common.UserPrincipal;
 import com.gwn.xcbl.data.hibernate.dao.DAOFactory;
 import com.gwn.xcbl.data.hibernate.entity.Account;
@@ -23,7 +22,7 @@ public class HttpServletRequestHelper {
 	public static StringBuilder getServerContextPath(HttpServletRequest request) {
 		StringBuilder b = new StringBuilder();
 		if (AppData.getInstance().isEnvProd()) {
-			b.append(AppConstants.APP_DOMAIN);
+			b.append(AppData.getInstance().getDomainUrl());
 		} else {
 			b.append(request.getScheme()).append("://");
 			b.append(request.getServerName()).append(":").append(request.getServerPort());

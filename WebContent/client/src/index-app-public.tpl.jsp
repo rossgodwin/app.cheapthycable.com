@@ -36,7 +36,7 @@
 		<%
 			int pwdMinLength = UserConstants.PWD_MIN_LENGTH;
 			String appName = AppConstants.APP_NAME;
-			String appUrl = AppConstants.APP_DOMAIN;
+			String appUrl = AppData.getInstance().getDomainUrl();
 			String recaptchaSiteKey = AppData.getInstance().getRecaptchaSiteKey();
 		%>
 		var pwdMinLength = <%= pwdMinLength %>;
