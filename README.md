@@ -12,7 +12,7 @@ Application source code for a crowdsourcing web application that I developed giv
 
 ### Deploy
 
-Change to WebContent\client\build directory
-npm install
-node_modules/grunt/bin/grunt build-app
-node_modules/grunt/bin/grunt prod-clean
+1. Change to WebContent\client\build directory
+2. npm install
+3. node_modules/grunt/bin/grunt build-app
+4. node_modules/grunt/bin/grunt prod-clean
